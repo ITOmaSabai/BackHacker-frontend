@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 
-export default function useFirebaseAuth() {
+export const useFirebaseAuth = () => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 

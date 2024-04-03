@@ -1,5 +1,5 @@
-import { axios } from '@/lib';
-import useFirebaseAuth from "../hooks/useFirebaseAuth";
+import { axios } from '../../../lib/axios'
+import { useFirebaseAuth } from '../../../hooks/useFirebaseAuth';
 import { IconButton } from '@mui/material';
 import { Login } from '@mui/icons-material';
 
@@ -32,8 +32,8 @@ export const SignInButton = ({ text }) => {
 
   return (
     <IconButton onClick={handleGoogleLogin} >
-      <Login />
       {text}
+      <Login />
     </IconButton>
   );
 }
