@@ -11,7 +11,8 @@ export const deleteUser = async ( currentUser ) => {
   };
 
   try {
-    axios.delete(`/api/v1/users/${currentUser.uid}`, config);
+    const res = await axios.delete(`/api/v1/users/${currentUser.uid}`, config);
+    return res.data.message;
   } catch (err) {
     let message;
     if (axios.isAxiosError(err) && err.response) {

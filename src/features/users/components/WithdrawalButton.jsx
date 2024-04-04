@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../api/deleteUser";
 
 export const WithdrawalButton = () => {
+  const navigate = useNavigate();
+
   const withdrawalUser = () => {
     const login = () => {
       const provider = new GoogleAuthProvider();
@@ -15,7 +17,6 @@ export const WithdrawalButton = () => {
 
     const auth = getAuth();
     const currentUser = auth.currentUser;
-    // const navigate = useNavigate();
 
     if (currentUser) {
       // 最近サインインしていないとエラーになってしまうので、再認証してクレデンシャルを取得
@@ -30,9 +31,14 @@ export const WithdrawalButton = () => {
             if (currentUser?.id) {
               deleteDoc(doc(db, "users", currentUser.id));
             }
-            deleteUser(currentUser);
-            // navigate("/");
-            window.location.redirect("/");
+            deleteUser(currentUser).then((message) => {
+              navigate("/", { state: { message: message } });
+            }).catch ((error) => {
+              return {
+                isSuccess: false,
+                errorMessage: "アカウントの削除に失敗しました",
+              };
+            })
           })
           .catch((error) => {
             // An error ocurred
