@@ -12,7 +12,7 @@ export const getUser = async ( currentUser ) => {
 
   try {
     const res = await axios.get(`/api/v1/users/${currentUser.uid}`, config);
-    return res.data.message;
+    return res.data;
   } catch (err) {
     let message;
     if (axios.isAxiosError(err) && err.response) {

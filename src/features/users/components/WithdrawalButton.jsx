@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { signInWithPopup, getAuth, GoogleAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 import { deleteUser as deleteUserFromFirebase } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore"
