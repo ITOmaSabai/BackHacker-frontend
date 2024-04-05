@@ -122,15 +122,15 @@ export default function Header() {
           </div>
       ) : (
         <MenuItem>
-          <IconButton
+          {/* <IconButton
             size="large"
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
             color="inherit"
-          >
+          > */}
           <Typography ><SignInButton text={"ログイン"} /></Typography>
-          </IconButton>
+          {/* </IconButton> */}
         </MenuItem>
       )}
     </Menu>
