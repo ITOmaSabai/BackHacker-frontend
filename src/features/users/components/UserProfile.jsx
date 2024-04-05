@@ -1,8 +1,8 @@
-import { Typography } from "@mui/material";
-import { getAuth } from "firebase/auth"
+import { Avatar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getUser } from "../api/getUser";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import Spinner from "../../../components/Elements/Spinner/Spinner";
 
 export const UserProfile = () => {
   const { currentUser, loading } = useFirebaseAuth();
@@ -23,14 +23,14 @@ export const UserProfile = () => {
   }, [currentUser])
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Spinner /></div>;
   }
 
   return (
     userInfo && (
       <>
         <Typography >{userInfo.name}</Typography>
-        <Typography ></Typography>
+        <Avatar src={userInfo.avatar} sx={{mr: 3, width: 56, height: 56}}></Avatar>
       </>
     )
   )
