@@ -8,8 +8,8 @@ import Header from "../Header/Header";
 export const MainLayout = () => {
   return (
     <>
-    <Header />
-    <TransitionsSnackbar />
+      <Header />
+      <TransitionsSnackbar />
     </>
   )
 }

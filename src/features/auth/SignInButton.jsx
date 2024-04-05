@@ -1,6 +1,6 @@
 import { axios } from '../../lib/axios';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
-import { IconButton } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
 
 export const SignInButton = ({ text }) => {
@@ -31,9 +31,11 @@ export const SignInButton = ({ text }) => {
   };
 
   return (
-    <IconButton onClick={handleGoogleLogin} >
-      {text}
+    <Button onClick={handleGoogleLogin} size="large"  >
+      <Typography fontWeight={"bold"} >
+        {text}
+      </Typography>
       <Login />
-    </IconButton>
+    </Button>
   );
 }
