@@ -3,14 +3,13 @@ import { SignInButton } from "../../features/auth/SignInButton";
 import { WithdrawalButton } from "../../features/users/components/WithdrawalButton";
 import TransitionsSnackbar from "../FlashMessages/FlashMessage";
 import { IconButton } from "@mui/material";
+import Header from "../Header/Header";
 
 export const MainLayout = () => {
   return (
     <>
-    <SignInButton text={"ログイン"} />
-    <IconButton ><Link to={"http://localhost:3001/profile"} style={{color: "inherit", textDecoration: "none"}} target='_blank'>プロフィール</Link></IconButton>
-    <WithdrawalButton />
-    <TransitionsSnackbar />
+      <Header />
+      <TransitionsSnackbar />
     </>
   )
 }
