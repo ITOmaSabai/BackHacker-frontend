@@ -4,6 +4,7 @@ import { getUser } from "../api/getUser";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Spinner from "../../../components/Elements/Spinner/Spinner";
 import { WithdrawalButton } from "./WithdrawalButton";
+import { LogOutButton } from "../../auth/components/LogOutButton";
 
 export const UserProfile = () => {
   const { currentUser, loading } = useFirebaseAuth();
@@ -32,6 +33,7 @@ export const UserProfile = () => {
       <>
         <Typography >{userInfo.name}</Typography>
         <Avatar src={userInfo.avatar} sx={{mr: 3, width: 56, height: 56}}></Avatar>
+        <LogOutButton />
         <WithdrawalButton />
       </>
     )
