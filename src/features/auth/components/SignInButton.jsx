@@ -1,5 +1,5 @@
-import { axios } from '../../lib/axios';
-import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
+import { axios } from '../../../lib/axios';
+import { useFirebaseAuth } from '../../../hooks/useFirebaseAuth';
 import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
 
