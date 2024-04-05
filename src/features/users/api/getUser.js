@@ -1,7 +1,7 @@
 import { axios } from '../../../lib/axios'
 
 export const getUser = async ( currentUser ) => {
-  const token = await currentUser?.getIdToken()
+  const token = await currentUser?.getIdToken();
 
   if (!token) {
     throw new Error('No token found');
