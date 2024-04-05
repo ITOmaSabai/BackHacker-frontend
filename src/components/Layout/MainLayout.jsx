@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { SignInButton } from "../../features/auth/components/SignInButton";
-import { UserProfile } from "../../features/users/components/UserProfile";
+import { SignInButton } from "../../features/auth/components/SignInButton"
 import { WithdrawalButton } from "../../features/users/components/WithdrawalButton";
 import TransitionsSnackbar from "../FlashMessages/FlashMessage";
 import { IconButton } from "@mui/material";
