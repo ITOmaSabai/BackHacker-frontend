@@ -3,6 +3,7 @@ import { useState } from "react"
 import RoomTwoToneIcon from '@mui/icons-material/RoomTwoTone';
 import { createSpot } from "../api/createSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import Switch from '@mui/material/Switch';
 
 const style = {
   display: 'flex',
@@ -14,6 +15,10 @@ export const CreateSpot = ({ latLng }) => {
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
   const { currentUser } = useFirebaseAuth();
+  const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
+
+
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   const handleSpotPost = (e) => {
     e.preventDefault();
@@ -24,6 +29,23 @@ export const CreateSpot = ({ latLng }) => {
     <form onSubmit={handleSpotPost} >
       <Box style={style} >
         <Typography variant='h5' fontSize={"24px"}><RoomTwoToneIcon />スポット新規投稿</Typography>
+        <Box></Box>
+        <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pt: 3}}>
+          <Typography>動画を自動で取得</Typography>
+          <Switch
+            {...label}
+            defaultChecked
+            checked={isAutoFetchEnabled}
+            onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
+          />
+        </Box>
+        <Box >
+          {isAutoFetchEnabled ? (
+            <Typography >動画を自動で取得します</Typography>
+          ) : (
+            <TextField label="YouTube動画URL" ></TextField>
+          )}
+        </Box>
         <TextField
           id="spotName"
           label="スポット名"
