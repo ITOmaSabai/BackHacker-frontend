@@ -1,6 +1,6 @@
-import { axios } from '../../../lib/axios'
+import { axios } from "../../../lib/axios";
 
-export const getUser = async ( currentUser ) => {
+export const createSpot = async (currentUser, spotName, spotDescription) => {
   const token = await currentUser?.getIdToken();
 
   if (!token) {
@@ -10,8 +10,16 @@ export const getUser = async ( currentUser ) => {
     headers: { authorization: `Bearer ${token}` },
   };
 
+  const data = {
+    name: spotName,
+    description: spotDescription,
+    lat: 100,
+    lng: 10
+  }
+
   try {
-    const res = await axios.get(`/api/v1/users/${currentUser.uid}`, config);
+    const res = await axios.post("/api/v1/spots", data, config);
+    console.log(res.data)
     return res.data;
   } catch (err) {
     let message;
