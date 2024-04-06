@@ -7,17 +7,17 @@ import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 const style = {
   display: 'flex',
   flexDirection: 'column',
-  width: '40%',
+  width: '90%',
   textAlign: 'center'
 }
-export const CreateSpot = () => {
+export const CreateSpot = ({ latLng }) => {
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
   const { currentUser } = useFirebaseAuth();
 
   const handleSpotPost = (e) => {
     e.preventDefault();
-    createSpot(currentUser, spotName, spotDescription);
+    createSpot(currentUser, spotName, spotDescription, latLng);
   }
 
   return (

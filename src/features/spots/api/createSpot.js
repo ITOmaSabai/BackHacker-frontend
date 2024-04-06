@@ -1,6 +1,6 @@
 import { axios } from "../../../lib/axios";
 
-export const createSpot = async (currentUser, spotName, spotDescription) => {
+export const createSpot = async (currentUser, spotName, spotDescription, spotLatLng) => {
   const token = await currentUser?.getIdToken();
 
   if (!token) {
@@ -13,8 +13,8 @@ export const createSpot = async (currentUser, spotName, spotDescription) => {
   const data = {
     name: spotName,
     description: spotDescription,
-    lat: 100,
-    lng: 10
+    lat: spotLatLng.lat,
+    lng: spotLatLng.lng
   }
 
   try {
