@@ -4,6 +4,7 @@ import RoomTwoToneIcon from '@mui/icons-material/RoomTwoTone';
 import { createSpot } from "../api/createSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Switch from '@mui/material/Switch';
+import { ReverseGeocode } from "./ReverseGeocode";
 
 const style = {
   display: 'flex',
@@ -20,9 +21,10 @@ export const CreateSpot = ({ latLng }) => {
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-  const handleSpotPost = (e) => {
+  const handleSpotPost = async (e) => {
     e.preventDefault();
-    createSpot(currentUser, spotName, spotDescription, latLng);
+    await ReverseGeocode(latLng);
+    await createSpot(currentUser, spotName, spotDescription, latLng);
   }
 
   return (
@@ -30,22 +32,6 @@ export const CreateSpot = ({ latLng }) => {
       <Box style={style} >
         <Typography variant='h5' fontSize={"24px"}><RoomTwoToneIcon />スポット新規投稿</Typography>
         <Box></Box>
-        <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pt: 3}}>
-          <Typography>動画を自動で取得</Typography>
-          <Switch
-            {...label}
-            defaultChecked
-            checked={isAutoFetchEnabled}
-            onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
-          />
-        </Box>
-        <Box >
-          {isAutoFetchEnabled ? (
-            <Typography >動画を自動で取得します</Typography>
-          ) : (
-            <TextField label="YouTube動画URL" ></TextField>
-          )}
-        </Box>
         <TextField
           id="spotName"
           label="スポット名"
@@ -72,6 +58,28 @@ export const CreateSpot = ({ latLng }) => {
           // value={spotDescription}
           onChange={(e) => setSpotDescription(e.target.value)}
         />
+        <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>
+          <Typography>動画を自動で取得する</Typography>
+          <Switch
+            {...label}
+            defaultChecked
+            checked={isAutoFetchEnabled}
+            onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
+          />
+        </Box>
+        <Box sx={{pb: 3}}>
+          {isAutoFetchEnabled ? (
+            <>
+              {/* <TextField label="YouTube動画URLを入力" disabled ></TextField> */}
+              <Typography fontSize={"14px"} >ピンの周辺の動画を自動で取得します</Typography>
+            </>
+          ) : (
+            <>
+            {/* <Typography >表示するYouTube動画を自分で選択できます</Typography> */}
+            <TextField label="YouTube動画URLを入力" ></TextField>
+            </>
+          )}
+        </Box>
         <Box >
           <Button variant='text' >キャンセル</Button>
           <Button
