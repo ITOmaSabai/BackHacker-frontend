@@ -1,12 +1,10 @@
 import { Box } from '@mui/material';
 import { Map, Marker } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
-import { CreateSpot } from '../../features/spots/components/CreateSpot';
 
-const defaultPosition = { lat: 15.637474886767327, lng: 151.47934266767578 }
-
-export const MapView = () => {
-  const [ latLng, setLatLng ] = useState({});
+export const MapView = ({ latLng, setLatLng }) => {
+  console.log(latLng)
+  console.log(setLatLng)
+  const defaultPosition = { lat: 15.637474886767327, lng: 151.47934266767578 }
 
   const handleMapClick = (e) => {
     const lat = parseFloat(e.detail.latLng.lat);
@@ -15,24 +13,19 @@ export const MapView = () => {
   }
 
   return(
-    <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
-      <Box sx={{height: "100%", width :"25%"}}>
-        <CreateSpot latLng={latLng} />
-      </Box>
-      <Box sx={{height: "100%", width :"75%"}} >
-        <Map
-          defaultCenter = {defaultPosition}
-          defaultZoom = {2}
-          clickableIcons={true}
-          disableDefaultUI
-          gestureHandling={'greedy'}
-          onClick={handleMapClick}
-        >
-          {latLng &&
-            <Marker position={latLng} ></Marker>
-          }
-        </Map>
-      </Box>
+    <Box sx={{height: "100%", width :"100%"}} >
+      <Map
+        defaultCenter = {defaultPosition}
+        defaultZoom = {2}
+        clickableIcons={true}
+        disableDefaultUI
+        gestureHandling={'greedy'}
+        onClick={handleMapClick}
+      >
+        {latLng &&
+          <Marker position={latLng} ></Marker>
+        }
+      </Map>
     </Box>
   )
 }
