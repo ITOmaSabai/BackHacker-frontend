@@ -63,6 +63,7 @@ export const CreateSpot = ({ latLng }) => {
           <Switch
             {...label}
             defaultChecked
+            disabled
             checked={isAutoFetchEnabled}
             onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
           />
@@ -71,7 +72,8 @@ export const CreateSpot = ({ latLng }) => {
           {isAutoFetchEnabled ? (
             <>
               {/* <TextField label="YouTube動画URLを入力" disabled ></TextField> */}
-              <Typography fontSize={"14px"} >ピンの周辺の動画を自動で取得します</Typography>
+              <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
+              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography>
             </>
           ) : (
             <>
