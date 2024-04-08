@@ -15,11 +15,11 @@ export const MapView = () => {
   }
 
   return(
-    <Box sx={{display: "flex", flexDirection: "row"}} >
-      <Box sx={{height: "100vh", width :"25%"}}>
+    <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
+      <Box sx={{height: "100%", width :"25%"}}>
         <CreateSpot latLng={latLng} />
       </Box>
-      <Box sx={{height: "100vh", width :"75%"}} >
+      <Box sx={{height: "100%", width :"75%"}} >
         <Map
           defaultCenter = {defaultPosition}
           defaultZoom = {2}

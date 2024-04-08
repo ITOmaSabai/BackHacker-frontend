@@ -8,10 +8,11 @@ import { MapView } from '../components/Map/MapView';
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />} />
-      <Route path="/profile" element={<UserProfile />} />
-      <Route path="/spots" element={<CreateSpot />} />
-      <Route path="/map" element={<MapView />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/spots" element={<CreateSpot />} />
+        <Route path="/map" element={<MapView />} />
+      </Route>
     </Routes>
   )
 }
