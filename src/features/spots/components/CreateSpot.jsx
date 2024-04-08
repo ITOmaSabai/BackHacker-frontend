@@ -23,8 +23,8 @@ export const CreateSpot = ({ latLng }) => {
 
   const handleSpotPost = async (e) => {
     e.preventDefault();
-    await ReverseGeocode(latLng);
-    await createSpot(currentUser, spotName, spotDescription, latLng);
+    const address = await ReverseGeocode(latLng);
+    await createSpot(currentUser, spotName, spotDescription, latLng, address);
   }
 
   return (
@@ -75,8 +75,8 @@ export const CreateSpot = ({ latLng }) => {
             </>
           ) : (
             <>
-            {/* <Typography >表示するYouTube動画を自分で選択できます</Typography> */}
-            <TextField label="YouTube動画URLを入力" ></TextField>
+              <TextField label="YouTube動画URLを入力" ></TextField>
+              <Typography >https://www.youtube.com/</Typography>
             </>
           )}
         </Box>
