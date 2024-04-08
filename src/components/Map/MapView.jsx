@@ -1,16 +1,8 @@
 import { Box } from '@mui/material';
-import { Map, Marker } from '@vis.gl/react-google-maps';
+import { Map } from '@vis.gl/react-google-maps';
 
-export const MapView = ({ latLng, setLatLng }) => {
-  console.log(latLng)
-  console.log(setLatLng)
+export const MapView = ({ children, onClick }) => {
   const defaultPosition = { lat: 15.637474886767327, lng: 151.47934266767578 }
-
-  const handleMapClick = (e) => {
-    const lat = parseFloat(e.detail.latLng.lat);
-    const lng = parseFloat(e.detail.latLng.lng);
-    setLatLng({lat: lat, lng: lng});
-  }
 
   return(
     <Box sx={{height: "100%", width :"100%"}} >
@@ -20,11 +12,9 @@ export const MapView = ({ latLng, setLatLng }) => {
         clickableIcons={true}
         disableDefaultUI
         gestureHandling={'greedy'}
-        onClick={handleMapClick}
+        onClick={onClick}
       >
-        {latLng &&
-          <Marker position={latLng} ></Marker>
-        }
+        {children}
       </Map>
     </Box>
   )
