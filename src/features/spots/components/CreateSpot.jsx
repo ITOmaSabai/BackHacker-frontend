@@ -18,7 +18,6 @@ export const CreateSpot = ({ latLng }) => {
   const { currentUser } = useFirebaseAuth();
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
 
-
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   const handleSpotPost = async (e) => {
@@ -31,7 +30,6 @@ export const CreateSpot = ({ latLng }) => {
     <form onSubmit={handleSpotPost} >
       <Box style={style} >
         <Typography variant='h5' fontSize={"24px"}><RoomTwoToneIcon />スポット新規投稿</Typography>
-        <Box></Box>
         <TextField
           id="spotName"
           label="スポット名"
@@ -42,7 +40,6 @@ export const CreateSpot = ({ latLng }) => {
           helperText="※必須項目です"
           placeholder="表示されるスポット名"
           name="spotName"
-          // value={spotName}
           onChange={(e) => setSpotName(e.target.value)}
         />
         <TextField
@@ -55,7 +52,6 @@ export const CreateSpot = ({ latLng }) => {
           placeholder="思い出や感想を入力してください"
           margin="normal"
           name='description'
-          // value={spotDescription}
           onChange={(e) => setSpotDescription(e.target.value)}
         />
         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>
@@ -71,7 +67,6 @@ export const CreateSpot = ({ latLng }) => {
         <Box sx={{pb: 3}}>
           {isAutoFetchEnabled ? (
             <>
-              {/* <TextField label="YouTube動画URLを入力" disabled ></TextField> */}
               <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
               <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography>
             </>
