@@ -11,7 +11,6 @@ export const SpotDetail = ({ spotId }) => {
       if (spots) {
       const spot = spots.find(spot => parseInt(spot.id) === parseInt(spotId));
       setSelectedSpot(spot);
-      console.log(selectedSpot)
     }
   }, [spotId, spots]);
 
