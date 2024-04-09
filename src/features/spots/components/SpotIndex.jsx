@@ -2,7 +2,7 @@ import { Marker } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
 import { getSpots } from '../api/getSpots';
 
-export const SpotIndex = () => {
+export const SpotIndex = ({handleMarkerClick}) => {
   const [ spots, setSpots ] = useState();
 
   useEffect(() => {
@@ -21,8 +21,17 @@ export const SpotIndex = () => {
     <>
       {spots ? (
         spots.map((spot) =>
-          <Marker position={{lat: spot.lat, lng: spot.lng}} />)
-        ) : ("")}
+          <Marker
+            key={spot.id}
+            position={{
+              lat: spot.lat,
+              lng: spot.lng
+            }}
+            onClick={() => handleMarkerClick(spot.id)}
+          />)
+      ) : (
+        ""
+      )}
     </>
   )
 }

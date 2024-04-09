@@ -8,7 +8,6 @@ export const MainLayout = () => {
     <Box sx={{height: "calc(100vh - 64px)", width: "100%"}}>
       <Header />
       <Outlet />
-      {/* <Link to="/map" style={{color: "inherit", textDecoration: "none"}}>新規投稿</Link> */}
       <TransitionsSnackbar />
     </Box>
   )
