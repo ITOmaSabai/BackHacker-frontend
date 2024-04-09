@@ -1,15 +1,14 @@
 import { Marker } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
-import { getSpots } from '../api/getSpots';
+import { useEffect } from 'react';
+import { useSpotsContext } from '../../../contexts/SpotsContext';
 
 export const SpotIndex = ({handleMarkerClick}) => {
-  const [ spots, setSpots ] = useState();
+  const { spots, loadSpots } = useSpotsContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedSpots = await getSpots();
-        setSpots(fetchedSpots);
+        loadSpots();
       } catch (error) {
         console.error('Failed to fetch user data', error);
       }
