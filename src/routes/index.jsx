@@ -12,6 +12,7 @@ export const AppRoutes = () => {
         <Route path="/spots" element={<CreateSpotLayout />} />
         <Route path="/map" element={<IndexSpotLayout />} />
         <Route path="spots/:spotId" element={<IndexSpotLayout />} />
+        <Route path="/users/:userId" element={<UserLayout />} />
       </Route>
     </Routes>
   )
