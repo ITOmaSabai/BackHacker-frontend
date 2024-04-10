@@ -55,8 +55,11 @@ export const useFirebaseAuth = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const user = getUser(currentUser);
-      currentUser.id = user.id;
+      const fetchUserData = async () => {
+        const user = await getUser(currentUser);
+        currentUser.id = user.id;
+      }
+      fetchUserData();
     }
   }, [currentUser])
 

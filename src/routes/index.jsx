@@ -8,7 +8,6 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route path="/profile" element={<UserLayout />} />
         <Route path="/spots" element={<CreateSpotLayout />} />
         <Route path="/map" element={<IndexSpotLayout />} />
         <Route path="spots/:spotId" element={<IndexSpotLayout />} />

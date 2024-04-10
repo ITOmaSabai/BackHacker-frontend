@@ -42,7 +42,7 @@ export default function Header() {
   };
 
   const handleProfileOpen = () => {
-    navigate('/profile');
+    navigate(`/users/${currentUser.id}`);
   }
 
   const menuId = 'primary-search-account-menu';

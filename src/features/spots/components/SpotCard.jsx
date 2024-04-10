@@ -1,11 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import Spinner from "../../../components/Elements/Spinner/Spinner";
 
 export const SpotCard = ({ spots }) => {
 
+  if (!spots) {
+    return <div><Spinner /></div>
+  }
+
   return (
     <>
-      {spots ? (
+      {spots.length > 0 ? (
         spots.map((spot) => (
           <Box>
             <Link
