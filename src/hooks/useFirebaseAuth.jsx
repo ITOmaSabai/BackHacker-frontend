@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
+import { getUser } from "../features/users/api/getUser";
 
 export const useFirebaseAuth = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -51,6 +52,17 @@ export const useFirebaseAuth = () => {
     const unsubscribe = onAuthStateChanged(auth, nextOrObserver);
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const fetchUserData = async () => {
+        const user = await getUser(currentUser);
+        currentUser.id = user.id;
+      }
+      fetchUserData();
+    }
+  }, [currentUser])
+
 
   return {
     currentUser,

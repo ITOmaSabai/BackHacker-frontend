@@ -1,6 +1,7 @@
 import { Avatar, Box, Typography } from "@mui/material"
 import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export const SpotDetail = ({ spotId }) => {
@@ -18,8 +19,13 @@ export const SpotDetail = ({ spotId }) => {
     <Box >
       {selectedSpot &&
       <>
+      <Link
+        to={`/users/${selectedSpot.user.id}`}
+        style={{color: "inherit", textDecoration: "none"}}
+      >
         <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
         <Typography >{selectedSpot.user.name}</Typography>
+      </Link>
         <Typography >{selectedSpot.name}</Typography>
         {selectedSpot.videos && selectedSpot.videos.length > 0 && (
           selectedSpot.videos.map((video) => (
