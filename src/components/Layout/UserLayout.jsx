@@ -5,8 +5,8 @@ import { UserProfile } from "../../features/users/components/UserProfile"
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import { useParams } from "react-router-dom";
 import Spinner from "../Elements/Spinner/Spinner";
-import { getUser } from "../../features/users/api/getUser";
 import { getUsers } from "../../features/users/api/getUsers";
+import { SpotListTab } from "../../features/users/components/SpotListTab";
 
 export const UserLayout = () => {
   const { spots, loadSpots } = useSpotsContext();
@@ -31,18 +31,18 @@ export const UserLayout = () => {
     fetchData();
   }, [currentUser, userId])
 
-  if (!currentUser) {
-    return <div><Spinner /></div>;
-  }
-
   const userPostedSpots = () => {
     return spots && spots.filter(spot => parseInt(spot.user_id) === parseInt(userId));
+  }
+
+  if (!currentUser) {
+    return <div><Spinner /></div>;
   }
 
   return (
     <>
       <UserProfile userInfo={userInfo}/>
-      <SpotCard spots={userPostedSpots()} />
+      <SpotListTab spots={userPostedSpots()} />
     </>
   );
 }
