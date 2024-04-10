@@ -16,7 +16,7 @@ export const SpotDetail = ({ spotId }) => {
       const spot = spots.find(spot => parseInt(spot.id) === parseInt(spotId));
       setSelectedSpot(spot);
     }
-  }, [spotId, spots]);
+  }, [spotId, spots, currentUser]);
 
   if (!selectedSpot || !currentUser) {
     return <div><Spinner /></div>;
@@ -25,22 +25,25 @@ export const SpotDetail = ({ spotId }) => {
   return (
     <Box >
       {selectedSpot &&
-      <>
-      <Link
-        to={`/users/${selectedSpot.user.id}`}
-        style={{color: "inherit", textDecoration: "none"}}
-      >
-        <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
-        <Typography >{selectedSpot.user.name}</Typography>
-      </Link>
-        <Typography >{selectedSpot.name}</Typography>
-        {selectedSpot.videos && selectedSpot.videos.length > 0 && (
-          selectedSpot.videos.map((video) => (
-            <iframe  src={`https://www.youtube.com/embed/${video.youtube_video_id}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          ))
-        )}
-        <LikeButton savedLikes={selectedSpot.likes} currentUser={currentUser} />
-      </>
+        <>
+          <Link
+            to={`/users/${selectedSpot.user.id}`}
+            style={{color: "inherit", textDecoration: "none"}}
+          >
+            <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
+            <Typography >{selectedSpot.user.name}</Typography>
+          </Link>
+            <Typography >{selectedSpot.name}</Typography>
+            {selectedSpot.videos && selectedSpot.videos.length > 0 && (
+              selectedSpot.videos.map((video) => (
+                <iframe  src={`https://www.youtube.com/embed/${video.youtube_video_id}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              ))
+            )}
+            <LikeButton
+              savedLikes={selectedSpot.likes}
+              selectedSpot={selectedSpot}
+            />
+        </>
       }
     </Box>
   )
