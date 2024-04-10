@@ -1,5 +1,6 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { ClickedLikeIcon } from "../../../features/likes/components/ClickedLikeIcon";
 
 export const LikeButton = ({ savedLikes, currentUser }) => {
   const [ likedCount, setLikedCount ] = useState(0);
@@ -28,6 +29,11 @@ export const LikeButton = ({ savedLikes, currentUser }) => {
 
 
   return (
-    <Typography >{likedCount}</Typography>
+    <>
+      <Button  sx={{height: "30px", width: "10px", pl: 4}} disableRipple>
+        <ClickedLikeIcon on={on}/>
+      </Button>
+      <Typography >{likedCount}</Typography>
+    </>
   )
 }
