@@ -1,8 +1,8 @@
 import { Box } from "@mui/material"
 import { MapView } from "../Map/MapView"
+import { LikedSpotIndex } from "../../features/spots/components/LikedSpotIndex";
 import { SpotDetail } from "../../features/spots/components/SpotDetail";
 import { useNavigate, useParams } from "react-router-dom";
-import { LikedSpotIndex } from "../../features/spots/components/LikedSpotIndex";
 
 export const IndexLikedSpotLayout = () => {
   const { spotId } = useParams();

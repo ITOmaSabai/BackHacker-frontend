@@ -1,24 +1,21 @@
 import { Marker } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
+import { useParams } from "react-router-dom";
 
 export const LikedSpotIndex = ({handleMarkerClick}) => {
-  const { spots, loadSpots } = useSpotsContext();
-  const { currentUser } = useFirebaseAuth();
-  sonst [ likedSpots, setLikedSpots ] = useState();
+  const { userId } = useParams();
+  const { likedSpots, loadLikedSpots } = useSpotsContext();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await loadSpots();
-        const likedSpotList = await spots.filter(spot => spot.likes.some(
-          like => parseInt(like.user_id) === parseInt(currentUser.id)));
-          setLikedSpots(likedSpotList);
-      } catch (error) {
-        console.error('Failed to fetch user data', error);
+      const fetchData = async () => {
+        try {
+          loadLikedSpots(userId);
+        } catch (error) {
+          console.error('Failed to fetch user data', error);
+        }
       }
-    }
-    fetchData();
+      fetchData();
   }, [])
 
   return (
