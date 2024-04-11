@@ -1,9 +1,25 @@
 import { Box, Typography } from "@mui/material"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { deleteSpot } from "../../../features/spots/api/deleteSpot";
+import { useNavigate } from "react-router-dom";
+import { useSpotsContext } from "../../../contexts/SpotsContext";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
-export const DeleteButton = () => {
-  const handleSpotDelete = () => {
+export const DeleteButton = ({ currentUser, spot }) => {
+  const { loadSpots } = useSpotsContext();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
+  const navigate = useNavigate();
 
+  const handleSpotDelete = async () => {
+    try {
+      await deleteSpot(currentUser, spot.id, setIsSuccessMessage);
+      await loadSpots();
+      setMessage("削除しました");
+      navigate('/map');
+    } catch (error) {
+      setMessage(error.message);
+      navigate('/map');
+    }
   }
 
   return (

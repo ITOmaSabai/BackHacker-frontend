@@ -1,6 +1,7 @@
 import { axios } from "../../../lib/axios";
+import { isAxiosError } from 'axios';
 
-export const deleteSpot = async ( currentUser, spotId ) => {
+export const deleteSpot = async ( currentUser, spotId, setIsSuccessMessage ) => {
   const token = await currentUser?.getIdToken()
 
   if (!token) {
@@ -12,14 +13,16 @@ export const deleteSpot = async ( currentUser, spotId ) => {
 
   try {
     const res = await axios.delete(`/api/v1/spots/${spotId}`, config);
+    setIsSuccessMessage(true);
     return res.data.message;
   } catch (err) {
-    let message;
-    if (axios.isAxiosError(err) && err.response) {
-      console.error(err.response.data.message);
+    let message = '削除できませんでした';
+    if (isAxiosError(err) && err.response) {
+      message = err.response.data.message || message;
+      throw new Error(message);
     } else {
       message = String(err);
-      console.error(message);
+      throw new Error(message);
     }
   }
 }

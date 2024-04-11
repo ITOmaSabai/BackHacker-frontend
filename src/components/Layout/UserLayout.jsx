@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import Spinner from "../Elements/Spinner/Spinner";
 import { getUsers } from "../../features/users/api/getUsers";
 import { SpotListTab } from "../../features/users/components/SpotListTab";
-import { DeleteButton } from "../Elements/Buttons/DeleteButton";
 
 export const UserLayout = () => {
   const { loadSpots } = useSpotsContext();
@@ -37,7 +36,6 @@ export const UserLayout = () => {
 
   return (
     <>
-      <DeleteButton />
       <UserProfile userInfo={userInfo}/>
       <SpotListTab userInfo={userInfo}/>
     </>
