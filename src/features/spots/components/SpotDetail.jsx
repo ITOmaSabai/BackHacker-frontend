@@ -33,16 +33,16 @@ export const SpotDetail = ({ spotId }) => {
             <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
             <Typography >{selectedSpot.user.name}</Typography>
           </Link>
-            <Typography >{selectedSpot.name}</Typography>
-            {selectedSpot.videos && selectedSpot.videos.length > 0 && (
-              selectedSpot.videos.map((video) => (
-                <iframe  src={`https://www.youtube.com/embed/${video.youtube_video_id}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-              ))
-            )}
-            <LikeButton
-              savedLikes={selectedSpot.likes}
-              selectedSpot={selectedSpot}
-            />
+          <Typography >{selectedSpot.name}</Typography>
+          {selectedSpot.videos && selectedSpot.videos.length > 0 && (
+            selectedSpot.videos.map((video) => (
+              <iframe src={`https://www.youtube.com/embed/${video.youtube_video_id}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            ))
+          )}
+          <LikeButton
+            savedLikes={selectedSpot.likes}
+            selectedSpot={selectedSpot}
+          />
         </>
       }
     </Box>
