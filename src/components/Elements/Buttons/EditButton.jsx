@@ -24,13 +24,16 @@ export const EditButton = ({ currentUser, spot, setEditing }) => {
   }
 
   return (
-    <IconButton onClick={handleSpotEdit}>
-      <Box sx={{p: 0, m: 0}} display={"flex"} flexDirection={"row"} >
-        <EditIcon fontSize="small" sx={{mr: 1}} />
-        <Typography >
-          編集
-        </Typography>
-      </Box>
-    </IconButton>
+    <Box
+      sx={{p: 0, m: 0}}
+      display={"flex"}
+      flexDirection={"row"}
+      onClick={handleSpotEdit}
+    >
+      <EditIcon fontSize="small" sx={{mr: 1}} />
+      <Typography >
+        編集
+      </Typography>
+    </Box>
   )
 }

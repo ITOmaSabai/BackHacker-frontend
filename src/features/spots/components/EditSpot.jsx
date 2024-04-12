@@ -6,6 +6,7 @@ import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Switch from '@mui/material/Switch';
 import Spinner from "../../../components/Elements/Spinner/Spinner";
 import { useSpotsContext } from "../../../contexts/SpotsContext";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 const style = {
   display: 'flex',
@@ -16,6 +17,7 @@ const style = {
 export const EditSpot = ({ spot, setEditing, title }) => {
   const { currentUser } = useFirebaseAuth();
   const { loadSpots } = useSpotsContext();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
@@ -31,10 +33,16 @@ export const EditSpot = ({ spot, setEditing, title }) => {
   }
 
   const handleSpotUpdate = async (e) => {
-    e.preventDefault();
-    await updateSpot(currentUser, spotInfo);
-    await loadSpots();
-    setEditing(false);
+    try {
+      e.preventDefault();
+      await updateSpot(currentUser, spotInfo);
+      await loadSpots();
+      setIsSuccessMessage(true);
+      setMessage("編集が完了しました");
+      setEditing(false);
+    } catch (error) {
+      setMessage(error.message);
+    }
   }
 
   return (

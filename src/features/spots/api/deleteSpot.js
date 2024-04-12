@@ -16,7 +16,7 @@ export const deleteSpot = async ( currentUser, spotId, setIsSuccessMessage ) => 
     setIsSuccessMessage(true);
     return res.data.message;
   } catch (err) {
-    let message = '編集に失敗しました';
+    let message = '削除に失敗しました';
     if (isAxiosError(err) && err.response) {
       message = err.response.data.message || message;
       throw new Error(message);
