@@ -14,6 +14,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { useNavigate } from "react-router-dom";
+import { LogOutButton } from '../../features/auth/components/LogOutButton';
+import { WithdrawalButton } from '../../features/users/components/WithdrawalButton';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -157,6 +159,8 @@ export default function Header() {
           >
             BackHacker.
           </Typography>
+          <LogOutButton />
+          <WithdrawalButton />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton

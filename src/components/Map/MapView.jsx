@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { Map } from '@vis.gl/react-google-maps';
 
 export const MapView = ({ children, onClick }) => {
-  const defaultPosition = { lat: 15.637474886767327, lng: 151.47934266767578 }
+  const defaultPosition = { lat: parseFloat(15.637474886767327), lng: parseFloat(151.47934266767578) }
 
   return(
     <Box sx={{height: "100%", width :"100%"}} >
