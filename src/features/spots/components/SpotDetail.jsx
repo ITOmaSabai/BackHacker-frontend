@@ -6,6 +6,7 @@ import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Spinner from "../../../components/Elements/Spinner/Spinner";
 import { LikeButton } from "../../../components/Elements/Buttons/LikeButton";
 import { DeleteButton } from "../../../components/Elements/Buttons/DeleteButton";
+import { EditButton } from "../../../components/Elements/Buttons/EditButton";
 
 export const SpotDetail = ({ spotId }) => {
   const { spots } = useSpotsContext();
@@ -35,6 +36,7 @@ export const SpotDetail = ({ spotId }) => {
             <Typography >{selectedSpot.user.name}</Typography>
           </Link>
           <Typography >{selectedSpot.name}</Typography>
+          <EditButton currentUser={currentUser} spot={selectedSpot} />
           <DeleteButton currentUser={currentUser} spot={selectedSpot} />
           {selectedSpot.videos && selectedSpot.videos.length > 0 && (
             selectedSpot.videos.map((video) => (
