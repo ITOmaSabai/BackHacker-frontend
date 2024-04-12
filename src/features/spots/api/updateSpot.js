@@ -1,8 +1,8 @@
 import { axios } from "../../../lib/axios";
 import { isAxiosError } from 'axios';
 
-export const deleteSpot = async ( currentUser, spotId, setIsSuccessMessage ) => {
-  const token = await currentUser?.getIdToken()
+export const updateSpot = async (currentUser, spotInfo) => {
+  const token = await currentUser?.getIdToken();
 
   if (!token) {
     throw new Error('No token found');
@@ -11,12 +11,18 @@ export const deleteSpot = async ( currentUser, spotId, setIsSuccessMessage ) => 
     headers: { authorization: `Bearer ${token}` },
   };
 
+  const data = {
+    spot: {
+      name: spotInfo.name,
+      description: spotInfo.description,
+    }
+  }
+
   try {
-    const res = await axios.delete(`/api/v1/spots/${spotId}`, config);
-    setIsSuccessMessage(true);
-    return res.data.message;
+    const res = await axios.put(`/api/v1/spots/${spotInfo.id}`, data, config);
+    return res.data;
   } catch (err) {
-    let message = '削除に失敗しました';
+    let message = '編集に失敗しました';
     if (isAxiosError(err) && err.response) {
       message = err.response.data.message || message;
       throw new Error(message);
