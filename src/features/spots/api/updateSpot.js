@@ -1,12 +1,6 @@
 import { axios } from "../../../lib/axios";
 
-export const updateSpot = async (
-    currentUser,
-    spotName,
-    spotDescription,
-    spotLatLng,
-    address
-  ) => {
+export const updateSpot = async (currentUser, spotInfo) => {
   const token = await currentUser?.getIdToken();
 
   if (!token) {
@@ -18,17 +12,13 @@ export const updateSpot = async (
 
   const data = {
     spot: {
-    name: spotName,
-    description: spotDescription,
-    lat: spotLatLng.lat,
-    lng: spotLatLng.lng,
-    address_components: address.address_components,
-    formatted_address: address.formatted_address,
+      name: spotInfo.name,
+      description: spotInfo.description,
     }
   }
 
   try {
-    const res = await axios.put("/api/v1/spots", data, config);
+    const res = await axios.put(`/api/v1/spots/${spotInfo.id}`, data, config);
     return res.data;
   } catch (err) {
     let message;

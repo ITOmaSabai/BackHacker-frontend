@@ -5,6 +5,7 @@ import { updateSpot } from "../api/updateSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Switch from '@mui/material/Switch';
 import Spinner from "../../../components/Elements/Spinner/Spinner";
+import { useSpotsContext } from "../../../contexts/SpotsContext";
 
 const style = {
   display: 'flex',
@@ -13,20 +14,26 @@ const style = {
   textAlign: 'center'
 }
 export const EditSpot = ({ spot, setEditing, title }) => {
+  const { currentUser } = useFirebaseAuth();
+  const { loadSpots } = useSpotsContext();
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
-  const { currentUser } = useFirebaseAuth();
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
   if (!currentUser || !spot) return <div><Spinner /></div>;
-  console.log(spot)
-  const latLng = {lat: spot.lat, lng: spot.lng};
+
+  const spotInfo = {
+    id: spot.id,
+    name: spotName,
+    description: spotDescription,
+  }
 
   const handleSpotUpdate = async (e) => {
     e.preventDefault();
-    await updateSpot(currentUser, spotName, spotDescription, latLng, spot.address);
+    await updateSpot(currentUser, spotInfo);
+    await loadSpots();
     setEditing(false);
   }
 
