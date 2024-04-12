@@ -3,12 +3,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { deleteSpot } from "../../../features/spots/api/deleteSpot";
 import { useSpotsContext } from "../../../contexts/SpotsContext";
 import { useFlashMessage } from "../../../contexts/FlashMessageContext";
+import { useState } from "react";
 
-export const EditButton = ({ currentUser, spot }) => {
+export const EditButton = ({ currentUser, spot, setEditing }) => {
   const { loadSpots } = useSpotsContext();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
 
   const handleSpotEdit = async () => {
+    setEditing(true);
+  }
+
+  const handleSpotUpdate = async () => {
     try {
       await deleteSpot(currentUser, spot.id, setIsSuccessMessage);
       await loadSpots();
