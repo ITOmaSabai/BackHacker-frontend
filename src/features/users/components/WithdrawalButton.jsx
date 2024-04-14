@@ -60,6 +60,6 @@ export const WithdrawalButton = () => {
   }
 
   return (
-    <IconButton onClick={withdrawalUser} >退会</IconButton>
+    <IconButton type="button" onClick={withdrawalUser} >退会</IconButton>
   )
 }

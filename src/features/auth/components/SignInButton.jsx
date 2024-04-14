@@ -11,6 +11,10 @@ export const SignInButton = ({ text }) => {
       const user = await loginWithGoogle();
       const token = await user?.getIdToken();
 
+      if (!token) {
+        throw new Error('No token found');
+      }
+
       const config = {
         headers: { authorization: `Bearer ${token}` },
       };

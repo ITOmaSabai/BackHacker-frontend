@@ -18,6 +18,8 @@ export const UserLayout = () => {
   }, []);
 
   useEffect(() => {
+    if (!currentUser) return;
+
     const fetchData = async () => {
       try {
         const users = await getUsers();

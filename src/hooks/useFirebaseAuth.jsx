@@ -6,6 +6,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  getAuth,
 } from "firebase/auth";
 import { getUser } from "../features/users/api/getUser";
 
@@ -32,18 +33,18 @@ export const useFirebaseAuth = () => {
     setLoading(false);
   };
 
-  const logout = () => {
-    signOut(auth).then(clear);
-    navigate("/");
+  const logout = async () => {
+    await signOut(auth).then(clear());
+    navigate("/", { state: {message: "ログアウトしました"}});
   };
 
   const nextOrObserver = async (user) => {
     if (!user) {
       setLoading(false);
+      setCurrentUser(null);
       return;
     }
 
-    setLoading(true);
     setCurrentUser(user);
     setLoading(false);
   };

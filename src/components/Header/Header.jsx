@@ -95,7 +95,7 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {currentUser ? (
+      {currentUser && currentUser === null ? (
         <div>
           <MenuItem>
             <IconButton
@@ -137,7 +137,7 @@ export default function Header() {
       )}
     </Menu>
   );
-
+console.log(currentUser)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
