@@ -4,7 +4,7 @@ import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
 import { useFlashMessage } from '../../../contexts/FlashMessageContext';
 
-export const SignInButton = ({ text, currentUser }) => {
+export const SignInButton = ({ text, currentUser, variant, color }) => {
   const { loginWithGoogle } = useFirebaseAuth();
   const { setMessage } = useFlashMessage();
 
@@ -39,7 +39,7 @@ export const SignInButton = ({ text, currentUser }) => {
   };
 
   return (
-    <Button onClick={handleGoogleLogin} size="large"  >
+    <Button onClick={handleGoogleLogin} size="large" variant={variant} color={color}  >
       <Typography fontWeight={"bold"} >
         {text}
       </Typography>

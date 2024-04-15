@@ -5,6 +5,7 @@ import { createLike } from "../../../features/likes/api/createLike";
 import { deleteLike } from "../../../features/likes/api/deleteLike";
 import { useSpotsContext } from "../../../contexts/SpotsContext";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import MessageModal from "../Modals/MessageModal";
 
 export const LikeButton = ({ savedLikes, selectedSpot }) => {
   const [ likedCount, setLikedCount ] = useState(0);
@@ -12,6 +13,11 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
   const [ on, setOn ] = useState(false);
   const { spots, loadSpots } = useSpotsContext();
   const { currentUser, userId } = useFirebaseAuth();
+  const [ open, setOpen ] = useState(false);
+
+  const title = "ログインすると「いいね」ができます！";
+  const body = "投稿者に気持ちを伝えましょう！"
+  const icon = "😘 ❤️";
 
   // スポットにsavedLikes(いいね配列)が存在していれば、配列の長さを取得して、いいね数とする
   useEffect(() => {
@@ -50,13 +56,21 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
         setOn(false);
       }
       loadSpots();
-    // } else {
-      // setOpen(true);
+    } else {
+      setOpen(true);
     }
   };
 
   return (
     <>
+      <MessageModal
+        open={open}
+        setOpen={setOpen}
+        title={title}
+        body={body}
+        icon={icon}
+        button={"login"}
+      />
       <Button
         onClick={handleLikeButtonClick}
         sx={{height: "30px", width: "10px", pl: 4}}
