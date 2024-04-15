@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSpotsContext } from "../../contexts/SpotsContext";
 import { UserProfile } from "../../features/users/components/UserProfile"
-import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import { useParams } from "react-router-dom";
 import Spinner from "../Elements/Spinner/Spinner";
 import { getUsers } from "../../features/users/api/getUsers";
@@ -9,7 +8,6 @@ import { SpotListTab } from "../../features/users/components/SpotListTab";
 
 export const UserLayout = () => {
   const { loadSpots } = useSpotsContext();
-  const { currentUser } = useFirebaseAuth();
   const { userId } = useParams();
   const [ userInfo, setUserInfo ] = useState();
 
@@ -28,9 +26,9 @@ export const UserLayout = () => {
       }
     }
     fetchData();
-  }, [currentUser, userId])
+  }, [userId])
 
-  if (!currentUser) {
+  if (!userInfo) {
     return <div><Spinner /></div>;
   }
 

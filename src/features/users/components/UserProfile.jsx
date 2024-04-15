@@ -5,7 +5,7 @@ import { WithdrawalButton } from "./WithdrawalButton";
 import { LogOutButton } from "../../auth/components/LogOutButton";
 
 export const UserProfile = ({ userInfo }) => {
-  const { currentUser, loading } = useFirebaseAuth();
+  const { loading } = useFirebaseAuth();
 
   if (loading) {
     return <div><Spinner /></div>;

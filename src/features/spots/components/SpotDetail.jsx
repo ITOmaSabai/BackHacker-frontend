@@ -11,7 +11,7 @@ import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton"
 export const SpotDetail = ({ spotId }) => {
   const { spots } = useSpotsContext();
   const [ selectedSpot, setSelectedSpot ] = useState();
-  const { currentUser } = useFirebaseAuth();
+  const { currentUser, userId } = useFirebaseAuth();
   const [ editing, setEditing ] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const SpotDetail = ({ spotId }) => {
     }
   }, [spotId, spots, currentUser]);
 
-  if (!selectedSpot || !currentUser) {
+  if (!selectedSpot) {
     return <div><Spinner /></div>;
   }
 
@@ -37,7 +37,13 @@ export const SpotDetail = ({ spotId }) => {
             <Typography >{selectedSpot.user.name}</Typography>
           </Link>
           <Typography >{selectedSpot.name}</Typography>
-          <ConfigButton currentUser={currentUser} selectedSpot={selectedSpot} setEditing={setEditing} />
+          { userId === selectedSpot.user.id &&
+            <ConfigButton
+              currentUser={currentUser}
+              selectedSpot={selectedSpot}
+              setEditing={setEditing}
+            />
+          }
           {selectedSpot.videos && selectedSpot.videos.length > 0 && (
             selectedSpot.videos.map((video) => (
               <iframe

@@ -2,21 +2,28 @@ import { axios } from '../../../lib/axios';
 import { useFirebaseAuth } from '../../../hooks/useFirebaseAuth';
 import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
+import { useFlashMessage } from '../../../contexts/FlashMessageContext';
 
-export const SignInButton = ({ text }) => {
+export const SignInButton = ({ text, currentUser, variant, color }) => {
   const { loginWithGoogle } = useFirebaseAuth();
+  const { setMessage } = useFlashMessage();
 
   const handleGoogleLogin = () => {
     const verifyIdToken = async () => {
       const user = await loginWithGoogle();
       const token = await user?.getIdToken();
 
+      if (!token) {
+        throw new Error('No token found');
+      }
+
       const config = {
         headers: { authorization: `Bearer ${token}` },
       };
 
       try {
-        axios.post("/api/v1/authentication", null, config);
+        const res = await axios.post("/api/v1/authentication", null, config);
+        return res.data;
       } catch (err) {
         let message;
         if (axios.isAxiosError(err) && err.response) {
@@ -27,11 +34,12 @@ export const SignInButton = ({ text }) => {
         }
       }
     };
-    verifyIdToken();
+    const res = verifyIdToken();
+    setMessage(res.message);
   };
 
   return (
-    <Button onClick={handleGoogleLogin} size="large"  >
+    <Button onClick={handleGoogleLogin} size="large" variant={variant} color={color}  >
       <Typography fontWeight={"bold"} >
         {text}
       </Typography>
