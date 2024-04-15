@@ -59,7 +59,6 @@ export const useFirebaseAuth = () => {
       const fetchUserData = async () => {
         const userData = await getUser(currentUser);
         setUserId(userData.id)
-        console.log("userData.id", userData.id)
       }
       fetchUserData();
     }

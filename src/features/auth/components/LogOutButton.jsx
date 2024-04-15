@@ -6,7 +6,6 @@ export const LogOutButton = () => {
   const { logout } = useFirebaseAuth();
 
   const handleSignOut = async () => {
-    console.log("ボタンが押されました")
     await logout();
   };
 
