@@ -44,6 +44,7 @@ export default function Header() {
   };
 
   const handleProfileOpen = () => {
+    handleMenuClose();
     navigate(`/users/${userId}`);
   }
 
@@ -159,8 +160,8 @@ export default function Header() {
           >
             BackHacker.
           </Typography>
-          <LogOutButton />
-          <WithdrawalButton />
+          {/* <LogOutButton />
+          <WithdrawalButton /> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
