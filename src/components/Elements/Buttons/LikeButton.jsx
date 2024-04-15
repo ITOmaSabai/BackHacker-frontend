@@ -11,7 +11,7 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
   const [ likeId, setLikeId ] = useState();
   const [ on, setOn ] = useState(false);
   const { spots, loadSpots } = useSpotsContext();
-  const { currentUser } = useFirebaseAuth();
+  const { currentUser, userId } = useFirebaseAuth();
 
   // スポットにsavedLikes(いいね配列)が存在していれば、配列の長さを取得して、いいね数とする
   useEffect(() => {
@@ -23,8 +23,8 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
   // ログイン中のユーザーがいいね済みであれば、いいねidを特定する
   // ログイン中のユーザーがいいね済みであれば、いいね済みボタンを表示する
   useEffect(() => {
-    if (currentUser && savedLikes) {
-      const likeByCurrentUser = savedLikes.find(like => like.user_id === parseInt(currentUser.id));
+    if (currentUser && userId && savedLikes) {
+      const likeByCurrentUser = savedLikes.find(like => like.user_id === parseInt(userId));
 
       if (likeByCurrentUser && likeByCurrentUser !== null) {
         setLikeId(likeByCurrentUser.id);
