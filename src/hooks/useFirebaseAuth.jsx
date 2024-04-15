@@ -6,13 +6,13 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
-  getAuth,
 } from "firebase/auth";
 import { getUser } from "../features/users/api/getUser";
 
 export const useFirebaseAuth = () => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [ userId, setUserId ] = useState();
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const useFirebaseAuth = () => {
 
     if (result) {
       const user = result.user;
-
+      setCurrentUser(user);
       navigate("/");
       return user;
     }
@@ -34,7 +34,7 @@ export const useFirebaseAuth = () => {
   };
 
   const logout = async () => {
-    await signOut(auth).then(clear());
+    await signOut(auth).then(clear);
     navigate("/", { state: {message: "ログアウトしました"}});
   };
 
@@ -42,9 +42,9 @@ export const useFirebaseAuth = () => {
     if (!user) {
       setLoading(false);
       setCurrentUser(null);
+      setUserId(null);
       return;
     }
-
     setCurrentUser(user);
     setLoading(false);
   };
@@ -57,8 +57,9 @@ export const useFirebaseAuth = () => {
   useEffect(() => {
     if (currentUser) {
       const fetchUserData = async () => {
-        const user = await getUser(currentUser);
-        currentUser.id = user.id;
+        const userData = await getUser(currentUser);
+        setUserId(userData.id)
+        console.log("userData.id", userData.id)
       }
       fetchUserData();
     }
@@ -70,5 +71,6 @@ export const useFirebaseAuth = () => {
     loading,
     loginWithGoogle,
     logout,
+    userId
   };
 }

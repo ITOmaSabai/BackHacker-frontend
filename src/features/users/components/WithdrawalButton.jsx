@@ -19,18 +19,15 @@ export const WithdrawalButton = () => {
     const currentUser = auth.currentUser;
 
     if (currentUser) {
-      // 最近サインインしていないとエラーになってしまうので、再認証してクレデンシャルを取得
       login().then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         reauthenticateWithCredential(currentUser, credential)
         .then(() => {
-          // User re-authenticated.
           deleteUserFromFirebase(currentUser)
           .then(() => {
-            // User deleted.
-            if (currentUser?.id) {
+            // if (currentUser?.id) {
               deleteDoc(doc(db, "users", currentUser.id));
-            }
+            // }
             deleteUser(currentUser).then((message) => {
               navigate("/", { state: { message: message } });
             }).catch ((error) => {

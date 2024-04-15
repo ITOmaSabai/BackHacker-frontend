@@ -1,13 +1,12 @@
 import { Button } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from "react-router-dom";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 
 export const LogOutButton = () => {
-  const navigate = useNavigate();
   const { logout } = useFirebaseAuth();
 
   const handleSignOut = async () => {
+    console.log("ボタンが押されました")
     await logout();
   };
 

@@ -20,7 +20,7 @@ import { WithdrawalButton } from '../../features/users/components/WithdrawalButt
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { currentUser } = useFirebaseAuth();
+  const { currentUser, userId } = useFirebaseAuth();
   const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -44,7 +44,7 @@ export default function Header() {
   };
 
   const handleProfileOpen = () => {
-    navigate(`/users/${currentUser.id}`);
+    navigate(`/users/${userId}`);
   }
 
   const menuId = 'primary-search-account-menu';
@@ -64,7 +64,7 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {currentUser ?
+      {currentUser && currentUser !== null ?
       <div>
         <MenuItem onClick={handleProfileOpen}>
           <AccountCircle sx={{pr :1}}/>ユーザー情報
@@ -72,7 +72,7 @@ export default function Header() {
       </div>
       :
         <MenuItem onClick={handleMenuClose}>
-          <SignInButton text={"ログイン"} />
+          <SignInButton text={"ログイン"} currentUser={currentUser} />
         </MenuItem>
       }
     </Menu>
@@ -131,13 +131,13 @@ export default function Header() {
             aria-haspopup="true"
             color="inherit"
           > */}
-          <Typography ><SignInButton text={"ログイン"} /></Typography>
+          <Typography ><SignInButton text={"ログイン"} currentUser={currentUser} /></Typography>
           {/* </IconButton> */}
         </MenuItem>
       )}
     </Menu>
   );
-console.log(currentUser)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
