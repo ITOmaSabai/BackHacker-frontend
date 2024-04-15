@@ -35,7 +35,7 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
     } else {
       setOn(false);
     }
-  }, [currentUser, savedLikes, spots])
+  }, [currentUser, savedLikes, spots, userId])
 
   // いいねボタンを押した時の処理
   // いいね済みでなければ、いいねを作成し、いいね済みボタンを表示する

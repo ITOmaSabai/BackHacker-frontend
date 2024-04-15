@@ -21,7 +21,7 @@ export const SpotDetail = ({ spotId }) => {
     }
   }, [spotId, spots, currentUser]);
 
-  if (!selectedSpot || !currentUser) {
+  if (!selectedSpot) {
     return <div><Spinner /></div>;
   }
 
