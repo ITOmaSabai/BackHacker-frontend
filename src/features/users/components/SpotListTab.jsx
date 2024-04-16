@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import { SpotCard } from '../../spots/components/SpotCard';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
 import Spinner from '../../../components/Elements/Spinner/Spinner';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,6 +96,7 @@ export const SpotListTab = ({ userInfo }) => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       {!spots && <Spinner ></Spinner>}
+      <Link to={`/users/${userInfo.id}/likes`}><Button variant='outlined' >地図上に表示</Button></Link>
         <Box
           display={"flex"}
           flexDirection={"column"}
