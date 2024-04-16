@@ -51,10 +51,7 @@ export const CreateSpotLayout = () => {
         <SpotModal
           open={open}
           setOpen={setOpen}
-          title={createdSpot.title}
-          body={createdSpot.body}
-          icon={createdSpot.url}
-          // button={"login"}
+          spot={createdSpot}
           setLatLng={setLatLng}
         />
       }

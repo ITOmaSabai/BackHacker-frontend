@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
 import { SignInButton } from '../../../features/auth/components/SignInButton';
 import { ShareButton } from '../Buttons/ShareButton';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -21,14 +22,21 @@ const style = {
   textAlign: "center"
 };
 
-export default function SpotModal({open, setOpen, title, body, icon, button, setLatLng}) {
+export default function SpotModal({open, setOpen, spot, setLatLng}) {
+  const navigate = useNavigate();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const buttonType = button;
+  const buttonType = spot.button;
 
-  const handleNextPostClick = () => {
+  const handleNextPost = () => {
     setOpen(false);
     setLatLng("");
+  }
+
+  const handleSpotDetail = () => {
+    setOpen(false);
+    setLatLng("");
+    navigate(`/spots/${parseInt(spot.id)}`);
   }
 
   return (
@@ -39,19 +47,21 @@ export default function SpotModal({open, setOpen, title, body, icon, button, set
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          {buttonType === "close" && <IconButton onClick={handleClose}><CloseIcon variant={"contained"} color={"info"} /></IconButton>}
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {title}
-          </Typography>
-          <img src={icon} />
-          <Typography sx={{pt: 2}}>{body}</Typography>
-          <Box sx={{pt: 2, display: "flex", flexDirection: "column", alignItems: "center"}} textAlign={"center"}>
-            <Button onClick={handleNextPostClick} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
-            <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"}  >投稿を確認する</Button>
-            <ShareButton />
+        {spot &&
+          <Box sx={style}>
+            {buttonType === "close" && <IconButton onClick={handleClose}><CloseIcon variant={"contained"} color={"info"} /></IconButton>}
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {spot.title}
+            </Typography>
+            <img src={spot.url} />
+            <Typography sx={{pt: 2}}>{spot.body}</Typography>
+            <Box sx={{pt: 2, display: "flex", flexDirection: "column", alignItems: "center"}} textAlign={"center"}>
+              <Button onClick={handleNextPost} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
+              <Button onClick={handleSpotDetail} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"}  >投稿を確認する</Button>
+              <ShareButton />
+            </Box>
           </Box>
-        </Box>
+        }
       </Modal>
     </div>
   );
