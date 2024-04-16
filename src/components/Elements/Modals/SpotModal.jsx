@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
 import { SignInButton } from '../../../features/auth/components/SignInButton';
+import { ShareButton } from '../Buttons/ShareButton';
 
 const style = {
   position: 'absolute',
@@ -43,7 +44,7 @@ export default function SpotModal({open, setOpen, title, body, icon, button}) {
           <Box sx={{pt: 2, display: "flex", flexDirection: "column", alignItems: "center"}} textAlign={"center"}>
             <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
             <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"}  >投稿を確認する</Button>
-            <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"} >シェア</Button>
+            <ShareButton />
           </Box>
         </Box>
       </Modal>
