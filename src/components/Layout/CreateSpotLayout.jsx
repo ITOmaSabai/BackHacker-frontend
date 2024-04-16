@@ -5,11 +5,13 @@ import { useState } from "react";
 import { Marker } from '@vis.gl/react-google-maps';
 import MessageModal from "../Elements/Modals/MessageModal";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
+import SpotModal from "../Elements/Modals/SpotModal";
 
 export const CreateSpotLayout = () => {
   const { currentUser } = useFirebaseAuth();
   const [ latLng, setLatLng ] = useState({});
   const [ open, setOpen ] = useState(true);
+  const [ createdSpot, setCreatedSpot ] = useState();
 
   const handleMapClick = (e) => {
     const lat = parseFloat(e.detail.latLng.lat);
@@ -45,6 +47,16 @@ export const CreateSpotLayout = () => {
 
   return (
     <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
+      {createdSpot && createdSpot !== null &&
+        <SpotModal
+          open={open}
+          setOpen={setOpen}
+          title={createdSpot.title}
+          body={createdSpot.body}
+          icon={createdSpot.url}
+          // button={"login"}
+        />
+      }
       <Box sx={{height: "100%", width :"75%"}} >
         <MapView latLng={latLng} setLatLng={setLatLng} onClick={handleMapClick} >
           {latLng &&
@@ -53,7 +65,7 @@ export const CreateSpotLayout = () => {
         </MapView>
       </Box>
       <Box sx={{height: "100%", width :"25%"}}>
-        <CreateSpot latLng={latLng}/>
+        <CreateSpot latLng={latLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
       </Box>
     </Box>
   )

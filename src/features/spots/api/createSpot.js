@@ -29,7 +29,7 @@ export const createSpot = async (
 
   try {
     const res = await axios.post("/api/v1/spots", data, config);
-    return res.data;
+    return res;
   } catch (err) {
     let message;
     if (axios.isAxiosError(err) && err.response) {

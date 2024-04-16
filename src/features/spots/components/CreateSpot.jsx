@@ -5,6 +5,7 @@ import { createSpot } from "../api/createSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Switch from '@mui/material/Switch';
 import { ReverseGeocode } from "./ReverseGeocode";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 const style = {
   display: 'flex',
@@ -12,10 +13,12 @@ const style = {
   width: '90%',
   textAlign: 'center'
 }
-export const CreateSpot = ({ latLng }) => {
+
+export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
+  const { currentUser } = useFirebaseAuth();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
-  const { currentUser } = useFirebaseAuth();
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -23,7 +26,17 @@ export const CreateSpot = ({ latLng }) => {
   const handleSpotPost = async (e) => {
     e.preventDefault();
     const address = await ReverseGeocode(latLng);
-    await createSpot(currentUser, spotName, spotDescription, latLng, address);
+    const res = await createSpot(currentUser, spotName, spotDescription, latLng, address);
+    if (res.statusText === "Created") {
+      setIsSuccessMessage(true);
+      setMessage("登録が完了しました");
+      setOpen(true);
+      setCreatedSpot({
+        title: "新規投稿が完了しました🎉",
+        body: res.data.spot.name,
+        url: res.data.videos[0].snippet.thumbnails.medium.url
+      });
+    }
   }
 
   return (
