@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { IconButton } from "@mui/material"
 import XIcon from '@mui/icons-material/X';
 
 export const ShareButton = ({ url }) => {
@@ -7,8 +7,8 @@ export const ShareButton = ({ url }) => {
   }
 
   return (
-    <Button  onClick={handleClick} >
+    <IconButton onClick={handleClick} >
       <XIcon />
-    </Button>
+    </IconButton>
   );
 }

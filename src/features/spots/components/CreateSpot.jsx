@@ -36,6 +36,8 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
         body: res.data.spot.name,
         url: res.data.videos[0].snippet.thumbnails.medium.url
       });
+      setSpotName("");
+      setSpotDescription("");
     }
   }
 
@@ -53,6 +55,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
           helperText="※必須項目です"
           placeholder="表示されるスポット名"
           name="spotName"
+          value={spotName}
           onChange={(e) => setSpotName(e.target.value)}
         />
         <TextField
@@ -65,6 +68,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
           placeholder="思い出や感想を入力してください"
           margin="normal"
           name='description'
+          value={spotDescription}
           onChange={(e) => setSpotDescription(e.target.value)}
         />
         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>

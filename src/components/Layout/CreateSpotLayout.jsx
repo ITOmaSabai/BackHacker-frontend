@@ -55,10 +55,11 @@ export const CreateSpotLayout = () => {
           body={createdSpot.body}
           icon={createdSpot.url}
           // button={"login"}
+          setLatLng={setLatLng}
         />
       }
       <Box sx={{height: "100%", width :"75%"}} >
-        <MapView latLng={latLng} setLatLng={setLatLng} onClick={handleMapClick} >
+        <MapView onClick={handleMapClick} >
           {latLng &&
             <Marker position={latLng} />
           }

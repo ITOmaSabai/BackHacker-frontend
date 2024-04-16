@@ -21,10 +21,15 @@ const style = {
   textAlign: "center"
 };
 
-export default function SpotModal({open, setOpen, title, body, icon, button}) {
+export default function SpotModal({open, setOpen, title, body, icon, button, setLatLng}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const buttonType = button;
+
+  const handleNextPostClick = () => {
+    setOpen(false);
+    setLatLng("");
+  }
 
   return (
     <div>
@@ -42,7 +47,7 @@ export default function SpotModal({open, setOpen, title, body, icon, button}) {
           <img src={icon} />
           <Typography sx={{pt: 2}}>{body}</Typography>
           <Box sx={{pt: 2, display: "flex", flexDirection: "column", alignItems: "center"}} textAlign={"center"}>
-            <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
+            <Button onClick={handleNextPostClick} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
             <Button text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"}  >投稿を確認する</Button>
             <ShareButton />
           </Box>
