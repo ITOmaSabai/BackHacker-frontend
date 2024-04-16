@@ -5,6 +5,7 @@ import { createSpot } from "../api/createSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import Switch from '@mui/material/Switch';
 import { ReverseGeocode } from "./ReverseGeocode";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 const style = {
   display: 'flex',
@@ -12,10 +13,12 @@ const style = {
   width: '90%',
   textAlign: 'center'
 }
-export const CreateSpot = ({ latLng }) => {
+
+export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
+  const { currentUser } = useFirebaseAuth();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
-  const { currentUser } = useFirebaseAuth();
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -23,7 +26,21 @@ export const CreateSpot = ({ latLng }) => {
   const handleSpotPost = async (e) => {
     e.preventDefault();
     const address = await ReverseGeocode(latLng);
-    await createSpot(currentUser, spotName, spotDescription, latLng, address);
+    const res = await createSpot(currentUser, spotName, spotDescription, latLng, address);
+    console.log(res.data)
+    if (res.statusText === "Created") {
+      setIsSuccessMessage(true);
+      setMessage("登録が完了しました");
+      setOpen(true);
+      setCreatedSpot({
+        title: "新規投稿が完了しました🎉",
+        body: res.data.spot.name,
+        url: res.data.videos[0].snippet.thumbnails.medium.url,
+        id: res.data.spot.id
+      });
+      setSpotName("");
+      setSpotDescription("");
+    }
   }
 
   return (
@@ -40,6 +57,7 @@ export const CreateSpot = ({ latLng }) => {
           helperText="※必須項目です"
           placeholder="表示されるスポット名"
           name="spotName"
+          value={spotName}
           onChange={(e) => setSpotName(e.target.value)}
         />
         <TextField
@@ -52,6 +70,7 @@ export const CreateSpot = ({ latLng }) => {
           placeholder="思い出や感想を入力してください"
           margin="normal"
           name='description'
+          value={spotDescription}
           onChange={(e) => setSpotDescription(e.target.value)}
         />
         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>

@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Spinner from "../../../components/Elements/Spinner/Spinner";
 
-export const SpotCard = ({ spots }) => {
+export const SpotCard = ({ spots, text }) => {
 
   if (!spots) {
     return <div><Spinner /></div>
@@ -25,7 +25,7 @@ export const SpotCard = ({ spots }) => {
           </Box>
         ))
       ) : (
-        <Typography >投稿したスポットはありません</Typography>
+        <Typography >{text}したスポットはありません</Typography>
       )}
     </>
   )

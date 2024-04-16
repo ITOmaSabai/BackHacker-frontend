@@ -5,19 +5,27 @@ import { WithdrawalButton } from "./WithdrawalButton";
 import { LogOutButton } from "../../auth/components/LogOutButton";
 
 export const UserProfile = ({ userInfo }) => {
-  const { loading } = useFirebaseAuth();
+  const { loading, userId } = useFirebaseAuth();
 
   if (loading) {
     return <div><Spinner /></div>;
   }
+
+  console.log(userInfo)
+  console.log(userId)
+
 
   return (
     userInfo && (
       <>
         <Typography >{userInfo.name}</Typography>
         <Avatar src={userInfo.avatar} sx={{mr: 3, width: 56, height: 56}}></Avatar>
-        <LogOutButton />
-        <WithdrawalButton />
+        {userId === userInfo.id &&
+          <>
+            <LogOutButton />
+            <WithdrawalButton />
+          </>
+        }
       </>
     )
   )

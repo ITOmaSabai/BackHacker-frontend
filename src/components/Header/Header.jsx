@@ -13,7 +13,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LogOutButton } from '../../features/auth/components/LogOutButton';
 import { WithdrawalButton } from '../../features/users/components/WithdrawalButton';
 
@@ -152,16 +152,19 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            BackHacker.
-          </Typography>
-          {/* <LogOutButton />
-          <WithdrawalButton /> */}
+          <Link
+              to={"/"}
+              style={{color: "inherit", textDecoration: "none"}}
+            >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: 'none', sm: 'block' } }}
+            >
+              BackHacker.
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
@@ -182,7 +185,7 @@ export default function Header() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-            {currentUser ? (
+            {currentUser && currentUser === null ? (
               <AccountCircle />
           ) : (
               <AccountCircle />

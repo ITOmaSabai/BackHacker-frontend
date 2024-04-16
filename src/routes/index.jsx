@@ -4,11 +4,13 @@ import { CreateSpotLayout } from '../components/Layout/CreateSpotLayout';
 import { IndexSpotLayout } from '../components/Layout/IndexSpotLayout';
 import { UserLayout } from '../components/Layout/UserLayout';
 import { IndexLikedSpotLayout } from '../components/Layout/IndexLikedSpotLayout';
+import { HeroLayout } from '../components/Layout/HeroLayout';
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route element={<MainLayout />} >
+        <Route path="/" element={<HeroLayout />} />
         <Route path="/spots" element={<CreateSpotLayout />} />
         <Route path="/map" element={<IndexSpotLayout />} />
         <Route path="spots/:spotId" element={<IndexSpotLayout />} />

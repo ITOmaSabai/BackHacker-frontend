@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import { SpotCard } from '../../spots/components/SpotCard';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
 import Spinner from '../../../components/Elements/Spinner/Spinner';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,18 +84,26 @@ export const SpotListTab = ({ userInfo }) => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
+        {!spots && <Spinner ></Spinner>}
         <Box
           display={"flex"}
           flexDirection={"column"}
           justifyContent={'space-between'}
           alignItems={"center"}
         >
-          {spots ? <SpotCard spots={userPostedSpots()} /> : <Typography >投稿したスポットはありません</Typography>}
+          <SpotCard spots={userPostedSpots()} text={"投稿"} />
         </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Box>
-          {spots ? <SpotCard spots={userLikedSpots()} /> : <Typography >いいねしたスポットはありません</Typography>}
+      {!spots && <Spinner ></Spinner>}
+      <Link to={`/users/${userInfo.id}/likes`}><Button variant='outlined' >地図上に表示</Button></Link>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={'space-between'}
+          alignItems={"center"}
+        >
+          <SpotCard spots={userLikedSpots()} text={"いいね"} />
         </Box>
       </CustomTabPanel>
     </Box>
