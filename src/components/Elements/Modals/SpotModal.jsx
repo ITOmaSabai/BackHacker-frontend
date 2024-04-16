@@ -56,9 +56,24 @@ export default function SpotModal({open, setOpen, spot, setLatLng}) {
             <img src={spot.url} />
             <Typography sx={{pt: 2}}>{spot.body}</Typography>
             <Box sx={{pt: 2, display: "flex", flexDirection: "column", alignItems: "center"}} textAlign={"center"}>
-              <Button onClick={handleNextPost} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"outlined"} color={"info"} >続けて投稿する</Button>
-              <Button onClick={handleSpotDetail} text={"ログイン"} sx={{width: "40%", my: 1}} variant={"contained"} color={"info"}  >投稿を確認する</Button>
-              <ShareButton />
+              <Button
+                onClick={handleNextPost}
+                text={"ログイン"} sx={{width: "40%", my: 1}}
+                variant={"outlined"}
+                color={"info"}
+              >
+                続けて投稿する
+              </Button>
+              <Button
+                onClick={handleSpotDetail}
+                text={"ログイン"}
+                sx={{width: "40%", my: 1}}
+                variant={"contained"}
+                color={"info"}
+              >
+                投稿を確認する
+              </Button>
+              <ShareButton url={`https://twitter.com/share?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(spot.id)} (※PC💻環境より閲覧してください)&text=${spot.body}を投稿したよ！🎉【BackHacker.】で見に行かない？🌎%0a%0a`} />
             </Box>
           </Box>
         }
