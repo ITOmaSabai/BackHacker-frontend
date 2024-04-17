@@ -23,24 +23,25 @@ export const LikedSpotIndex = ({handleMarkerClick, isClickedMarkerId}) => {
     <>
       {likedSpots ? (
         likedSpots.map((spot) =>
-        {if (spot.id === isClickedMarkerId ) {
-          <MyMarker
-            key={spot.id}
-            position={{
-              lat: spot.lat,
-              lng: spot.lng
-            }}
-          />
-        } else {
-          <Marker
-            key={spot.id}
-            position={{
-              lat: spot.lat,
-              lng: spot.lng
-            }}
-            onClick={() => handleMarkerClick(spot.id)}
-          />
-        }}
+          <>
+            <Marker
+              key={spot.id}
+              position={{
+                lat: spot.lat,
+                lng: spot.lng
+              }}
+              // onClick={() => handleMarkerClick(spot.id)}
+            />
+            {spot.id === isClickedMarkerId &&
+              <MyMarker
+                key={spot.id}
+                position={{
+                  lat: spot.lat,
+                  lng: spot.lng
+                }}
+              />
+            }
+          </>
       )) : (
         ""
       )}
