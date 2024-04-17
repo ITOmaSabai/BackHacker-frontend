@@ -16,6 +16,7 @@ import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
 import { LogOutButton } from '../../features/auth/components/LogOutButton';
 import { WithdrawalButton } from '../../features/users/components/WithdrawalButton';
+import { Avatar } from '@mui/material';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,6 +40,7 @@ export default function Header() {
     handleMobileMenuClose();
   };
 
+  // Mobile画面でのメニュー
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -49,6 +51,8 @@ export default function Header() {
   }
 
   const menuId = 'primary-search-account-menu';
+
+  // ヘッダー右側のアイコン部分
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -65,16 +69,13 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {currentUser && currentUser !== null ?
-      <div>
+      {currentUser && currentUser !== null &&
         <MenuItem onClick={handleProfileOpen}>
           <AccountCircle sx={{pr :1}}/>ユーザー情報
         </MenuItem>
-      </div>
-      :
-        <MenuItem onClick={handleMenuClose}>
-          <SignInButton text={"ログイン"} currentUser={currentUser} />
-        </MenuItem>
+      //   <MenuItem onClick={handleMenuClose}>
+      //     <SignInButton text={"ログイン"} currentUser={currentUser} />
+      //   </MenuItem>
       }
     </Menu>
   );
@@ -108,7 +109,7 @@ export default function Header() {
                 <NotificationsIcon />
               {/* </Badge> */}
             </IconButton>
-            <Typography >お知らせ</Typography>
+            <Typography >テスト</Typography>
           </MenuItem>
           <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
@@ -185,9 +186,14 @@ export default function Header() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-            {currentUser && currentUser === null ? (
-              <AccountCircle />
-          ) : (
+            {currentUser && currentUser !== null ? (
+              <Avatar
+                src={`${currentUser.photoURL}`}
+                alt={`${currentUser.displayName}`}
+                sx={{width: "25px", height: "25px"}}
+              />
+            ) : (
+            // ログイン中でない時は、アカウントサークル
               <AccountCircle />
               )}
             </IconButton>
