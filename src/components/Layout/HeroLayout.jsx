@@ -10,8 +10,8 @@ export const HeroLayout = () => {
     <Box sx={{height: "100%", display: "flex", alignItems: "center"}} bgcolor={"black"} >
       <Box sx={{mx: 20}} >
         <Typography variant="h1" color={"white"} sx={{mb: 1}} >BackHacker.</Typography>
-        <Typography variant="h4" color={"white"} sx={{mb: 7}} >ひらけPC。いくぞ世界。</Typography>
-        <Button onClick={handleClick} variant="contained" color="primary" sx={{mx: 1, mb: 3}} >旅を始める</Button>
+        <Typography variant="h4" color={"white"} sx={{mb: 7}} >バーチャル旅行に出かけよう</Typography>
+        <Button onClick={handleClick} variant="outlined" color="info" sx={{mx: 1, mb: 3}} size="large" >旅を始める</Button>
       </Box>
     </Box>
   )

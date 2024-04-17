@@ -120,7 +120,7 @@ export default function Header() {
           </div>
       ) : (
         <MenuItem>
-          <Typography ><SignInButton text={"ログイン"} currentUser={currentUser} /></Typography>
+          <Typography ><SignInButton text={"ログイン"} color={"info"} /></Typography>
         </MenuItem>
       )}
     </Menu>
@@ -178,7 +178,7 @@ export default function Header() {
                   </>
                 ) : (
                   // ログイン中でない時は、ログインボタンを表示する
-                  <SignInButton text={"ログイン"} variant={"contained"} color={"primary"} />
+                  <SignInButton text={"ログイン"} variant={"contained"} color={"info"} />
                 )}
               </>
             )}

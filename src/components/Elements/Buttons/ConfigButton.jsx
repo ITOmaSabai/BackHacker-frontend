@@ -25,7 +25,7 @@ export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        color='secondary'
+        color='primary'
       >
         <MoreHorizIcon />
       </IconButton>
