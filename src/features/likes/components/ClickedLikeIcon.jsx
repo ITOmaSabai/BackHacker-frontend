@@ -18,7 +18,7 @@ export const ClickedLikeIcon = ({ on }) => {
   }, [on]);
 
   return (
-    <Box position={"absolute"} sx={{width: "30px", height: "40px", overflow: "hidden"}}>
+    <Box position={"absolute"} sx={{width: "50px", height: "40px", overflow: "hidden"}}>
       <Player
         ref={playerRef}
         keepLastFrame

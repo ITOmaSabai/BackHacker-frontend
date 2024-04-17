@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography } from "@mui/material"
+import { Avatar, Box, IconButton, Typography } from "@mui/material"
 import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +7,8 @@ import Spinner from "../../../components/Elements/Spinner/Spinner";
 import { LikeButton } from "../../../components/Elements/Buttons/LikeButton";
 import { EditSpot } from "./EditSpot";
 import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton";
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { ShareButton } from "../../../components/Elements/Buttons/ShareButton";
 
 export const SpotDetail = ({ spotId }) => {
   const { spots } = useSpotsContext();
@@ -54,10 +56,14 @@ export const SpotDetail = ({ spotId }) => {
               </iframe>
             ))
           )}
-          <LikeButton
-            savedLikes={selectedSpot.likes}
-            selectedSpot={selectedSpot}
-          />
+          <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}>
+            <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
+            <LikeButton
+              savedLikes={selectedSpot.likes}
+              selectedSpot={selectedSpot}
+            />
+            <ShareButton sx={{mx: 2}} url={`https://twitter.com/share?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)} (※PC💻環境より閲覧してください)&text=【BackHacker.】で${selectedSpot.name}を見に行かない？🌎%0a%0a`}  />
+          </Box>
         </>
       :
         <EditSpot spot={selectedSpot} setEditing={setEditing} title={"スポット編集"} />
