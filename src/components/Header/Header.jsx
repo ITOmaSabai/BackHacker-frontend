@@ -14,10 +14,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
-import { LogOutButton } from '../../features/auth/components/LogOutButton';
-import { WithdrawalButton } from '../../features/users/components/WithdrawalButton';
 import { Avatar, Button } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 
 
 export default function Header() {
@@ -73,11 +70,8 @@ export default function Header() {
     >
       {currentUser && currentUser !== null &&
         <MenuItem onClick={handleProfileOpen}>
-          <AccountCircle sx={{pr :1}}/>ユーザー情報
+          <AccountCircle sx={{pr :1}}/>プロフィール
         </MenuItem>
-      //   <MenuItem onClick={handleMenuClose}>
-      //     <SignInButton text={"ログイン"} currentUser={currentUser} />
-      //   </MenuItem>
       }
     </Menu>
   );
@@ -99,7 +93,7 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {currentUser && currentUser === null ? (
+      {currentUser && currentUser !== null ? (
         <div>
           <MenuItem>
             <IconButton
@@ -111,9 +105,9 @@ export default function Header() {
                 <NotificationsIcon />
               {/* </Badge> */}
             </IconButton>
-            <Typography >テスト</Typography>
+            <Typography >通知</Typography>
           </MenuItem>
-          <MenuItem onClick={handleProfileMenuOpen}>
+          <MenuItem onClick={handleProfileOpen}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -123,20 +117,12 @@ export default function Header() {
             >
               <AccountCircle />
             </IconButton>
-            <Typography >ユーザー情報</Typography>
+            <Typography >プロフィール</Typography>
           </MenuItem>
           </div>
       ) : (
         <MenuItem>
-          {/* <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          > */}
           <Typography ><SignInButton text={"ログイン"} currentUser={currentUser} /></Typography>
-          {/* </IconButton> */}
         </MenuItem>
       )}
     </Menu>
@@ -196,9 +182,8 @@ export default function Header() {
                   sx={{width: "25px", height: "25px"}}
                 />
               </IconButton>
-
             ) : (
-            // ログイン中でない時は、アカウントサークル
+              // ログイン中でない時は、ログインボタンを表示する
               <SignInButton text={"ログイン"} variant={"contained"} color={"primary"} />
             )}
           </Box>
