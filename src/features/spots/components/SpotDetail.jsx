@@ -3,7 +3,6 @@ import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
-import Spinner from "../../../components/Elements/Spinner/Spinner";
 import { LikeButton } from "../../../components/Elements/Buttons/LikeButton";
 import { EditSpot } from "./EditSpot";
 import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton";
@@ -24,27 +23,31 @@ export const SpotDetail = ({ spotId }) => {
   }, [spotId, spots, currentUser]);
 
   if (!selectedSpot) {
-    return <div><Spinner /></div>;
+    return <div></div>;
   }
 
   return (
     <Box >
       {selectedSpot && !editing ?
-        <>
+        <Box>
           <Box
             display={"flex"}
             flexDirection={"row"}
             justifyContent={"space-between"}
-            sx={{px: 3, my: 2}}
+            sx={{px: 2, mt: 2}}
           >
-            <Button
-              component={Link}
-              to={`/users/${selectedSpot.user.id}`}
-              style={{color: "inherit", textDecoration: "none", display: "flex", flexDirection: "row"}}
-            >
-              <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
-              <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
-            </Button>
+            <Box >
+              <Button
+                component={Link}
+                to={`/users/${selectedSpot.user.id}`}
+                style={{color: "inherit", textDecoration: "none", display: "flex", flexDirection: "row"}}
+                sx={{mb: 2}}
+              >
+                <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
+                <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
+              </Button>
+              <Typography fontSize="20px" fontWeight="bold" >{selectedSpot.name}</Typography>
+            </Box>
           { userId === selectedSpot.user.id &&
             <ConfigButton
               currentUser={currentUser}
@@ -54,8 +57,10 @@ export const SpotDetail = ({ spotId }) => {
           }
           </Box>
           <Box >
-            <Typography fontSize="20px" fontWeight="bold" >{selectedSpot.name}</Typography>
-            {selectedSpot.videos && selectedSpot.videos.length > 0 && (
+            <Button >
+              <img src={selectedSpot.videos[0].thumbnail_url} />
+            </Button>
+            {/* {selectedSpot.videos && selectedSpot.videos.length > 0 && (
               selectedSpot.videos.map((video) => (
                 <iframe
                   src={`https://www.youtube.com/embed/${video.youtube_video_id}`}
@@ -65,17 +70,22 @@ export const SpotDetail = ({ spotId }) => {
                 >
                 </iframe>
               ))
-            )}
+            )} */}
           </Box>
-          <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}>
-            <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
-            <LikeButton
-              savedLikes={selectedSpot.likes}
-              selectedSpot={selectedSpot}
-            />
+          <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
+            <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
+              <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
+              <LikeButton
+                savedLikes={selectedSpot.likes}
+                selectedSpot={selectedSpot}
+              />
+            </Box>
             <ShareButton sx={{mx: 2}} url={`https://twitter.com/share?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)} (※PC💻環境より閲覧してください)&text=【BackHacker.】で${selectedSpot.name}を見に行かない？🌎%0a%0a`}  />
           </Box>
-        </>
+          <Box sx={{px: 2, mt: 2}}>
+            <Typography >{selectedSpot.description}</Typography>
+          </Box>
+        </Box>
       :
         <EditSpot spot={selectedSpot} setEditing={setEditing} title={"スポット編集"} />
       }
