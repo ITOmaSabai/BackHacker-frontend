@@ -1,8 +1,9 @@
 import { Marker } from '@vis.gl/react-google-maps';
 import { useEffect } from 'react';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
+import { MyMarker } from '../../../components/Elements/Markers/MyMarker';
 
-export const SpotIndex = ({handleMarkerClick}) => {
+export const SpotIndex = ({ handleMarkerClick, isClickedMarkerId }) => {
   const { spots, loadSpots } = useSpotsContext();
 
   useEffect(() => {
@@ -20,14 +21,26 @@ export const SpotIndex = ({handleMarkerClick}) => {
     <>
       {spots ? (
         spots.map((spot) =>
-          <Marker
-            key={spot.id}
-            position={{
-              lat: spot.lat,
-              lng: spot.lng
-            }}
-            onClick={() => handleMarkerClick(spot.id)}
-          />)
+          <>
+            <Marker
+              key={spot.id}
+              position={{
+                lat: spot.lat,
+                lng: spot.lng
+              }}
+              onClick={() => handleMarkerClick(spot.id)}
+            />
+            {spot.id === isClickedMarkerId &&
+              <MyMarker
+                key={spot.id}
+                position={{
+                  lat: spot.lat,
+                  lng: spot.lng
+                }}
+              />
+            }
+          </>
+        )
       ) : (
         ""
       )}

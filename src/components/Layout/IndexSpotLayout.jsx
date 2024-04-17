@@ -3,12 +3,17 @@ import { MapView } from "../Map/MapView"
 import { SpotIndex } from "../../features/spots/components/SpotIndex";
 import { SpotDetail } from "../../features/spots/components/SpotDetail";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 export const IndexSpotLayout = () => {
   const { spotId } = useParams();
   const navigate = useNavigate();
+  const [ isClickedMarkerId, setIsClickedMarkerId ] = useState(false);
+
+  console.log(isClickedMarkerId);
 
   const handleMarkerClick = (spotId) => {
+    setIsClickedMarkerId(spotId);
     navigate(`/spots/${spotId}`);
   }
 
@@ -16,7 +21,10 @@ export const IndexSpotLayout = () => {
     <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
       <Box sx={{height: "100%", width :"75%"}} >
         <MapView >
-          <SpotIndex handleMarkerClick={handleMarkerClick} />
+          <SpotIndex
+            handleMarkerClick={handleMarkerClick}
+            isClickedMarkerId={isClickedMarkerId}
+          />
         </MapView>
       </Box>
       <Box sx={{height: "100%", width :"25%"}}>
