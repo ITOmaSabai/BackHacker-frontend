@@ -4,17 +4,15 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
-import { Avatar, Button } from '@mui/material';
+import { Avatar } from '@mui/material';
 
 
 export default function Header() {
@@ -130,17 +128,8 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{pl: 5}}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Link
               to={"/"}
               style={{color: "inherit", textDecoration: "none"}}
