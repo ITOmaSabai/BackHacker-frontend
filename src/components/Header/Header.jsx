@@ -18,7 +18,7 @@ import { Avatar } from '@mui/material';
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { currentUser, userId } = useFirebaseAuth();
+  const { currentUser, userId, loading } = useFirebaseAuth();
   const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -145,35 +145,42 @@ export default function Header() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              {/* <Badge badgeContent={17} color="error"> */}
-                <NotificationsIcon />
-              {/* </Badge> */}
-            </IconButton>
-            {currentUser && currentUser !== null ? (
-
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Avatar
-                  src={`${currentUser.photoURL}`}
-                  alt={`${currentUser.displayName}`}
-                  sx={{width: "25px", height: "25px"}}
-                />
-              </IconButton>
+            { loading ? (
+              <></>
             ) : (
-              // ログイン中でない時は、ログインボタンを表示する
-              <SignInButton text={"ログイン"} variant={"contained"} color={"primary"} />
+              <>
+                {currentUser && currentUser !== null ? (
+                  <>
+                    <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                    >
+                    {/* <Badge badgeContent={17} color="error"> */}
+                      <NotificationsIcon />
+                    {/* </Badge> */}
+                    </IconButton>
+                    <IconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                      color="inherit"
+                    >
+                      <Avatar
+                        src={`${currentUser.photoURL}`}
+                        alt={`${currentUser.displayName}`}
+                        sx={{width: "25px", height: "25px"}}
+                      />
+                    </IconButton>
+                  </>
+                ) : (
+                  // ログイン中でない時は、ログインボタンを表示する
+                  <SignInButton text={"ログイン"} variant={"contained"} color={"primary"} />
+                )}
+              </>
             )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
