@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 
@@ -10,9 +10,14 @@ export const LogOutButton = () => {
   };
 
   return (
-    <Button onClick={handleSignOut} color="warning">
-      <LogoutIcon sx={{mr: 2}} />
-      ログアウト
-    </Button>
+    <Box
+      sx={{p: 0, m: 0}}
+      display={"flex"}
+      flexDirection={"row"}
+      onClick={handleSignOut}
+    >
+      <LogoutIcon fontSize="small" sx={{mr: 1}} />
+      <Typography>ログアウト</Typography>
+    </Box>
   );
 };

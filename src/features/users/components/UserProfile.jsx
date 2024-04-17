@@ -1,31 +1,28 @@
-import { Avatar, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
-import Spinner from "../../../components/Elements/Spinner/Spinner";
-import { WithdrawalButton } from "./WithdrawalButton";
-import { LogOutButton } from "../../auth/components/LogOutButton";
+import { UserConfigButton } from "../../../components/Elements/Buttons/UserConfigButton";
 
 export const UserProfile = ({ userInfo }) => {
   const { loading, userId } = useFirebaseAuth();
 
   if (loading) {
-    return <div><Spinner /></div>;
+    return <></>;
   }
-
-  console.log(userInfo)
-  console.log(userId)
-
 
   return (
     userInfo && (
       <>
-        <Typography >{userInfo.name}</Typography>
-        <Avatar src={userInfo.avatar} sx={{mr: 3, width: 56, height: 56}}></Avatar>
+      <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}>
+        <Box sx={{display: "flex", justifyContent: "space-between", width: "30%", maxWidth: "50%", py: 2}}>
+        <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
+          <Avatar src={userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
+          <Typography fontSize="30px" >{userInfo.name}</Typography>
+        </Box>
         {userId === userInfo.id &&
-          <>
-            <LogOutButton />
-            <WithdrawalButton />
-          </>
+          <UserConfigButton />
         }
+      </Box>
+      </Box>
       </>
     )
   )
