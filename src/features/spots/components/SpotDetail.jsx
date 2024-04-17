@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
 import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -31,14 +31,20 @@ export const SpotDetail = ({ spotId }) => {
     <Box >
       {selectedSpot && !editing ?
         <>
-          <Link
-            to={`/users/${selectedSpot.user.id}`}
-            style={{color: "inherit", textDecoration: "none"}}
+          <Box
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            sx={{px: 3, my: 2}}
           >
-            <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
-            <Typography >{selectedSpot.user.name}</Typography>
-          </Link>
-          <Typography >{selectedSpot.name}</Typography>
+            <Button
+              component={Link}
+              to={`/users/${selectedSpot.user.id}`}
+              style={{color: "inherit", textDecoration: "none", display: "flex", flexDirection: "row"}}
+            >
+              <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
+              <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
+            </Button>
           { userId === selectedSpot.user.id &&
             <ConfigButton
               currentUser={currentUser}
@@ -46,16 +52,21 @@ export const SpotDetail = ({ spotId }) => {
               setEditing={setEditing}
             />
           }
-          {selectedSpot.videos && selectedSpot.videos.length > 0 && (
-            selectedSpot.videos.map((video) => (
-              <iframe
-                src={`https://www.youtube.com/embed/${video.youtube_video_id}`}
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              >
-              </iframe>
-            ))
-          )}
+          </Box>
+          <Box >
+            <Typography fontSize="20px" fontWeight="bold" >{selectedSpot.name}</Typography>
+            {selectedSpot.videos && selectedSpot.videos.length > 0 && (
+              selectedSpot.videos.map((video) => (
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.youtube_video_id}`}
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  width="100%"
+                >
+                </iframe>
+              ))
+            )}
+          </Box>
           <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}>
             <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
             <LikeButton
