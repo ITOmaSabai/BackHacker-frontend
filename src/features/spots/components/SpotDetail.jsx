@@ -9,9 +9,8 @@ import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton"
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { ShareButton } from "../../../components/Elements/Buttons/ShareButton";
 
-export const SpotDetail = ({ spotId }) => {
+export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoClick }) => {
   const { spots } = useSpotsContext();
-  const [ selectedSpot, setSelectedSpot ] = useState();
   const { currentUser, userId } = useFirebaseAuth();
   const [ editing, setEditing ] = useState(false);
 
@@ -57,20 +56,9 @@ export const SpotDetail = ({ spotId }) => {
           }
           </Box>
           <Box >
-            <Button >
+            <Button onClick={handleVideoClick}>
               <img src={selectedSpot.videos[0].thumbnail_url} />
             </Button>
-            {/* {selectedSpot.videos && selectedSpot.videos.length > 0 && (
-              selectedSpot.videos.map((video) => (
-                <iframe
-                  src={`https://www.youtube.com/embed/${video.youtube_video_id}`}
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  width="100%"
-                >
-                </iframe>
-              ))
-            )} */}
           </Box>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
