@@ -16,7 +16,9 @@ import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
 import { LogOutButton } from '../../features/auth/components/LogOutButton';
 import { WithdrawalButton } from '../../features/users/components/WithdrawalButton';
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -177,26 +179,28 @@ export default function Header() {
                 <NotificationsIcon />
               {/* </Badge> */}
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
             {currentUser && currentUser !== null ? (
-              <Avatar
-                src={`${currentUser.photoURL}`}
-                alt={`${currentUser.displayName}`}
-                sx={{width: "25px", height: "25px"}}
-              />
+
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <Avatar
+                  src={`${currentUser.photoURL}`}
+                  alt={`${currentUser.displayName}`}
+                  sx={{width: "25px", height: "25px"}}
+                />
+              </IconButton>
+
             ) : (
             // ログイン中でない時は、アカウントサークル
-              <AccountCircle />
-              )}
-            </IconButton>
+              <SignInButton text={"ログイン"} variant={"contained"} color={"primary"} />
+            )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
