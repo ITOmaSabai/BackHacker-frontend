@@ -12,7 +12,9 @@ export const VideoModal = ({  open, setOpen, selectedSpot }) => {
   return (
     <div>
       <Dialog
-        PaperProps={{sx: {maxHeight: "90vh", width: "90%"}}}
+        PaperProps={{sx: {maxHeight: "90vh"}}}
+        maxWidth={'xl'}
+        fullWidth
         onClose={handleClose}
         open={open}
       >
