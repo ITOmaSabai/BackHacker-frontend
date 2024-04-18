@@ -27,7 +27,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
     e.preventDefault();
     const address = await ReverseGeocode(latLng);
     const res = await createSpot(currentUser, spotName, spotDescription, latLng, address);
-    console.log(res.data)
+    console.log(res);
     if (res.statusText === "Created") {
       setIsSuccessMessage(true);
       setMessage("登録が完了しました");

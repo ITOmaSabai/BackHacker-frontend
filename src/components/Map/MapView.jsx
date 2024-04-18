@@ -7,6 +7,7 @@ export const MapView = ({ children, onClick }) => {
   return(
     <Box sx={{height: "100%", width :"100%"}} >
       <Map
+        mapId={process.env.REACT_APP_GOOGLE_MAP_ID}
         defaultCenter = {defaultPosition}
         defaultZoom = {2}
         clickableIcons={true}

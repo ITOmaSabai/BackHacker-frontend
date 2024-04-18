@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { IconButton } from '@mui/material';
-import { DeleteButton } from './DeleteButton';
+import { Button, IconButton } from '@mui/material';
 import { EditButton } from './EditButton';
+import { LogOutButton } from '../../../features/auth/components/LogOutButton';
+import { WithdrawalButton } from '../../../features/users/components/WithdrawalButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
+export const UserConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -27,7 +28,7 @@ export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
         onClick={handleClick}
         color='primary'
       >
-        <MoreHorizIcon />
+        <MoreVertIcon />
       </IconButton>
       <Menu
         id="fade-menu"
@@ -40,10 +41,17 @@ export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
         TransitionComponent={Fade}
       >
         <MenuItem onClick={handleClose} >
-          <EditButton currentUser={currentUser} spot={selectedSpot} setEditing={setEditing} />
+          <Button disabled >
+            <EditButton />
+          </Button>
         </MenuItem>
         <MenuItem onClick={handleClose} >
-          <DeleteButton currentUser={currentUser} spot={selectedSpot} />
+          <LogOutButton />
+        </MenuItem>
+        <MenuItem onClick={handleClose} >
+          <Button disabled >
+            <WithdrawalButton />
+          </Button>
         </MenuItem>
       </Menu>
     </div>

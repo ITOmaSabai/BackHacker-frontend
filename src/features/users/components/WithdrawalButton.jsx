@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { signInWithPopup, getAuth, GoogleAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 import { deleteUser as deleteUserFromFirebase } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore"
@@ -57,6 +57,13 @@ export const WithdrawalButton = () => {
   }
 
   return (
-    <IconButton type="button" onClick={withdrawalUser} >退会</IconButton>
+    <Box
+      sx={{p: 0, m: 0}}
+      display={"flex"}
+      flexDirection={"row"}
+      onClick={withdrawalUser}
+    >
+      <Typography color={"warning"}>退会する</Typography>
+    </Box>
   )
 }

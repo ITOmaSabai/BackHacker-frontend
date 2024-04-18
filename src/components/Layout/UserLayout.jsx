@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSpotsContext } from "../../contexts/SpotsContext";
 import { UserProfile } from "../../features/users/components/UserProfile"
 import { useParams } from "react-router-dom";
-import Spinner from "../Elements/Spinner/Spinner";
 import { getUsers } from "../../features/users/api/getUsers";
 import { SpotListTab } from "../../features/users/components/SpotListTab";
 
@@ -29,7 +28,7 @@ export const UserLayout = () => {
   }, [userId])
 
   if (!userInfo) {
-    return <div><Spinner /></div>;
+    return <div></div>;
   }
 
   return (

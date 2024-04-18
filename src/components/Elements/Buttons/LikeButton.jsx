@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ClickedLikeIcon } from "../../../features/likes/components/ClickedLikeIcon";
 import { createLike } from "../../../features/likes/api/createLike";
@@ -71,14 +71,14 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
         icon={icon}
         button={"login"}
       />
-      <Button
+      <IconButton
         onClick={handleLikeButtonClick}
-        sx={{height: "30px", width: "10px", pl: 4}}
+        sx={{height: "30px", width: "10px", mr: 1}}
         disableRipple
       >
         <ClickedLikeIcon on={on}/>
-      </Button>
-      <Typography >{likedCount}</Typography>
+      </IconButton>
+      {likedCount > 0 && <Typography color={"#d600a6"} fontWeight={"bold"} >{likedCount}</Typography> }
     </>
   )
 }

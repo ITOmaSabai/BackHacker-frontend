@@ -36,7 +36,7 @@ export default function SpotModal({open, setOpen, spot, setLatLng}) {
   const handleSpotDetail = () => {
     setOpen(false);
     setLatLng("");
-    navigate(`/spots/${parseInt(spot.id)}`);
+    navigate(`/spots/${parseInt(spot.id)}`, { state: { open: true, spotId: spot.id }});
   }
 
   return (
