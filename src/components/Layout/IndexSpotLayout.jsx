@@ -4,15 +4,17 @@ import { SpotIndex } from "../../features/spots/components/SpotIndex";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import SpotDetailModal from "../Elements/Modals/SpotDetailModal";
+import { useLocation } from "react-router-dom";
 
 export const IndexSpotLayout = () => {
   const { spotId } = useParams();
   const navigate = useNavigate();
-  const [ isClickedMarkerId, setIsClickedMarkerId ] = useState(false);
-  const [ open, setOpen ] = useState(false);
+  const location = useLocation();
+  const [ clickedMarkerId, setClickedMarkerId ] = useState(location.state?.spotId ?? false);
+  const [ open, setOpen ] = useState(location.state?.open ?? false);
 
   const handleMarkerClick = (spotId) => {
-    setIsClickedMarkerId(spotId);
+    setClickedMarkerId(spotId);
     setOpen(true);
     navigate(`/spots/${spotId}`);
   }
@@ -23,7 +25,7 @@ export const IndexSpotLayout = () => {
         <MapView >
           <SpotIndex
             handleMarkerClick={handleMarkerClick}
-            isClickedMarkerId={isClickedMarkerId}
+            clickedMarkerId={clickedMarkerId}
           />
           <SpotDetailModal spotId={spotId} open={open} setOpen={setOpen} />
         </MapView>

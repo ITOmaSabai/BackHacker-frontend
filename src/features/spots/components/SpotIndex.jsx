@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
 import { MyMarker } from '../../../components/Elements/Markers/MyMarker';
 
-export const SpotIndex = ({ handleMarkerClick, isClickedMarkerId }) => {
+export const SpotIndex = ({ handleMarkerClick, clickedMarkerId }) => {
   const { spots, loadSpots } = useSpotsContext();
 
   useEffect(() => {
@@ -30,13 +30,14 @@ export const SpotIndex = ({ handleMarkerClick, isClickedMarkerId }) => {
               }}
               onClick={() => handleMarkerClick(spot.id)}
             />
-            {spot.id === isClickedMarkerId &&
+            {spot.id === clickedMarkerId &&
               <MyMarker
                 key={spot.id}
                 position={{
                   lat: spot.lat,
                   lng: spot.lng
                 }}
+                onClick={() => handleMarkerClick(spot.id)}
               />
             }
           </>

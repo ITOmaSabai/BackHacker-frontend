@@ -16,6 +16,7 @@ export const SpotCard = ({ spots, text }) => {
             <Link
               to={`/spots/${spot.id}`}
               style={{color: "inherit", textDecoration: "none"}}
+              state={{ open: true, spotId: spot.id }}
             >
               <Typography>
                 {spot.name}
