@@ -84,26 +84,18 @@ export const SpotListTab = ({ userInfo }) => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        {!spots && <Spinner ></Spinner>}
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={'space-between'}
-          alignItems={"center"}
-        >
+        <Box width={"70vw"}>
+          {!spots && <Spinner />}
           <SpotCard spots={userPostedSpots()} text={"投稿"} />
         </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      {!spots && <Spinner ></Spinner>}
-      <Link to={`/users/${userInfo.id}/likes`}><Button variant='outlined' >地図上に表示</Button></Link>
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={'space-between'}
-          alignItems={"center"}
-        >
+        <Box width={"70vw"}>
+          {!spots && <Spinner />}
           <SpotCard spots={userLikedSpots()} text={"いいね"} />
+          <Box display={"flex"} justifyContent={"center"} sx={{mt: 2}}>
+            <Link to={`/users/${userInfo.id}/likes`}><Button variant='outlined' >地図上に表示</Button></Link>
+          </Box>
         </Box>
       </CustomTabPanel>
     </Box>
