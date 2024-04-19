@@ -21,7 +21,7 @@ const style = {
 export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
   const { currentUser } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
-  const [ spotName, setSpotName ] = useState();
+  const [ spotName, setSpotName ] = useState("");
   const [ spotDescription, setSpotDescription ] = useState("");
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
   const [ isDisabled, setIsDisabled] = useState(true);
@@ -36,20 +36,23 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
 
   const handleSpotPost = async (e) => {
     e.preventDefault();
+    setIsDisabled(true);
     const address = await ReverseGeocode(latLng);
-    const res = await createSpot(currentUser, spotName, spotDescription, latLng, address);
-    console.log(res);
-    if (res.statusText === "Created") {
+    const result = await createSpot(currentUser, spotName, spotDescription, latLng, address);
+    if (result.success) {
       setIsSuccessMessage(true);
       setMessage("登録が完了しました");
       setOpen(true);
+      setIsDisabled(false);
       setCreatedSpot({
         title: "新規投稿が完了しました🎉",
-        body: res.data.spot.name,
-        url: res.data.videos[0].snippet.thumbnails.medium.url,
-        id: res.data.spot.id
+        body: result.data.spot.name,
+        url: result.data.videos[0].snippet.thumbnails.medium.url,
+        id: result.data.spot.id
       });
       handleCancelClick();
+    } else {
+      setMessage(result.message);
     }
   }
 
@@ -126,6 +129,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
               variant='contained'
               display={"flex"}
               sx={{width: "150px"}}
+              disabled={isDisabled}
             >
               投稿する
             </Button>
