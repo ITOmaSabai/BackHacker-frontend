@@ -1,4 +1,5 @@
 import { axios } from "../../../lib/axios";
+import { isAxiosError } from 'axios';
 
 export const createSpot = async (
     currentUser,
@@ -38,7 +39,7 @@ export const createSpot = async (
       throw new Error("スポットの投稿に失敗しました");
     }
   } catch (err) {
-    if (axios.isAxiosError(err) && err.response) {
+    if (isAxiosError(err) && err.response) {
       return { success: false, message: err.response.data.message || "エラーが発生しました" };
     } else {
       return { success: false, message: String(err) };
