@@ -25,13 +25,6 @@ export const CreateSpotLayout = () => {
     icon: "📺 👀"
   };
 
-  const searchFailureModal = {
-    title: "動画を取得できませんでした",
-    body: "山、砂漠、海などは避け、都市部をクリックして再度試してみてください 🙇‍♂️",
-    icon: "😭",
-    button: "close"
-  };
-
   if (loading) return;
 
   if (!currentUser) {
