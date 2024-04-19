@@ -8,7 +8,7 @@ import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import SpotModal from "../Elements/Modals/SpotModal";
 
 export const CreateSpotLayout = () => {
-  const { currentUser } = useFirebaseAuth();
+  const { currentUser, loading } = useFirebaseAuth();
   const [ latLng, setLatLng ] = useState({});
   const [ open, setOpen ] = useState(true);
   const [ createdSpot, setCreatedSpot ] = useState();
@@ -31,6 +31,8 @@ export const CreateSpotLayout = () => {
     icon: "😭",
     button: "close"
   };
+
+  if (loading) return;
 
   if (!currentUser) {
     return (
