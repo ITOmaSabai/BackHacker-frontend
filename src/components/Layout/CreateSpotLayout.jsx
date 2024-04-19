@@ -65,7 +65,7 @@ export const CreateSpotLayout = () => {
         </MapView>
       </Box>
       <Box sx={{height: "100%", width :"25%"}}>
-        <CreateSpot latLng={latLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
+        <CreateSpot latLng={latLng} setLatLng={setLatLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
       </Box>
     </Box>
   )

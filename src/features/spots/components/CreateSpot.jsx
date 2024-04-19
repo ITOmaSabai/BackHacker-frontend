@@ -18,7 +18,7 @@ const style = {
   paddingTop: "30px"
 }
 
-export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
+export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
   const { currentUser } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
@@ -56,6 +56,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
   const handleCancelClick = () => {
     setSpotName("");
     setSpotDescription("");
+    setLatLng("");
   }
 
   return (
