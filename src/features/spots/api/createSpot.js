@@ -1,4 +1,5 @@
 import { axios } from "../../../lib/axios";
+import { isAxiosError } from 'axios';
 
 export const createSpot = async (
     currentUser,
@@ -29,14 +30,19 @@ export const createSpot = async (
 
   try {
     const res = await axios.post("/api/v1/spots", data, config);
-    return res;
-  } catch (err) {
-    let message;
-    if (axios.isAxiosError(err) && err.response) {
-      console.error(err.response.data.message);
+
+    if (res.status === 201) {
+      // 成功時はレスポンスデータ全体を返す
+      return { success: true, data: res.data };
     } else {
-      message = String(err);
-      console.error(message);
+      // ステータスコードが201以外の場合は、エラーメッセージを返す
+      throw new Error("スポットの投稿に失敗しました");
+    }
+  } catch (err) {
+    if (isAxiosError(err) && err.response) {
+      return { success: false, message: err.response.data.message || "エラーが発生しました" };
+    } else {
+      return { success: false, message: String(err) };
     }
   }
 }

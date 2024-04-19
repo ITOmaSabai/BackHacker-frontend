@@ -8,8 +8,8 @@ import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import SpotModal from "../Elements/Modals/SpotModal";
 
 export const CreateSpotLayout = () => {
-  const { currentUser } = useFirebaseAuth();
-  const [ latLng, setLatLng ] = useState({});
+  const { currentUser, loading } = useFirebaseAuth();
+  const [ latLng, setLatLng ] = useState();
   const [ open, setOpen ] = useState(true);
   const [ createdSpot, setCreatedSpot ] = useState();
 
@@ -25,12 +25,7 @@ export const CreateSpotLayout = () => {
     icon: "📺 👀"
   };
 
-  const searchFailureModal = {
-    title: "動画を取得できませんでした",
-    body: "山、砂漠、海などは避け、都市部をクリックして再度試してみてください 🙇‍♂️",
-    icon: "😭",
-    button: "close"
-  };
+  if (loading) return;
 
   if (!currentUser) {
     return (
@@ -63,7 +58,7 @@ export const CreateSpotLayout = () => {
         </MapView>
       </Box>
       <Box sx={{height: "100%", width :"25%"}}>
-        <CreateSpot latLng={latLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
+        <CreateSpot latLng={latLng} setLatLng={setLatLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
       </Box>
     </Box>
   )

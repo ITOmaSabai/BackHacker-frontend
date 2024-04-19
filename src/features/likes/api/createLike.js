@@ -19,7 +19,6 @@ export const createLike = async (currentUser, selectedSpot) => {
 
   try {
     const res = await axios.post("/api/v1/likes", data, config);
-    console.log(res.data)
     return res.data;
   } catch (err) {
     let message;
