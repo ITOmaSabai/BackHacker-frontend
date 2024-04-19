@@ -9,7 +9,7 @@ import SpotModal from "../Elements/Modals/SpotModal";
 
 export const CreateSpotLayout = () => {
   const { currentUser, loading } = useFirebaseAuth();
-  const [ latLng, setLatLng ] = useState({});
+  const [ latLng, setLatLng ] = useState();
   const [ open, setOpen ] = useState(true);
   const [ createdSpot, setCreatedSpot ] = useState();
 

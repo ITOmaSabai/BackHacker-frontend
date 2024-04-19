@@ -1,5 +1,5 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
-import { useState } from "react"
+import { Alert, Box, Button, TextField, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import RoomTwoToneIcon from '@mui/icons-material/RoomTwoTone';
 import { createSpot } from "../api/createSpot";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
@@ -10,8 +10,12 @@ import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 const style = {
   display: 'flex',
   flexDirection: 'column',
+  height: "100%",
   width: '90%',
-  textAlign: 'center'
+  textAlign: 'center',
+  alignItems: "center",
+  margin: "0 auto",
+  paddingTop: "30px"
 }
 
 export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
@@ -20,8 +24,15 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
   const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
+  const [ isDisabled, setIsDisabled] = useState(true);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+  useEffect(() => {
+    if (latLng) {
+      setIsDisabled(false);
+    }
+  }, [latLng])
 
   const handleSpotPost = async (e) => {
     e.preventDefault();
@@ -38,15 +49,22 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
         url: res.data.videos[0].snippet.thumbnails.medium.url,
         id: res.data.spot.id
       });
-      setSpotName("");
-      setSpotDescription("");
+      handleCancelClick();
     }
   }
 
+  const handleCancelClick = () => {
+    setSpotName("");
+    setSpotDescription("");
+  }
+
   return (
-    <form onSubmit={handleSpotPost} >
+    latLng ?
       <Box style={style} >
-        <Typography variant='h5' fontSize={"24px"}><RoomTwoToneIcon />スポット新規投稿</Typography>
+    <form onSubmit={handleSpotPost} >
+        <Typography variant='h5' fontSize={"24px"}>
+          <RoomTwoToneIcon />スポット新規投稿
+        </Typography>
         <TextField
           id="spotName"
           label="スポット名"
@@ -57,6 +75,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
           helperText="※必須項目です"
           placeholder="表示されるスポット名"
           name="spotName"
+          disabled={isDisabled}
           value={spotName}
           onChange={(e) => setSpotName(e.target.value)}
         />
@@ -70,6 +89,7 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
           placeholder="思い出や感想を入力してください"
           margin="normal"
           name='description'
+          disabled={isDisabled}
           value={spotDescription}
           onChange={(e) => setSpotDescription(e.target.value)}
         />
@@ -86,8 +106,8 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
         <Box sx={{pb: 3}}>
           {isAutoFetchEnabled ? (
             <>
-              <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
-              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography>
+              {/* <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
+              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography> */}
             </>
           ) : (
             <>
@@ -97,18 +117,28 @@ export const CreateSpot = ({ latLng, setOpen, setCreatedSpot }) => {
           )}
         </Box>
         <Box >
-          <Button variant='text' >キャンセル</Button>
-          <Button
-            type='submit'
-            color='success'
-            variant='contained'
-            display={"flex"}
-            sx={{width: "150px"}}
-          >
-            投稿する
-          </Button>
+          <>
+            <Button variant='text' onClick={handleCancelClick} >キャンセル</Button>
+            <Button
+              type='submit'
+              color='success'
+              variant='contained'
+              display={"flex"}
+              sx={{width: "150px"}}
+            >
+              投稿する
+            </Button>
+          </>
+
         </Box>
-      </Box>
     </form>
+      </Box>
+    :
+      <Box style={style} >
+        <Typography variant='h5' fontSize={"24px"}>
+          <RoomTwoToneIcon />スポット新規投稿
+        </Typography>
+        <Alert severity="info" variant="filled" sx={{mt: 5}}>地図上をクリックして、投稿する地点を指定してください</Alert>
+      </Box>
   )
 }
