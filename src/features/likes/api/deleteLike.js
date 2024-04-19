@@ -16,7 +16,6 @@ export const deleteLike = async (currentUser, id) => {
 
   try {
     const res = await axios.delete(`/api/v1/likes/${id}`, config);
-    console.log(res.data)
     return res.data;
   } catch (err) {
     let message;
