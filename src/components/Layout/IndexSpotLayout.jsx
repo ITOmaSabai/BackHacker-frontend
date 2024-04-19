@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import SpotDetailModal from "../Elements/Modals/SpotDetailModal";
 import { useLocation } from "react-router-dom";
+import FloatingButton from "../Elements/Buttons/FloatingButton";
 
 export const IndexSpotLayout = () => {
   const { spotId } = useParams();
@@ -19,6 +20,10 @@ export const IndexSpotLayout = () => {
     navigate(`/spots/${spotId}`);
   }
 
+  const handleButtonClick = () => {
+    navigate("/spots");
+  }
+
   return (
     <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
       <Box sx={{height: "100%", width :"100%"}} >
@@ -28,6 +33,7 @@ export const IndexSpotLayout = () => {
             clickedMarkerId={clickedMarkerId}
           />
           <SpotDetailModal spotId={spotId} open={open} setOpen={setOpen} />
+          <FloatingButton text={"新規投稿"} onClick={handleButtonClick} />
         </MapView>
       </Box>
     </Box>
