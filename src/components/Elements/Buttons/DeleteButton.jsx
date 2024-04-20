@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSpotsContext } from "../../../contexts/SpotsContext";
 import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
-export const DeleteButton = ({ currentUser, spot }) => {
+export const DeleteButton = ({ currentUser, spot, handleClose }) => {
   const { loadSpots } = useSpotsContext();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const DeleteButton = ({ currentUser, spot }) => {
       await deleteSpot(currentUser, spot.id, setIsSuccessMessage);
       await loadSpots();
       setMessage("削除しました");
-      navigate('/map');
+      handleClose();
     } catch (error) {
       setMessage(error.message);
       navigate('/map');

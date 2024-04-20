@@ -7,7 +7,7 @@ import { IconButton } from '@mui/material';
 import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
 
-export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
+export const ConfigButton = ({ currentUser, selectedSpot, setEditing, handleModalClose }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -43,7 +43,7 @@ export const ConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
           <EditButton currentUser={currentUser} spot={selectedSpot} setEditing={setEditing} />
         </MenuItem>
         <MenuItem onClick={handleClose} >
-          <DeleteButton currentUser={currentUser} spot={selectedSpot} />
+          <DeleteButton currentUser={currentUser} spot={selectedSpot} handleClose={handleModalClose} />
         </MenuItem>
       </Menu>
     </div>

@@ -32,7 +32,6 @@ export const SpotIndex = ({ handleMarkerClick, clickedMarkerId }) => {
             />
             {spot.id === clickedMarkerId &&
               <MyMarker
-                key={spot.id}
                 position={{
                   lat: spot.lat,
                   lng: spot.lng

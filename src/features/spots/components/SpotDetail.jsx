@@ -9,7 +9,7 @@ import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton"
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { ShareButton } from "../../../components/Elements/Buttons/ShareButton";
 
-export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoClick }) => {
+export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoClick, handleClose }) => {
   const { spots } = useSpotsContext();
   const { currentUser, userId } = useFirebaseAuth();
   const [ editing, setEditing ] = useState(false);
@@ -52,6 +52,7 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
               currentUser={currentUser}
               selectedSpot={selectedSpot}
               setEditing={setEditing}
+              handleModalClose={handleClose}
             />
           }
           </Box>
