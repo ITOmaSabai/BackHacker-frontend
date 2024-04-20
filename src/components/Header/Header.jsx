@@ -13,7 +13,7 @@ import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from '@mui/material';
-
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -47,6 +47,11 @@ export default function Header() {
     navigate(`/users/${userId}`);
   }
 
+  const handleNavigate = () => {
+    handleMenuClose();
+    navigate("/");
+  }
+
   const menuId = 'primary-search-account-menu';
 
   // ヘッダー右側のアイコン部分
@@ -67,9 +72,14 @@ export default function Header() {
       onClose={handleMenuClose}
     >
       {currentUser && currentUser !== null &&
-        <MenuItem onClick={handleProfileOpen}>
-          <AccountCircle sx={{pr :1}}/>プロフィール
-        </MenuItem>
+        <>
+          <MenuItem onClick={handleProfileOpen}>
+            <AccountCircle sx={{pr :1}}/>マイページ
+          </MenuItem>
+          <MenuItem onClick={handleNavigate}>
+            <HomeIcon sx={{pr :1}}/>トップ
+          </MenuItem>
+        </>
       }
     </Menu>
   );
@@ -115,7 +125,16 @@ export default function Header() {
             >
               <AccountCircle />
             </IconButton>
-            <Typography >プロフィール</Typography>
+            <Typography >マイページ</Typography>
+          </MenuItem>
+          <MenuItem onClick={handleNavigate}>
+            <IconButton
+              size="large"
+              color="inherit"
+            >
+              <HomeIcon />
+            </IconButton>
+            <Typography >トップ</Typography>
           </MenuItem>
           </div>
       ) : (
