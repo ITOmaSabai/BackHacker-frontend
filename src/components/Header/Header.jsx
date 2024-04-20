@@ -131,7 +131,7 @@ export default function Header() {
       <AppBar position="static" sx={{pl: 5}}>
         <Toolbar>
           <Link
-              to={"/"}
+              to={`${currentUser ? "/map" : "/"}`}
               style={{color: "inherit", textDecoration: "none"}}
             >
             <Typography
