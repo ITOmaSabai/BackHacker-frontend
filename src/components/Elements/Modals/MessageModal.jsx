@@ -40,7 +40,7 @@ export default function MessageModal({open, setOpen, title, body, icon, button})
           </Typography>
           <Typography sx={{pt: 2}}>{body}</Typography>
           <Box sx={{pt: 2}} textAlign={"center"}>
-            {buttonType === "login" && <SignInButton text={"ログイン"} variant={"contained"} color={"info"} />}
+            {buttonType === "login" && <SignInButton text={"ログイン"} variant={"contained"} color={"info"} handleClose={handleClose} />}
             {buttonType === "close" && <Button variant="contained" color="info" onClick={handleClose}><ReplayIcon />別の場所を投稿する</Button>}
           </Box>
         </Box>

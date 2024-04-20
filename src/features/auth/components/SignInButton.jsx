@@ -5,7 +5,7 @@ import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
 import { useFlashMessage } from '../../../contexts/FlashMessageContext';
 
-export const SignInButton = ({ text, currentUser, variant, color }) => {
+export const SignInButton = ({ text, variant, color, handleClose }) => {
   const { loginWithGoogle } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
 
@@ -28,6 +28,7 @@ export const SignInButton = ({ text, currentUser, variant, color }) => {
           // 成功時はレスポンスデータ全体を返す
           setIsSuccessMessage(true);
           setMessage("ログインしました");
+          handleClose();
           return { success: true, data: res.data };
         } else {
           // ステータスコードが200以外の場合は、エラーメッセージを返す
