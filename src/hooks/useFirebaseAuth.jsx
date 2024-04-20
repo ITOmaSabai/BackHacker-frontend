@@ -23,7 +23,6 @@ export const useFirebaseAuth = () => {
     if (result) {
       const user = result.user;
       setCurrentUser(user);
-      navigate("/");
       return user;
     }
   };

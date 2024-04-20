@@ -1,4 +1,5 @@
 import { axios } from '../../../lib/axios';
+import { isAxiosError } from 'axios';
 import { useFirebaseAuth } from '../../../hooks/useFirebaseAuth';
 import { Button, Typography } from '@mui/material';
 import { Login } from '@mui/icons-material';
@@ -6,7 +7,7 @@ import { useFlashMessage } from '../../../contexts/FlashMessageContext';
 
 export const SignInButton = ({ text, currentUser, variant, color }) => {
   const { loginWithGoogle } = useFirebaseAuth();
-  const { setMessage } = useFlashMessage();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
 
   const handleGoogleLogin = () => {
     const verifyIdToken = async () => {
@@ -23,14 +24,20 @@ export const SignInButton = ({ text, currentUser, variant, color }) => {
 
       try {
         const res = await axios.post("/api/v1/authentication", null, config);
-        return res.data;
-      } catch (err) {
-        let message;
-        if (axios.isAxiosError(err) && err.response) {
-          console.error(err.response.data.message);
+        if (res.status === 200) {
+          // 成功時はレスポンスデータ全体を返す
+          setIsSuccessMessage(true);
+          setMessage("ログインしました");
+          return { success: true, data: res.data };
         } else {
-          message = String(err);
-          console.error(message);
+          // ステータスコードが200以外の場合は、エラーメッセージを返す
+          throw new Error("スポットの投稿に失敗しました");
+        }
+      } catch (err) {
+        if (isAxiosError(err) && err.response) {
+          return { success: false, message: err.response.data.message || "エラーが発生しました" };
+        } else {
+          return { success: false, message: String(err) };
         }
       }
     };
