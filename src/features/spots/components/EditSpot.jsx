@@ -24,7 +24,7 @@ export const EditSpot = ({ spot, setEditing, title }) => {
   const { loadSpots } = useSpotsContext();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
-  const [ spotDescription, setSpotDescription ] = useState("");
+  const [ spotDescription, setSpotDescription ] = useState();
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
