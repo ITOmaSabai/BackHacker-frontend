@@ -25,7 +25,6 @@ export const EditSpot = ({ spot, setEditing, title }) => {
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ spotName, setSpotName ] = useState();
   const [ spotDescription, setSpotDescription ] = useState("");
-  const [ isAutoFetchEnabled, setIsAutoFetchEnabled ] = useState(true);
 
   const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -81,27 +80,7 @@ export const EditSpot = ({ spot, setEditing, title }) => {
           onChange={(e) => setSpotDescription(e.target.value)}
         />
         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>
-          <Typography>動画を自動で取得する</Typography>
-          <Switch
-            {...label}
-            defaultChecked
-            disabled
-            checked={isAutoFetchEnabled}
-            onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
-          />
-        </Box>
-        <Box sx={{pb: 3}}>
-          {isAutoFetchEnabled ? (
-            <>
-              {/* <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
-              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography> */}
-            </>
-          ) : (
-            <>
-              <TextField label="YouTube動画URLを入力" ></TextField>
-              <Typography >https://www.youtube.com/</Typography>
-            </>
-          )}
+
         </Box>
         <Box >
           <Button variant='text' onClick={() => setEditing(false)} >キャンセル</Button>
