@@ -11,9 +11,14 @@ import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 const style = {
   display: 'flex',
   flexDirection: 'column',
+  height: "100%",
   width: '90%',
-  textAlign: 'center'
+  textAlign: 'center',
+  alignItems: "center",
+  margin: "0 auto",
+  paddingTop: "30px"
 }
+
 export const EditSpot = ({ spot, setEditing, title }) => {
   const { currentUser } = useFirebaseAuth();
   const { loadSpots } = useSpotsContext();
@@ -88,8 +93,8 @@ export const EditSpot = ({ spot, setEditing, title }) => {
         <Box sx={{pb: 3}}>
           {isAutoFetchEnabled ? (
             <>
-              <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
-              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography>
+              {/* <Typography fontSize={"14px"} >オススメ！ピンの周辺の動画を</Typography>
+              <Typography fontSize={"14px"} >自動で取得します(1回/日 限定)</Typography> */}
             </>
           ) : (
             <>
