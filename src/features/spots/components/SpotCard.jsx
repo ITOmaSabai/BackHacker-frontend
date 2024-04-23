@@ -19,7 +19,15 @@ export const SpotCard = ({ spots, text }) => {
                 style={{color: "inherit", textDecoration: "none"}}
                 state={{ open: true, spotId: spot.id }}
               >
-                <Typography>{spot.name}</Typography>
+                <Typography
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {spot.name || "---"}
+                </Typography>
                 <img
                   src={spot.videos[0].thumbnail_url}
                   alt="動画のサムネイル"
