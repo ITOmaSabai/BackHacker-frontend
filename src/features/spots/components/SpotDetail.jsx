@@ -64,7 +64,9 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
               <Tooltip title="コメントする(機能作成中)">
-                <IconButton sx={{mx: 2}} ><ChatBubbleIcon /></IconButton>
+                <span>
+                  <IconButton sx={{mx: 2}} disabled ><ChatBubbleIcon /></IconButton>
+                </span>
               </Tooltip>
               <LikeButton
                 savedLikes={selectedSpot.likes}

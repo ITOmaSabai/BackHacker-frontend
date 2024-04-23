@@ -104,17 +104,20 @@ export default function Header() {
       {currentUser && currentUser !== null ? (
         <div>
           <MenuItem>
-            <Tooltip title="通知(作成中)" >
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                {/* <Badge badgeContent={17} color="error"> */}
-                  <NotificationsIcon />
-                {/* </Badge> */}
-              </IconButton>
-            </Tooltip>
+            <span>
+              <Tooltip title="通知(作成中)" >
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  disabled
+                >
+                  {/* <Badge badgeContent={17} color="error"> */}
+                    <NotificationsIcon />
+                  {/* </Badge> */}
+                </IconButton>
+              </Tooltip>
+            </span>
             <Typography >通知</Typography>
           </MenuItem>
           <MenuItem onClick={handleProfileOpen}>
@@ -173,15 +176,18 @@ export default function Header() {
                 {currentUser && currentUser !== null ? (
                   <>
                     <Tooltip title="通知(作成中)" >
-                      <IconButton
-                      size="large"
-                      aria-label="show 17 new notifications"
-                      color="inherit"
-                      >
-                      {/* <Badge badgeContent={17} color="error"> */}
-                        <NotificationsIcon />
-                      {/* </Badge> */}
-                      </IconButton>
+                      <span>
+                        <IconButton
+                          size="large"
+                          aria-label="show 17 new notifications"
+                          color="inherit"
+                          disabled
+                        >
+                        {/* <Badge badgeContent={17} color="error"> */}
+                          <NotificationsIcon />
+                        {/* </Badge> */}
+                        </IconButton>
+                      </span>
                     </Tooltip>
                     <IconButton
                       size="large"
