@@ -56,10 +56,36 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
             />
           }
           </Box>
-          <Box >
+          <Box
+            sx={{
+              position: 'relative',
+              '&:hover': {
+                '& img': {
+                  filter: 'brightness(50%)',
+                },
+                '& .icon-overlay': {
+                  visibility: 'visible',
+                },
+              },
+            }}
+          >
             <Button onClick={handleVideoClick}>
-              <img src={selectedSpot.videos[0].thumbnail_url} />
+              <img src={selectedSpot.videos[0].thumbnail_url} alt="サムネイル" style={{ width: '100%', display: 'block' }} />
             </Button>
+            <Box
+              className="icon-overlay"
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                visibility: 'hidden',
+              }}
+            >
+              <Button onClick={handleVideoClick} >
+                <Typography fontSize="20px" fontWeight="bold" color="white" >Watch Videos</Typography>
+              </Button>
+            </Box>
           </Box>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
