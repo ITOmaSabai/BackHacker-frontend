@@ -39,8 +39,15 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
               <Button
                 component={Link}
                 to={`/users/${selectedSpot.user.id}`}
-                style={{color: "inherit", textDecoration: "none", display: "flex", flexDirection: "row"}}
-                sx={{mb: 2}}
+                sx={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "left",
+                  mb: 2,
+                  width: "100%"
+                }}
               >
                 <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
                 <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
