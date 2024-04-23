@@ -12,7 +12,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { SignInButton } from '../../features/auth/components/SignInButton';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { Link, useNavigate } from "react-router-dom";
-import { Avatar } from '@mui/material';
+import { Avatar, Tooltip } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 
 export default function Header() {
@@ -104,15 +104,20 @@ export default function Header() {
       {currentUser && currentUser !== null ? (
         <div>
           <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              {/* <Badge badgeContent={17} color="error"> */}
-                <NotificationsIcon />
-              {/* </Badge> */}
-            </IconButton>
+            <span>
+              <Tooltip title="通知(作成中)" >
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  disabled
+                >
+                  {/* <Badge badgeContent={17} color="error"> */}
+                    <NotificationsIcon />
+                  {/* </Badge> */}
+                </IconButton>
+              </Tooltip>
+            </span>
             <Typography >通知</Typography>
           </MenuItem>
           <MenuItem onClick={handleProfileOpen}>
@@ -170,15 +175,20 @@ export default function Header() {
               <>
                 {currentUser && currentUser !== null ? (
                   <>
-                    <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                    >
-                    {/* <Badge badgeContent={17} color="error"> */}
-                      <NotificationsIcon />
-                    {/* </Badge> */}
-                    </IconButton>
+                    <Tooltip title="通知(作成中)" >
+                      <span>
+                        <IconButton
+                          size="large"
+                          aria-label="show 17 new notifications"
+                          color="inherit"
+                          disabled
+                        >
+                        {/* <Badge badgeContent={17} color="error"> */}
+                          <NotificationsIcon />
+                        {/* </Badge> */}
+                        </IconButton>
+                      </span>
+                    </Tooltip>
                     <IconButton
                       size="large"
                       edge="end"

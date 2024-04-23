@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Tooltip, Typography } from "@mui/material"
 import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -39,8 +39,15 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
               <Button
                 component={Link}
                 to={`/users/${selectedSpot.user.id}`}
-                style={{color: "inherit", textDecoration: "none", display: "flex", flexDirection: "row"}}
-                sx={{mb: 2}}
+                sx={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "left",
+                  mb: 2,
+                  width: "100%"
+                }}
               >
                 <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
                 <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
@@ -56,14 +63,44 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
             />
           }
           </Box>
-          <Box >
+          <Box
+            sx={{
+              position: 'relative',
+              '&:hover': {
+                '& img': {
+                  filter: 'brightness(50%)',
+                },
+                '& .icon-overlay': {
+                  visibility: 'visible',
+                },
+              },
+            }}
+          >
             <Button onClick={handleVideoClick}>
-              <img src={selectedSpot.videos[0].thumbnail_url} />
+              <img src={selectedSpot.videos[0].thumbnail_url} alt="サムネイル" style={{ width: '100%', display: 'block' }} />
             </Button>
+            <Box
+              className="icon-overlay"
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                visibility: 'hidden',
+              }}
+            >
+              <Button onClick={handleVideoClick} >
+                <Typography fontSize="20px" fontWeight="bold" color="white" >Watch Videos</Typography>
+              </Button>
+            </Box>
           </Box>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
-              <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
+              <Tooltip title="コメントする(機能作成中)">
+                <span>
+                  <IconButton sx={{mx: 2}} disabled ><ChatBubbleIcon /></IconButton>
+                </span>
+              </Tooltip>
               <LikeButton
                 savedLikes={selectedSpot.likes}
                 selectedSpot={selectedSpot}

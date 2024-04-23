@@ -78,7 +78,7 @@ export const LikeButton = ({ savedLikes, selectedSpot }) => {
       >
         <ClickedLikeIcon on={on}/>
       </IconButton>
-      {likedCount > 0 && <Typography color={"#d600a6"} fontWeight={"bold"} >{likedCount}</Typography> }
+      {likedCount > 0 && <Typography color={on ? "#d600a6" : "#979797"} fontWeight={"bold"} >{likedCount}</Typography> }
     </>
   )
 }
