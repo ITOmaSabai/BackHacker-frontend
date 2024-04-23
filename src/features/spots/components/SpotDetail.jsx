@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Tooltip, Typography } from "@mui/material"
 import { useSpotsContext } from "../../../contexts/SpotsContext"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -63,7 +63,9 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
           </Box>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
-              <IconButton disabled sx={{mx: 2}} ><ChatBubbleIcon color={"#c2c2c2"} /></IconButton>
+              <Tooltip title="コメントする(機能作成中)">
+                <IconButton sx={{mx: 2}} ><ChatBubbleIcon /></IconButton>
+              </Tooltip>
               <LikeButton
                 savedLikes={selectedSpot.likes}
                 selectedSpot={selectedSpot}
