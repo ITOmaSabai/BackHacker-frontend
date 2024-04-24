@@ -6,10 +6,13 @@ import { Marker } from '@vis.gl/react-google-maps';
 import MessageModal from "../Elements/Modals/MessageModal";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import SpotModal from "../Elements/Modals/SpotModal";
+import { useLocation } from 'react-router-dom';
+import { MyMarker } from "../Elements/Markers/MyMarker";
 
 export const CreateSpotLayout = () => {
   const { currentUser, loading } = useFirebaseAuth();
-  const [ latLng, setLatLng ] = useState();
+  const location = useLocation();
+  const [ latLng, setLatLng ] = useState(location.state?.latLng ?? null);
   const [ open, setOpen ] = useState(true);
   const [ createdSpot, setCreatedSpot ] = useState();
 
@@ -53,7 +56,7 @@ export const CreateSpotLayout = () => {
       <Box sx={{height: "100%", width :"75%"}} >
         <MapView onClick={handleMapClick} >
           {latLng &&
-            <Marker position={latLng} />
+            <MyMarker position={latLng} />
           }
         </MapView>
       </Box>

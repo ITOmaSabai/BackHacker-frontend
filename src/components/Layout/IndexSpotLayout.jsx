@@ -46,7 +46,7 @@ export const IndexSpotLayout = () => {
     if (!currentUser) {
       setLoginModalOpen(true);
     } else {
-      navigate("/spots");
+      navigate("/spots", { state: { latLng: latLng } });
     }
   }
 
