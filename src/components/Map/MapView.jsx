@@ -14,6 +14,8 @@ export const MapView = ({ children, onClick }) => {
         disableDefaultUI
         gestureHandling={'greedy'}
         onClick={onClick}
+        minZoom={2}
+        maxZoom={16}
       >
         {children}
       </Map>

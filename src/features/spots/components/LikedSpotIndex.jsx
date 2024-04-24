@@ -1,8 +1,8 @@
-import { Marker } from '@vis.gl/react-google-maps';
 import { useEffect } from 'react';
 import { useSpotsContext } from '../../../contexts/SpotsContext';
 import { useParams } from "react-router-dom";
 import { MyMarker } from '../../../components/Elements/Markers/MyMarker';
+import { SpotMarker } from '../../../components/Elements/Markers/SpotMarker';
 
 export const LikedSpotIndex = ({handleMarkerClick, isClickedMarkerId}) => {
   const { userId } = useParams();
@@ -24,12 +24,13 @@ export const LikedSpotIndex = ({handleMarkerClick, isClickedMarkerId}) => {
       {likedSpots ? (
         likedSpots.map((spot) =>
           <>
-            <Marker
+            <SpotMarker
               key={spot.id}
               position={{
                 lat: spot.lat,
                 lng: spot.lng
               }}
+              avatar={spot.user.avatar}
               // onClick={() => handleMarkerClick(spot.id)}
             />
             {spot.id === isClickedMarkerId &&
