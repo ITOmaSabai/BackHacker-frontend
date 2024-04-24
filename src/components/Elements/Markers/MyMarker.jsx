@@ -7,7 +7,7 @@ export const MyMarker = ({ key, position }) => {
         background={'#22ccff'}
         borderColor={'#1e89a1'}
         glyphColor={'#0f677a'}
-      >You</Pin>
+      >Now</Pin>
     </AdvancedMarker>
   )
 }
