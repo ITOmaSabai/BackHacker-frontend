@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom"
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import GroupsIcon from '@mui/icons-material/Groups';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { useSpring, animated } from 'react-spring';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useRef } from "react";
 
 const styleForHero = {
   backgroundImage: "url('/heroImage.jpg')",
@@ -14,29 +17,107 @@ const styleForHero = {
   // backgroundBlendMode: "lighten"
 };
 
+export const FadeInText = ({ text, delay, duration }) => {
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: delay,
+    config: { duration: duration }
+  });
+
+  return (
+    <animated.div style={props}>{text}</animated.div>
+  );
+};
+
 export const HeroLayout = () => {
   const navigate = useNavigate();
+  const scrollToMidRef = useRef(null);
+  const scrollToBottomRef = useRef(null);
+
   const handleClick = () => {
     navigate("/map");
   }
+
+  const scrollToMid = () => {
+    if(scrollToMidRef.current) {
+      scrollToMidRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToBottom = () => {
+    if(scrollToBottomRef.current) {
+      scrollToBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
-      <Box sx={{height: "100%", display: "flex", alignItems: "center"}} bgcolor={"primary.dark"}  >
+      <Box sx={{height: "100%", display: "flex", alignItems: "center", position: "relative"}} bgcolor={"primary.dark"}  >
         <Box sx={{mx: 20}} >
-          <Typography variant="h1" color={"white"} sx={{mb: 1}} >BackHacker.</Typography>
-          <Typography variant="h4" color={"white"} sx={{mb: 7}} >バーチャル旅行に出かけよう</Typography>
-          <Button onClick={handleClick} variant="outlined" color="info" sx={{mx: 1, mb: 3}} size="large" ><Typography fontSize={"20px"} >🌏 旅を始める</Typography></Button>
+          <Typography variant="h1" color={"white"} sx={{mb: 1}} >
+            <FadeInText text={"BackHacker."} delay={300} />
+          </Typography>
+          <Typography variant="h4" color={"white"} sx={{mb: 7}} >
+            <FadeInText text={"バーチャル旅行に出かけよう"} delay={600} />
+          </Typography>
+          <FadeInText
+            text={
+              <Button onClick={handleClick} variant="outlined" color="info" sx={{mx: 1, mb: 3}} size="large" >
+                <Typography fontSize={"20px"} >🌏 旅を始める</Typography>
+              </Button>
+            }
+            delay={1100}
+          />
+        </Box>
+        <Box
+          sx={{position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)'}}
+          onClick={scrollToMid}
+        >
+          <Typography color="white" fontSize="40px" >
+            <FadeInText text={<ExpandMoreIcon fontSize="40px" />} delay={1800} />
+          </Typography>
         </Box>
       </Box>
-      <Box sx={{height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}} bgcolor={"primary.dark"} style={styleForHero} >
-        <Box sx={{width: "60%"}}>
+      <Box
+        ref={scrollToMidRef}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative"
+        }}
+        bgcolor={"primary.dark"}
+        style={styleForHero}
+      >
+        <Box sx={{width: "60%"}} >
           <Typography fontSize={"60px"} color={"black"} fontWeight={"bold"} sx={{mb: 3}}>ひらけPC。行くぞ海外。</Typography>
           <Typography fontSize={"24px"} color={"black"} >BackHacker.は、「自宅にいながらPC1台でバックパッカー」をコンセプトとした、バーチャル旅行好きのためのエンタメアプリです。</Typography>
           <Typography fontSize={"24px"} color={"black"} >地図を見ながら、世界中の国や都市の街歩き動画を楽しんで、旅行気分を味わうことができます。</Typography>
           <Typography fontSize={"24px"} color={"black"} sx={{mt: 3}} >PC1台で、知らない土地に気軽にトリップしてみませんか？</Typography>
         </Box>
+        <Box
+          sx={{position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)'}}
+          onClick={scrollToBottom}
+        >
+          <Button color="primary" variant="outlined">
+            <FadeInText text={"BackHacker.でできること"} delay={2200} />
+          </Button>
+        </Box>
       </Box>
-      <Box sx={{height: "100vh", display: "flex", flexDirection: "column", text: "center", alignItems: "center"}} bgcolor={"primary.dark"} >
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          text: "center",
+          alignItems: "center"
+        }}
+        bgcolor={"primary.dark"}
+        ref={scrollToBottomRef}
+      >
         <Typography fontSize={"32px"} color={"white"} sx={{pt: 10}}>BackHacker.でできること</Typography>
         <Box sx={{display: "flex", height: "50vh", alignItems: "center"}} >
           <Grid container spacing={5} style={{ width: '80%', margin: '0 auto' }}>
