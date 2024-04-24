@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import GroupsIcon from '@mui/icons-material/Groups';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { useSpring, animated } from 'react-spring';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const styleForHero = {
   backgroundImage: "url('/heroImage.jpg')",
@@ -14,6 +16,19 @@ const styleForHero = {
   // backgroundBlendMode: "lighten"
 };
 
+export const FadeInText = ({ text, delay, duration }) => {
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: delay,
+    config: { duration: duration }
+  });
+
+  return (
+    <animated.div style={props}>{text}</animated.div>
+  );
+};
+
 export const HeroLayout = () => {
   const navigate = useNavigate();
   const handleClick = () => {
@@ -21,11 +36,27 @@ export const HeroLayout = () => {
   }
   return (
     <>
-      <Box sx={{height: "100%", display: "flex", alignItems: "center"}} bgcolor={"primary.dark"}  >
+      <Box sx={{height: "100%", display: "flex", alignItems: "center", position: "relative"}} bgcolor={"primary.dark"}  >
         <Box sx={{mx: 20}} >
-          <Typography variant="h1" color={"white"} sx={{mb: 1}} >BackHacker.</Typography>
-          <Typography variant="h4" color={"white"} sx={{mb: 7}} >バーチャル旅行に出かけよう</Typography>
-          <Button onClick={handleClick} variant="outlined" color="info" sx={{mx: 1, mb: 3}} size="large" ><Typography fontSize={"20px"} >🌏 旅を始める</Typography></Button>
+          <Typography variant="h1" color={"white"} sx={{mb: 1}} >
+            <FadeInText text={"BackHacker."} delay={300} />
+          </Typography>
+          <Typography variant="h4" color={"white"} sx={{mb: 7}} >
+            <FadeInText text={"バーチャル旅行に出かけよう"} delay={700} />
+          </Typography>
+          <FadeInText
+            text={
+              <Button onClick={handleClick} variant="outlined" color="info" sx={{mx: 1, mb: 3}} size="large" >
+                <Typography fontSize={"20px"} >🌏 旅を始める</Typography>
+              </Button>
+            }
+            delay={1500}
+          />
+        </Box>
+        <Box sx={{position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)'}}>
+          <Typography color="white" fontSize="30px" >
+            <FadeInText text={<ExpandMoreIcon fontSize="30px" />} delay={2200} />
+          </Typography>
         </Box>
       </Box>
       <Box sx={{height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}} bgcolor={"primary.dark"} style={styleForHero} >
