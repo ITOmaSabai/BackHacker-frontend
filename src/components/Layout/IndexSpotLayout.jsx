@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import FloatingButton from "../Elements/Buttons/FloatingButton";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import MessageModal from "../Elements/Modals/MessageModal";
+import { MyMarker } from "../Elements/Markers/MyMarker";
 
 export const IndexSpotLayout = () => {
   const { currentUser, loading } = useFirebaseAuth();
@@ -17,6 +18,7 @@ export const IndexSpotLayout = () => {
   const [ clickedMarkerId, setClickedMarkerId ] = useState(location.state?.spotId ?? false);
   const [ open, setOpen ] = useState(location.state?.open ?? false);
   const [ loginModalOpen, setLoginModalOpen ] = useState(false);
+  const [ latLng, setLatLng ] = useState();
 
   const createSpotModalMessage = {
     title: "ログインするとスポット投稿できます",
@@ -27,7 +29,15 @@ export const IndexSpotLayout = () => {
   const handleMarkerClick = (spotId) => {
     setClickedMarkerId(spotId);
     setOpen(true);
+    setLatLng(null);
     navigate(`/spots/${spotId}`);
+  }
+
+  const handleMapClick = (e) => {
+    const lat = parseFloat(e.detail.latLng.lat);
+    const lng = parseFloat(e.detail.latLng.lng);
+    setLatLng({lat: lat, lng: lng});
+    setClickedMarkerId(null);
   }
 
   const handleButtonClick = () => {
@@ -36,14 +46,17 @@ export const IndexSpotLayout = () => {
     if (!currentUser) {
       setLoginModalOpen(true);
     } else {
-      navigate("/spots");
+      navigate("/spots", { state: { latLng: latLng } });
     }
   }
 
   return (
     <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
       <Box sx={{height: "100%", width :"100%"}} >
-        <MapView >
+        <MapView onClick={handleMapClick} >
+          {latLng &&
+            <MyMarker position={latLng} />
+          }
           <SpotIndex
             handleMarkerClick={handleMarkerClick}
             clickedMarkerId={clickedMarkerId}
