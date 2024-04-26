@@ -1,29 +1,75 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import { UserConfigButton } from "../../../components/Elements/Buttons/UserConfigButton";
+import { useState } from "react";
+import { updateUser } from "../api/updateUser";
 
 export const UserProfile = ({ userInfo }) => {
-  const { loading, userId } = useFirebaseAuth();
+  const { loading, userId, currentUser } = useFirebaseAuth();
+  const [ editing, setEditing ] = useState(false);
+  const [ editedName, setEditedName ] = useState();
+  const [ updatedUser, setUpdatedUser ] = useState(null);
 
-  if (loading) {
+  const handleSubmitName = async (e) => {
+    e.preventDefault();
+    const updatedUser = await updateUser(currentUser, editedName, userId);
+    setUpdatedUser(updatedUser);
+    setEditing(false);
+  }
+
+  const handleEditName = (e) => {
+    setEditedName(e.target.value);
+  };
+
+  if (loading || !userId) {
     return <></>;
   }
 
   return (
     userInfo && (
-      <>
       <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}>
-        <Box sx={{display: "flex", justifyContent: "space-between", width: "30%", maxWidth: "50%", py: 2}}>
-        <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
-          <Avatar src={userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
-          <Typography fontSize="30px" >{userInfo.name}</Typography>
+        <Box sx={{display: "flex", justifyContent: "space-between", minWidth: "30%", maxWidth: "60%", py: 2}}>
+          {!editing ?
+            <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
+                <Avatar src={updatedUser && updatedUser !== null ? updatedUser.avatar : userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
+                <Typography fontSize="30px" >{updatedUser && updatedUser !== null ? updatedUser.name : userInfo.name}</Typography>
+            </Box>
+          :
+          <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
+            <Avatar src={userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
+              <form onSubmit={handleSubmitName}>
+                <Box display="flex" flexDirection="row">
+                  <Box bgcolor={"white"}>
+                    <TextField
+                      variant="outlined"
+                      color="info"
+                      defaultValue={`${updatedUser && updatedUser !== null ? updatedUser.name : userInfo.name}`}
+                      sx={{width: "300px"}}
+                      onChange={handleEditName}
+                    >
+                    </TextField>
+                  </Box>
+                  <Box display="flex" flexDirection="column" sx={{ml: 1, height: "100%"}} >
+                    <Button
+                      type="submit"
+                      color="success"
+                      variant="contained"
+                    >
+                      保存
+                    </Button>
+                    <Button onClick={() => setEditing(false)} variant="text" >
+                      <Typography fontSize={"12px"} >キャンセル</Typography>
+                    </Button>
+                  </Box>
+                </Box>
+              </form>
+            </Box>
+          }
         </Box>
-        {userId === userInfo.id &&
-          <UserConfigButton />
+        {!editing && userId === userInfo.id &&
+          <UserConfigButton setEditing={setEditing} />
         }
       </Box>
-      </Box>
-      </>
     )
   )
 }
