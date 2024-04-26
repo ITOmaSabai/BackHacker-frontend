@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
-import { Button, IconButton } from '@mui/material';
-import { EditButton } from './EditButton';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { LogOutButton } from '../../../features/auth/components/LogOutButton';
 import { WithdrawalButton } from '../../../features/users/components/WithdrawalButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import EditIcon from '@mui/icons-material/Edit';
 
-export const UserConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
+export const UserConfigButton = ({ setEditing }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleEditButtonClicked = () => {
+    setAnchorEl(null);
+    setEditing(true);
   };
 
   return (
@@ -40,10 +46,17 @@ export const UserConfigButton = ({ currentUser, selectedSpot, setEditing }) => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose} >
-          <Button disabled >
-            <EditButton />
-          </Button>
+        <MenuItem onClick={handleEditButtonClicked} >
+          <Box
+            sx={{p: 0, m: 0}}
+            display={"flex"}
+            flexDirection={"row"}
+          >
+            <EditIcon fontSize="small" sx={{mr: 1}} />
+            <Typography >
+              編集
+            </Typography>
+          </Box>
         </MenuItem>
         <MenuItem onClick={handleClose} >
           <LogOutButton />
