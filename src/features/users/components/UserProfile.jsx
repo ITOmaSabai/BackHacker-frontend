@@ -21,7 +21,7 @@ export const UserProfile = ({ userInfo }) => {
     setEditedName(e.target.value);
   };
 
-  if (loading || !userId) {
+  if (!userInfo) {
     return <></>;
   }
 
