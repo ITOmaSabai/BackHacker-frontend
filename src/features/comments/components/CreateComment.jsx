@@ -16,7 +16,7 @@ const style = {
   padding: "10px 0px 20px 0px"
 }
 
-export const CreateComment = ({ spotId, setIsCommentPosted }) => {
+export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
   const { currentUser } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ inputComment, setInputComment ] = useState(null);
@@ -38,11 +38,15 @@ export const CreateComment = ({ spotId, setIsCommentPosted }) => {
       setIsSuccessMessage(true);
       setInputComment("");
       setIsCommentPosted(true);
+    } else {
+      console.log(result)
+      setMessage(result.message);
     }
   }
 
   const handleCancelClick = () => {
     setInputComment("");
+    setOpen(false);
   }
 
   return (

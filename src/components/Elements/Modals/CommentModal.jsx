@@ -22,7 +22,7 @@ export default function CommentModal({ open, setOpen, spotId }) {
         <DialogContent sx={{py: 0}} >
           <CommentIndex spotId={spotId} isCommentPosted={isCommentPosted} />
         </DialogContent>
-        <CreateComment spotId={spotId} setIsCommentPosted={setIsCommentPosted} />
+        <CreateComment spotId={spotId} setIsCommentPosted={setIsCommentPosted} setOpen={setOpen} />
       </Dialog>
   );
 }
