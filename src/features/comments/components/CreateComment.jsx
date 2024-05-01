@@ -49,6 +49,11 @@ export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
     setOpen(false);
   }
 
+  const handleCommentInput = (e) => {
+    setInputComment(e.target.value);
+    setIsCommentPosted(false);
+  }
+
   return (
     <Box style={style} >
       <form onSubmit={handleCommentCteate} >
@@ -64,7 +69,7 @@ export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
           placeholder="コメントを入力"
           name="comment"
           value={inputComment}
-          onChange={(e) => setInputComment(e.target.value)}
+          onChange={handleCommentInput}
         />
         <Button variant='text' onClick={handleCancelClick} >キャンセル</Button>
         <Button
