@@ -8,6 +8,7 @@ import { EditSpot } from "./EditSpot";
 import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { ShareButton } from "../../../components/Elements/Buttons/ShareButton";
+import { CreateComment } from "../../comments/components/CreateComment";
 
 export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoClick, handleClose }) => {
   const { spots } = useSpotsContext();
@@ -111,6 +112,7 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
           <Box sx={{px: 2, mt: 2}}>
             <Typography >{selectedSpot.description}</Typography>
           </Box>
+          <CreateComment spotId={spotId} />
         </Box>
       :
         <EditSpot spot={selectedSpot} setEditing={setEditing} title={"スポット編集"} />

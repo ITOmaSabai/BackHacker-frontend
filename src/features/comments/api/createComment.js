@@ -1,7 +1,7 @@
 import { axios } from "../../../lib/axios";
 import { isAxiosError } from 'axios';
 
-export const createComment = async ( currentUser, inputComment ) => {
+export const createComment = async ( currentUser, spotId, inputComment ) => {
   const token = await currentUser?.getIdToken();
 
   if (!token) {
@@ -12,14 +12,14 @@ export const createComment = async ( currentUser, inputComment ) => {
   };
 
   const data = {
-    cpmment: {
-      body: inputComment,
+    comment: {
+      content: inputComment,
+      spot_id: spotId,
     }
   }
 
   try {
     const res = await axios.post("/api/v1/comments", data, config);
-
     if (res.status === 201) {
       // 成功時はレスポンスデータ全体を返す
       return { success: true, data: res.data };

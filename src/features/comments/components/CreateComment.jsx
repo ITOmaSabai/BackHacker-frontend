@@ -1,6 +1,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
 import SendIcon from '@mui/icons-material/Send';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createComment } from "../api/createComment";
+import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 const style = {
   display: 'flex',
@@ -13,12 +16,28 @@ const style = {
   paddingTop: "30px"
 }
 
-export const CreateComment = () => {
+export const CreateComment = ({ spotId }) => {
+  const { currentUser } = useFirebaseAuth();
+  const { setMessage, setIsSuccessMessage } = useFlashMessage();
   const [ inputComment, setInputComment ] = useState();
+  const [ isDisabled, setIsDisabled ] = useState(true);
 
-  const handleCommentCteate = (e) => {
+  useEffect(() => {
+    if(inputComment !== null && inputComment !== "" ) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [inputComment])
+
+  const handleCommentCteate = async (e) => {
     e.preventDefault();
-
+    const result = await createComment(currentUser, spotId, inputComment);
+    if (result.success) {
+      setMessage("コメントしました");
+      setIsSuccessMessage(true);
+      setInputComment("");
+    }
   }
 
   const handleCancelClick = () => {
@@ -49,6 +68,7 @@ export const CreateComment = () => {
           variant='contained'
           display={"flex"}
           sx={{width: "150px"}}
+          disabled={isDisabled}
         >
           投稿
         </Button>

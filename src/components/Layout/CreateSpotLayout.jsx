@@ -63,7 +63,6 @@ export const CreateSpotLayout = () => {
       </Box>
       <Box sx={{height: "100%", width :"25%"}}>
         <CreateSpot latLng={latLng} setLatLng={setLatLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
-        <CreateComment />
       </Box>
     </Box>
   )
