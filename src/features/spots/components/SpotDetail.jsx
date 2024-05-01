@@ -6,13 +6,15 @@ import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import { LikeButton } from "../../../components/Elements/Buttons/LikeButton";
 import { EditSpot } from "./EditSpot";
 import { ConfigButton } from "../../../components/Elements/Buttons/ConfigButton";
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { ShareButton } from "../../../components/Elements/Buttons/ShareButton";
+import CommentModal from "../../../components/Elements/Modals/CommentModal";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoClick, handleClose }) => {
   const { spots } = useSpotsContext();
   const { currentUser, userId } = useFirebaseAuth();
   const [ editing, setEditing ] = useState(false);
+  const [ commentModalOpen, setCommentModalOpen ] = useState(false);
 
   useEffect(() => {
     if (spots) {
@@ -96,9 +98,9 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
           </Box>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
-              <Tooltip title="コメントする(機能作成中)">
+              <Tooltip title="コメント">
                 <span>
-                  <IconButton sx={{mx: 2}} disabled ><ChatBubbleIcon /></IconButton>
+                  <IconButton sx={{mx: 2}} onClick={() => setCommentModalOpen(true)} ><ChatBubbleOutlineIcon /></IconButton>
                 </span>
               </Tooltip>
               <LikeButton
@@ -111,6 +113,7 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
           <Box sx={{px: 2, mt: 2}}>
             <Typography >{selectedSpot.description}</Typography>
           </Box>
+          <CommentModal open={commentModalOpen} setOpen={setCommentModalOpen} spotId={spotId} />
         </Box>
       :
         <EditSpot spot={selectedSpot} setEditing={setEditing} title={"スポット編集"} />
