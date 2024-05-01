@@ -13,13 +13,13 @@ const style = {
   textAlign: 'center',
   alignItems: "center",
   margin: "0 auto",
-  paddingTop: "30px"
+  padding: "10px 0px 20px 0px"
 }
 
-export const CreateComment = ({ spotId }) => {
+export const CreateComment = ({ spotId, setIsCommentPosted }) => {
   const { currentUser } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
-  const [ inputComment, setInputComment ] = useState();
+  const [ inputComment, setInputComment ] = useState(null);
   const [ isDisabled, setIsDisabled ] = useState(true);
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export const CreateComment = ({ spotId }) => {
       setMessage("コメントしました");
       setIsSuccessMessage(true);
       setInputComment("");
+      setIsCommentPosted(true);
     }
   }
 
