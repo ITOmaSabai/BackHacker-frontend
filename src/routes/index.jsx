@@ -5,6 +5,7 @@ import { IndexSpotLayout } from '../components/Layout/IndexSpotLayout';
 import { UserLayout } from '../components/Layout/UserLayout';
 import { IndexLikedSpotLayout } from '../components/Layout/IndexLikedSpotLayout';
 import { HeroLayout } from '../components/Layout/HeroLayout';
+import { TermsOfService } from '../features/terms_of_services/components/TermsOfService';
 
 export const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ export const AppRoutes = () => {
         <Route path="spots/:spotId" element={<IndexSpotLayout />} />
         <Route path="/users/:userId" element={<UserLayout />} />
         <Route path="/users/:userId/likes" element={<IndexLikedSpotLayout />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Route>
     </Routes>
   )

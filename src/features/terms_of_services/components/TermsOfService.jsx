@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material"
 
 export const TermsOfService = () => {
   return (
-    <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", px: 15, py: 2 }} >
+    <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", px: 20, py: 2 }} >
       <Box display="flex" justifyContent="center" sx={{pb: 5}}>
         <Typography variant="h4" fontWeight="bold" >利用規約</Typography>
       </Box>

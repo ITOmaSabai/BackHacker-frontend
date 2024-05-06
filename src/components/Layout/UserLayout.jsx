@@ -36,7 +36,6 @@ export const UserLayout = () => {
     <>
       <UserProfile userInfo={userInfo}/>
       <SpotListTab userInfo={userInfo}/>
-      <TermsOfService />
     </>
   );
 }
