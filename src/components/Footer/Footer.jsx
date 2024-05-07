@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (

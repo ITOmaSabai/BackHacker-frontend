@@ -109,7 +109,7 @@ export const HeroLayout = () => {
       </Box>
       <Box
         sx={{
-          height: "100vh",
+          height: "calc(100vh - 2.5rem)",
           display: "flex",
           flexDirection: "column",
           text: "center",
