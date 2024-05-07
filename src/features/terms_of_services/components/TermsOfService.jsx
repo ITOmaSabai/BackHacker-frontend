@@ -1,7 +1,11 @@
 import { Box, Typography } from "@mui/material"
-import { Footer } from "../../../components/Footer/Footer"
+import { useEffect } from 'react';
 
 export const TermsOfService = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", px: 20, py: 2 }} >
@@ -98,7 +102,6 @@ export const TermsOfService = () => {
           <Typography >以上、利用規約とする</Typography>
         </Box>
       </Box>
-      <Footer />
     </>
   )
 }

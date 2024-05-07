@@ -1,8 +1,9 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Footer = () => {
-
   return (
     <Box
       sx={{bgcolor: "primary.main", height: "2.5rem", px: 15}}
@@ -11,12 +12,19 @@ export const Footer = () => {
       alignItems="center"
     >
       <Box display="flex" sx={{gap: 5}} >
-        <Typography fontSize="12px" color="primary.light">
-          利用規約
-        </Typography>
-        <Typography fontSize="12px" color="primary.light">
-          プライバシーポリシー
-        </Typography>
+        <Link
+          to={"/terms-of-service"}
+          style={{color: "inherit", textDecoration: "none"}}
+        >
+          <Typography fontSize="12px" color="primary.light">
+            利用規約
+          </Typography>
+        </Link>
+        <Box >
+          <Typography fontSize="12px" color="primary.light">
+            プライバシーポリシー
+          </Typography>
+        </Box>
       </Box>
       <Box >
         <Typography fontSize="12px" color="primary.light">
