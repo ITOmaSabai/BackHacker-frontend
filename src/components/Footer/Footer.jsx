@@ -20,9 +20,14 @@ export const Footer = () => {
           </Typography>
         </Link>
         <Box >
-          <Typography fontSize="12px" color="primary.light">
-            プライバシーポリシー
-          </Typography>
+          <Link
+            to={"/privacy-policy"}
+            style={{color: "inherit", textDecoration: "none"}}
+          >
+            <Typography fontSize="12px" color="primary.light">
+              プライバシーポリシー
+            </Typography>
+          </Link>
         </Box>
       </Box>
       <Box >
