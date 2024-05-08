@@ -1,7 +1,15 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const TermsOfService = () => {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -100,6 +108,11 @@ export const TermsOfService = () => {
         </Box>
         <Box sx={{py: 5}}>
           <Typography >以上、利用規約とする</Typography>
+        </Box>
+        <Box>
+          <Button variant="text" onClick={goBack} sx={{ width: 'auto' }} >
+            <ArrowBackIcon />戻る
+          </Button>
         </Box>
       </Box>
     </>

@@ -1,13 +1,13 @@
 import { Box, Button, Typography } from "@mui/material"
 import { useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const PrivacyPolicy = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1); // 1つ前の画面に戻る
+    navigate(-1);
   };
 
   useEffect(() => {
