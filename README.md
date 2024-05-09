@@ -1,70 +1,131 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+こちらは「BackHacker.」のフロントエンドのリポジトリになります。バックエンドのリポジトリは[こちら](https://github.com/ITOmaSabai/BackHacker-backend)です。
+# BackHacker. / バーチャル旅行体験アプリ
+![サムネイル](https://raw.githubusercontent.com/ITOmaSabai/BackHacker-frontend/main/public/backhacker-thumbnail.jpg)
+[![React](https://img.shields.io/badge/React-v18.2.0-61DAFB?logo=React&logoColor=61DAFB)](https://react.dev/blog/2022/03/29/react-v18#whats-new-in-react-18)
+[![Ruby](https://img.shields.io/badge/Ruby-v3.2.2-CC342D?logo=Ruby&logoColor=CC342D)](https://www.ruby-lang.org/ja/news/2023/03/30/ruby-3-2-2-released)
+[![Rails](https://img.shields.io/badge/Rails-v7.1.3-CC0000?logo=Ruby-on-Rails&logoColor=CC0000)](https://rubyonrails.org/2023/3/13/Rails-7-0-4-3-and-6-1-7-3-have-been-released)
+[![Firebase](https://img.shields.io/badge/Firebase-gray?logo=Firebase&logoColor=FFCA28)](https://firebase.google.com)
+[![Maps JavaScript API](https://img.shields.io/badge/Maps_JavaScript_API-gray?logo=googlemaps&logoColor=%234285F4&color=gray
+)]()
+[![YouTube Data API](https://img.shields.io/badge/YouTube_Data_API-gray?logo=youtube&logoColor=%23FF0000
+)]()
+[![Thanks](https://img.shields.io/badge/Thank%20you-for%20visiting-00aab9)](https://www.hayabusatrip.com)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `yarn start`
+## サービス概要
+BackHackerは、「自宅にいながらPC一台でバックパッカー」をコンセプトとした、バーチャル旅行好きのためのエンタメアプリです。
+地図を見ながら、世界中の国や都市を直感的に選んで、街並み動画で旅行気分を味わうことができます。
+PC一台で、知らない土地に気軽にトリップしてみませんか？
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ▼サービスURL
+https://backhacker-frontend.vercel.app/  
+現状レスポンシブ未対応のため、PC環境からの閲覧をお願いいたします。(近日中にレスポンシブ対応予定)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ▼開発者Xアカウント
+https://twitter.com/Ito_GeekHatch  
+お気づきの点がございましたら、こちらまでお気軽にご連絡ください。
 
-### `yarn test`
+## メイン機能の使い方
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## このサービスへの思い・作りたい理由
+私は暇さえあればGoogle Mapで「旅」をしています。
+Google Mapを用いて、実際に行ってみたい場所のリサーチをすることもあれば、過去に訪れた場所を再訪し、旅を思い出して楽しんだりしています。
+それ以外にも、知らない土地を無作為に訪問しては、観光名所やお店の情報を見て旅行気分を味わっています。
+Google Mapで知らない土地を訪問したとき、実際の旅行に負けない高揚感を味わうことができます。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+同様に、YouTubeで街歩き動画を見るのも好きです。
+Google Mapと同じで、街並みや現地の雰囲気を知ることでワクワクするからです。
+街歩き動画には、Google Mapの写真で現地を確認するよりもリアリティがあります。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+もちろん実際に訪問できれば最高なのですが、時間や距離の制約から、なかなか訪問できない場所もあると思います。
+そんな遠隔地の街並みや空気感を知る手段として、Google MapやYouTubeの街歩き動画は非常に有益です。
 
-### `yarn eject`
+そのような中で、地図から気になった都市や街に訪問し、さらにその土地の動画が見られるアプリがあれば、
+「地図から知らない土地に降り立つ高揚感」を得ることができ、また現地の街並みをよりリアルに知ることができて楽しそうだと思い、このアプリを制作することとしました。
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ユーザー層について
+- 地図を眺めるのが好きなユーザー
+- Google Mapを利用して知らない土地のストリートビューを訪問したりするユーザー
+- YouTubeで街歩きの動画を見て楽しんでいるユーザー
+- 世界一周旅行に憧れがあるユーザー
+- 海外に興味はあるが、実際に旅行するのはハードルが高いと感じているユーザー
+- 過去の旅行を思い出したり、誰かにシェアしたいユーザー
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## サービスの利用イメージ
+### 利用方法
+- 世界のどこかに訪問したいとき、ユーザーはトップページの地図からピンが打ってあるスポット(都市)を選択します。
+- ピンをクリックすると国名、都市名、その都市のYouTube動画が埋め込みで表示されます。
+- ユーザーは動画を見て楽しんだり、ピンされたスポットに対してコメントを残したり、コメント付きでXにシェアしたり、いいねボタンを押すことができます。
+- スポットは、ユーザー自身で新規作成することができます。スポットを作成する際には、スポット名やスポット周辺の街歩き動画のほか、コメントやタグをつけてスポットを紹介することができます。
+- ユーザーは何箇所でもスポットの動画を見ることができますが、スポットを新規投稿できる回数には限りがあります。
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 得られる価値・体験
+このサービスを利用することで、知らない土地の雰囲気を詳細に知ることができ、ワクワクできます。
+また旅行先として検討している国や都市の雰囲気を事前に把握することもできます。
+単なる暇つぶしはもちろんですが、個人の趣味としてGoogle Map旅行をする人やYouTubeの街歩き動画を見る人が、お気に入りのスポットをシェアして共感を集めたり、他のユーザーとのつながりを持つことができます。
 
-## Learn More
+## ユーザーの獲得について
+以下の方法でユーザー獲得を目指します
+- Xでの宣伝、シェア活動
+- Qiitaでの紹介記事投稿
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## サービスの差別化ポイント・推しポイント
+- 世界中の都市の「歩いてみた」動画をまとめているWebサイトやアプリは極少数存在していますが、以下のポイントで差別化をしています。
+  - 地図から各都市の動画を探せる点（国名、都市名でいちいち検索しなくてもよい)
+  - ユーザーがスポットを新規投稿できる点
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 主要対応一覧
 
-### Code Splitting
+### MVPリリース時
+- ユーザー登録機能
+- ユーザー削除(退会)機能
+- ユーザー情報機能
+- ユーザーの投稿したスポット一覧機能
+- ユーザーのいいねしたスポット一覧機能
+- ログイン機能
+- ログアウト機能
+- Google Map APIを用いた機能
+  - スポット新規投稿機能
+  - スポット削除機能
+  - スポット編集機能
+  - スポット一覧機能(地図上に表示)
+  - いいね機能
+  - いいねしたスポットの一覧機能(地図上に表示)
+- YouTube Data APIを用いた機能
+  - スポットを投稿する際、自動的に動画を取得する機能
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 本リリース時
+- コメント投稿機能
+- コメント削除機能
+- タグから検索機能
+- 通知機能
+- 最新の投稿をトップ画面に表示する機能
+- 利用規約
+- プライバシーポリシー
 
-### Analyzing the Bundle Size
+## ■ 機能の実装方針予定
+### 使用技術
+フロントエンド: React 18.2.0
+- UIコンポーネント: MaterialUI
+- コード解析: ESLint
+- フォーマッター: Prettier
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+バックエンド: Ruby 3.2.2 / Rails 7.1.3
+- コード解析 / フォーマッター: Rubocop
+- テストフレームワーク: RSpec
+- データベース:　PostgreSQL
 
-### Making a Progressive Web App
+インフラ: Vercel(フロントエンド) / Render(バックエンド)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+認証:　Firebase Authentication
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+API:
+- Google Map API
+  - 表示させた埋め込みマップ上をクリックして、スポット情報をピンとして投稿し、地図上に表示させる
+- YouTube Data API
+  - スポットを登録時に、ピンした都市の動画をYouTubeから検索し、埋め込み表示させる
