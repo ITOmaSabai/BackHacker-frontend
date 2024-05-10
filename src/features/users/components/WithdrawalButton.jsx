@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { signInWithPopup, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { deleteUser as deleteUserFromFirebase } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../api/deleteUser";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import WarningIcon from '@mui/icons-material/Warning';
 
 export const WithdrawalButton = () => {
   const { currentUser, loginWithGoogle } = useFirebaseAuth();
@@ -33,9 +33,11 @@ export const WithdrawalButton = () => {
       sx={{p: 0, m: 0}}
       display={"flex"}
       flexDirection={"row"}
+      alignItems={"center"}
       onClick={withdrawalUser}
     >
-      <Typography color={"warning"}>退会する</Typography>
+      <WarningIcon fontSize="small" color="error" sx={{mr: 1}} />
+      <Typography color={"error"}>退会する</Typography>
     </Box>
   )
 }

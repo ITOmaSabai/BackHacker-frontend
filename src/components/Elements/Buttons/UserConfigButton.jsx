@@ -62,9 +62,7 @@ export const UserConfigButton = ({ setEditing }) => {
           <LogOutButton />
         </MenuItem>
         <MenuItem onClick={handleClose} >
-          <Button  >
-            <WithdrawalButton />
-          </Button>
+          <WithdrawalButton />
         </MenuItem>
       </Menu>
     </div>
