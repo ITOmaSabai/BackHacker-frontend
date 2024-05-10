@@ -1,60 +1,40 @@
 import { Box, Typography } from "@mui/material";
-import { signInWithPopup, getAuth, GoogleAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { deleteUser as deleteUserFromFirebase } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore"
-import { db } from "../../../lib/firebase";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../api/deleteUser";
+import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 
 export const WithdrawalButton = () => {
+  const { currentUser, loginWithGoogle } = useFirebaseAuth();
+
+
   const navigate = useNavigate();
 
-  const withdrawalUser = () => {
-    const login = () => {
-      const provider = new GoogleAuthProvider();
-      return signInWithPopup(auth, provider);
-    };
+  const withdrawalUser = async () => {
+    // const auth = getAuth();
 
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
+    // const login = async () => {
+    //   const provider = new GoogleAuthProvider();
+      // const res = signInWithPopup(auth, provider);
+      // console.log("loginのres", res)
+      // return res;
+    // };
 
-    if (currentUser) {
-      login().then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        reauthenticateWithCredential(currentUser, credential)
-        .then(() => {
-          deleteUserFromFirebase(currentUser)
-          .then(() => {
-            // if (currentUser?.id) {
-              deleteDoc(doc(db, "users", currentUser.id));
-            // }
-            deleteUser(currentUser).then((message) => {
-              navigate("/", { state: { message: message } });
-            }).catch ((error) => {
-              return {
-                isSuccess: false,
-                errorMessage: "アカウントの削除に失敗しました",
-              };
-            })
-          })
-          .catch((error) => {
-            // An error ocurred
-            return {
-              isSuccess: false,
-              errorMessage: "アカウントの削除に失敗しました",
-            };
-          });
-        })
-        .catch((error) => {
-          // An error ocurred
-          return {
-            isSuccess: false,
-            errorMessage: "エラーが発生しました",
-          };
-        });
-      });
-    }
-  }
+    if (!currentUser) return;
+    await loginWithGoogle();
+    await deleteUserFromFirebase(currentUser)
+    .then(() => {
+      deleteUser(currentUser).then((message) => {
+        navigate("/", { state: { message: message } });
+      }).catch ((error) => {
+        return {
+          isSuccess: false,
+          errorMessage: "アカウントの削除に失敗しました",
+        };
+      })
+    })
+  };
 
   return (
     <Box

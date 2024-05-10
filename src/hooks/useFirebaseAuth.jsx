@@ -21,9 +21,9 @@ export const useFirebaseAuth = () => {
     const result = await signInWithPopup(auth, provider);
 
     if (result) {
-      const user = result.user;
-      setCurrentUser(user);
-      return user;
+      console.log("ログインのresult.userは", result.user)
+      await nextOrObserver(result.user);
+      return result.user;
     }
   };
 
@@ -42,9 +42,12 @@ export const useFirebaseAuth = () => {
       setLoading(false);
       setCurrentUser(null);
       setUserId(null);
+      console.log("userがいないのでreturnされました");
       return;
     }
+    console.log("userは", user);
     setCurrentUser(user);
+    fetchUserData(user);
     setLoading(false);
   };
 
@@ -53,16 +56,10 @@ export const useFirebaseAuth = () => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    if (currentUser) {
-      const fetchUserData = async () => {
-        const userData = await getUser(currentUser);
-        setUserId(userData.id)
-      }
-      fetchUserData();
-    }
-  }, [currentUser])
-
+  const fetchUserData = async (currentUser) => {
+    const userData = await getUser(currentUser);
+    setUserId(userData.id)
+  }
 
   return {
     currentUser,

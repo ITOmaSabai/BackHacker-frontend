@@ -62,7 +62,7 @@ export const UserConfigButton = ({ setEditing }) => {
           <LogOutButton />
         </MenuItem>
         <MenuItem onClick={handleClose} >
-          <Button disabled >
+          <Button  >
             <WithdrawalButton />
           </Button>
         </MenuItem>
