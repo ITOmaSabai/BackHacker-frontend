@@ -6,7 +6,7 @@ import { Login } from '@mui/icons-material';
 import { useFlashMessage } from '../../../contexts/FlashMessageContext';
 
 export const SignInButton = ({ text, variant, color, handleClose }) => {
-  const { loginWithGoogle } = useFirebaseAuth();
+  const { loginWithGoogle, nextOrObserver } = useFirebaseAuth();
   const { setMessage, setIsSuccessMessage } = useFlashMessage();
 
   const handleGoogleLogin = () => {
@@ -28,6 +28,7 @@ export const SignInButton = ({ text, variant, color, handleClose }) => {
           // 成功時はレスポンスデータ全体を返す
           setIsSuccessMessage(true);
           setMessage("ログインしました");
+          nextOrObserver(user);
           handleClose();
           return { success: true, data: res.data };
         } else {

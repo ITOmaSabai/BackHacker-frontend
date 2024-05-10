@@ -4,7 +4,6 @@ import { UserProfile } from "../../features/users/components/UserProfile"
 import { useParams } from "react-router-dom";
 import { getUsers } from "../../features/users/api/getUsers";
 import { SpotListTab } from "../../features/users/components/SpotListTab";
-import { TermsOfService } from "../../features/terms_of_services/components/TermsOfService";
 
 export const UserLayout = () => {
   const { loadSpots } = useSpotsContext();

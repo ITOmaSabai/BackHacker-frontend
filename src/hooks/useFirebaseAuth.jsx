@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { getUser } from "../features/users/api/getUser";
+import { getUsers } from "../features/users/api/getUsers";
 
 export const useFirebaseAuth = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -29,6 +29,7 @@ export const useFirebaseAuth = () => {
   const clear = () => {
     setCurrentUser(null);
     setLoading(false);
+    setUserId(null);
   };
 
   const logout = async () => {
@@ -36,11 +37,11 @@ export const useFirebaseAuth = () => {
     navigate("/", { state: {message: "ログアウトしました"}});
   };
 
+  // ユーザーのログイン状態を監視する関数
   const nextOrObserver = async (user) => {
+    console.log("nextOrObserverが呼ばれました。userは", user)
     if (!user) {
-      setLoading(false);
-      setCurrentUser(null);
-      setUserId(null);
+      clear();
       return;
     }
     setCurrentUser(user);
@@ -53,16 +54,31 @@ export const useFirebaseAuth = () => {
     return unsubscribe;
   }, []);
 
-  const fetchUserData = async (currentUser) => {
-    const userData = await getUser(currentUser);
-    setUserId(userData.id)
+  // ログイン中のユーザーのidを取得する関数
+  const fetchUserData = async (user) => {
+    const usersData = await getUsers();
+    const foundUser = await usersData.find(userData => userData.uid === user.uid);
+    if (foundUser) {
+      // console.log("foundUser", foundUser);
+      // console.log("foundUser.id", foundUser.id);
+      setUserId(foundUser.id);
+    }
   }
+
+  useEffect(() => {
+    if(userId) {
+      console.log("setされたuserId", userId);
+    } else {
+      console.log("setされたuserIdはnullです");
+    }
+  },[userId]);
 
   return {
     currentUser,
     loading,
     loginWithGoogle,
     logout,
-    userId
+    userId,
+    nextOrObserver
   };
 }
