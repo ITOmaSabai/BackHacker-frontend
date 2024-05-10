@@ -12,16 +12,8 @@ export const WithdrawalButton = () => {
   const navigate = useNavigate();
 
   const withdrawalUser = async () => {
-    // const auth = getAuth();
-
-    // const login = async () => {
-    //   const provider = new GoogleAuthProvider();
-      // const res = signInWithPopup(auth, provider);
-      // console.log("loginのres", res)
-      // return res;
-    // };
-
     if (!currentUser) return;
+
     await loginWithGoogle();
     await deleteUserFromFirebase(currentUser)
     .then(() => {

@@ -39,7 +39,6 @@ export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
       setInputComment("");
       setIsCommentPosted(true);
     } else {
-      console.log(result)
       setMessage(result.message);
     }
   }
