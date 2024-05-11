@@ -183,13 +183,14 @@ export const HeroLayout = () => {
 
       <Box
         sx={{
-          minHeight: { sm: "calc(100vh - 4rem)", md: "calc(100vh - 2.5rem)" },
+          minHeight: "calc(100vh - 2.5rem)",
           display: "flex",
           flexDirection: "column",
           text: "center",
           alignItems: "center",
+          justifyContent: { xs: "center", sm: "none" },
           px: { xs: 1 },
-          pb: { xs: 2, sm: 1 }
+          pb: { xs: 3, sm: 1 },
         }}
         bgcolor={"primary.dark"}
         ref={scrollToBottomRef}
@@ -197,14 +198,14 @@ export const HeroLayout = () => {
         <Typography
           fontSize={{ xs: "20px", sm: "32px" }}
           color={"white"}
-          sx={{pt: { xs: 2, sm: 8, md: 5 }}}
+          sx={{pt: { xs: 2, sm: 8, md: 8 }}}
         >
           BackHacker.でできること
         </Typography>
         <Box
           sx={{
             display: "flex",
-            height: { xs: "100%", md: "50vh" },
+            height: { xs: "100%", md: "100%" },
             flexDirection: { xs: "row", sm: "column" },
             alignItems: "center",
             justifyContent: "center", // 追加
@@ -216,7 +217,7 @@ export const HeroLayout = () => {
             spacing={{ xs: 1, sm: 3, md: 3 }}
             sx={{
               flexDirection: { xs: "column", sm: "row" },
-              width: { xs: "100%", sm: '80%' },
+              width: { xs: "100%", sm: '80%', lg: "90%" },
               mb: { xs: 0, sm: 1 },
               justifyContent: "center", // 追加
               alignItems: "flex-start" // 追加
@@ -234,7 +235,7 @@ export const HeroLayout = () => {
             >
               <OndemandVideoIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none" }}
+                display={{ xs: "block", md: "none", lg: "block" }}
                 fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
                 color={"white"}
                 sx={{mb: 2}}
@@ -242,10 +243,10 @@ export const HeroLayout = () => {
                 世界中の街の動画を楽しむ
               </Typography>
               <Typography
-                display={{ xs: "none", md: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "none", md: "block", lg: "none" }}
+                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
                 color={"white"}
-                sx={{mb: 2, minHeight: "180px"}}
+                sx={{mb: 2, minHeight: "140px"}}
               >
                 世界中の街の動画を楽しむ
               </Typography>
@@ -268,7 +269,7 @@ export const HeroLayout = () => {
             >
               <GroupsIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none" }}
+                display={{ xs: "block", md: "none", lg: "block" }}
                 fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
                 color={"white"}
                 sx={{mb: 2}}
@@ -276,10 +277,10 @@ export const HeroLayout = () => {
                 みんなの投稿したスポットを見にいく
               </Typography>
               <Typography
-                display={{ xs: "none", md: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "none", md: "block", lg: "none" }}
+                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
                 color={"white"}
-                sx={{mb: 2, minHeight: "180px"}}
+                sx={{mb: 2, minHeight: "140px"}}
               >
                 みんなの投稿したスポットを見にいく
               </Typography>
@@ -302,7 +303,7 @@ export const HeroLayout = () => {
             >
               <ThumbUpIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none" }}
+                display={{ xs: "block", md: "none", lg: "block" }}
                 fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
                 color={"white"}
                 sx={{mb: 2}}
@@ -310,10 +311,10 @@ export const HeroLayout = () => {
                 コメント、いいね、シェアでつながる
               </Typography>
               <Typography
-                display={{ xs: "none", md: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "none", md: "block", lg: "none" }}
+                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
                 color={"white"}
-                sx={{mb: 2, minHeight: "180px"}}
+                sx={{mb: 2, minHeight: "140px"}}
               >
                 コメント、いいね、シェアでつながる
               </Typography>
