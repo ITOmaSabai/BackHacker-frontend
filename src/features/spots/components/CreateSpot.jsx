@@ -16,7 +16,10 @@ const style = {
   textAlign: 'center',
   alignItems: "center",
   margin: "0 auto",
-  paddingTop: "30px"
+  paddingTop: {
+    xs: 2,
+    sm: 4
+  }
 }
 const searchFailureModal = {
   title: "動画が見つかりませんでした...",
@@ -80,7 +83,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
 
   return (
     latLng ?
-      <Box style={style} >
+      <Box sx={style} >
         <MessageModal
           open={searchFailureModalOpen}
           setOpen={setSearchFailureModalOpen}
@@ -90,13 +93,14 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
           button={"close"}
         />
         <form onSubmit={handleSpotPost} >
-          <Typography variant='h5' fontSize={"24px"}>
+          <Typography variant='h5' fontSize={{xs: "16px", sm: "24px"}}>
             <RoomTwoToneIcon />スポット新規投稿
           </Typography>
           <TextField
             id="spotName"
             label="スポット名"
             fullWidth
+            size="small"
             variant="outlined"
             color="info"
             margin="normal"
@@ -110,6 +114,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
           <TextField
             id="outlined-multiline-static"
             label="説明"
+            size="small"
             fullWidth
             multiline
             rows={2}
@@ -121,7 +126,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
             value={spotDescription}
             onChange={(e) => setSpotDescription(e.target.value)}
           />
-          <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>
+          {/* <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", textAlign: "center", justifyContent: "center", pb: 1, pt: 1}}>
             <Typography>動画を自動で取得する</Typography>
             <Switch
               {...label}
@@ -130,7 +135,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
               checked={isAutoFetchEnabled}
               onChange={() => setIsAutoFetchEnabled(!isAutoFetchEnabled)}
             />
-          </Box>
+          </Box> */}
           <Box sx={{pb: 3}}>
             {isAutoFetchEnabled ? (
               <>
@@ -144,29 +149,32 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
               </>
             )}
           </Box>
-          <Box >
-            <>
-              <Button variant='text' onClick={handleCancelClick} >キャンセル</Button>
-              <Button
-                type='submit'
-                color='success'
-                variant='contained'
-                display={"flex"}
-                sx={{width: "150px"}}
-                disabled={isDisabled}
-              >
-                投稿する
-              </Button>
-            </>
+          <Box sx={{pb: { xs: 3, sm: 0 }}} >
+            <Button variant='text' onClick={handleCancelClick} >キャンセル</Button>
+            <Button
+              type='submit'
+              color='success'
+              variant='contained'
+              display={"flex"}
+              sx={{width: "150px"}}
+              disabled={isDisabled}
+            >
+              投稿する
+            </Button>
           </Box>
         </form>
       </Box>
     :
-      <Box style={style} >
-        <Typography variant='h5' fontSize={"24px"}>
+      <Box sx={style} >
+        <Typography variant='h5' fontSize={{xs: "16px", sm: "24px"}} >
           <RoomTwoToneIcon />スポット新規投稿
         </Typography>
-        <Alert severity="info" variant="filled" sx={{mt: 5}}>地図上をクリックして、投稿する地点を指定してください</Alert>
+        <Alert
+          severity="info"
+          variant="filled"
+          sx={{mt: { xs: 1, sm: 5} }}>
+          地図上をクリックして、投稿する地点を指定してください
+        </Alert>
       </Box>
   )
 }

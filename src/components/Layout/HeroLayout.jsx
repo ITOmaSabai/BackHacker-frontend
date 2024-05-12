@@ -13,7 +13,7 @@ const styleForHero = {
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  backgroundColor: "rgba(255,255,255,0.2)",
+  backgroundColor: "rgba(255,255,255,0.3)",
   backgroundBlendMode: "lighten"
 };
 
@@ -128,6 +128,13 @@ export const HeroLayout = () => {
           sx={{width: {xs: "90%", sm: "80%"} }}
         >
           <Typography
+            fontSize={{ xs: "16px", sm: "32px", md: "38px" }}
+            color={{ xs: "black", sm: "gray" }}
+            sx={{mb: 1}}
+          >
+            CONCEPT
+          </Typography>
+          <Typography
             fontSize={{ xs: "24px", sm: "50px", md: "60px" }}
             color={"black"}
             fontWeight={"bold"}
@@ -235,8 +242,8 @@ export const HeroLayout = () => {
             >
               <OndemandVideoIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none", lg: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "block", md: "none" }}
+                fontSize={{ xs: "16px", sm: "24px" }}
                 color={"white"}
                 sx={{mb: 2}}
               >
@@ -244,9 +251,17 @@ export const HeroLayout = () => {
               </Typography>
               <Typography
                 display={{ xs: "none", md: "block", lg: "none" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
+                fontSize={{ md: "30px" }}
                 color={"white"}
                 sx={{mb: 2, minHeight: "140px"}}
+              >
+                世界中の街の動画を楽しむ
+              </Typography>
+              <Typography
+                display={{ xs: "none", lg: "block" }}
+                fontSize={{ lg: "36px" }}
+                color={"white"}
+                sx={{mb: 2, minHeight: "110px"}}
               >
                 世界中の街の動画を楽しむ
               </Typography>
@@ -269,8 +284,8 @@ export const HeroLayout = () => {
             >
               <GroupsIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none", lg: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "block", md: "none" }}
+                fontSize={{ xs: "16px", sm: "24px" }}
                 color={"white"}
                 sx={{mb: 2}}
               >
@@ -278,9 +293,17 @@ export const HeroLayout = () => {
               </Typography>
               <Typography
                 display={{ xs: "none", md: "block", lg: "none" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
+                fontSize={{ md: "30px" }}
                 color={"white"}
                 sx={{mb: 2, minHeight: "140px"}}
+              >
+                みんなの投稿したスポットを見にいく
+              </Typography>
+              <Typography
+                display={{ xs: "none", lg: "block" }}
+                fontSize={{ lg: "36px" }}
+                color={"white"}
+                sx={{mb: 2, minHeight: "110px"}}
               >
                 みんなの投稿したスポットを見にいく
               </Typography>
@@ -303,8 +326,8 @@ export const HeroLayout = () => {
             >
               <ThumbUpIcon fontSize="large" color="secondary"/>
               <Typography
-                display={{ xs: "block", md: "none", lg: "block" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "36px" }}
+                display={{ xs: "block", md: "none" }}
+                fontSize={{ xs: "16px", sm: "24px" }}
                 color={"white"}
                 sx={{mb: 2}}
               >
@@ -312,9 +335,17 @@ export const HeroLayout = () => {
               </Typography>
               <Typography
                 display={{ xs: "none", md: "block", lg: "none" }}
-                fontSize={{ xs: "16px", sm: "24px", md: "30px" }}
+                fontSize={{ md: "30px" }}
                 color={"white"}
                 sx={{mb: 2, minHeight: "140px"}}
+              >
+                コメント、いいね、シェアでつながる
+              </Typography>
+              <Typography
+                display={{ xs: "none", lg: "block" }}
+                fontSize={{ lg: "36px" }}
+                color={"white"}
+                sx={{mb: 2, minHeight: "110px"}}
               >
                 コメント、いいね、シェアでつながる
               </Typography>

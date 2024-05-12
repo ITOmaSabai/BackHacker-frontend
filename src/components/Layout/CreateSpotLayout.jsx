@@ -45,7 +45,7 @@ export const CreateSpotLayout = () => {
   }
 
   return (
-    <Box sx={{display: "flex", flexDirection: "row", height: "100%"}} >
+    <Box sx={{display: "flex", flexDirection: { xs: "column", sm: "row" }, height: "100%"}} >
       {createdSpot && createdSpot !== null &&
         <SpotModal
           open={open}
@@ -54,14 +54,26 @@ export const CreateSpotLayout = () => {
           setLatLng={setLatLng}
         />
       }
-      <Box sx={{height: "100%", width :"75%"}} >
+      <Box
+        display={{xs: "block", sm: "block"}}
+        sx={{
+          height: { xs: "70%", sm: "100%" },
+          width : { xs: "100%", sm: "75%" }
+        }}
+      >
         <MapView onClick={handleMapClick} >
           {latLng &&
             <MyMarker position={latLng} />
           }
         </MapView>
       </Box>
-      <Box sx={{height: "100%", width :"25%"}}>
+      <Box
+        display={{xs: "block", sm: "block"}}
+        sx={{
+          height: { xs: "30%", sm: "100%" },
+          width : { xs: "100%", sm: "25%" }
+        }}
+      >
         <CreateSpot latLng={latLng} setLatLng={setLatLng} setOpen={setOpen} setCreatedSpot={setCreatedSpot} />
       </Box>
     </Box>
