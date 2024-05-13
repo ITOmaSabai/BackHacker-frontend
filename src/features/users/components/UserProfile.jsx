@@ -31,12 +31,12 @@ export const UserProfile = ({ userInfo }) => {
         <Box sx={{display: "flex", justifyContent: "space-between", minWidth: "30%", maxWidth: "60%", py: 2}}>
           {!editing ?
             <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
-                <Avatar src={updatedUser && updatedUser !== null ? updatedUser.avatar : userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
-                <Typography fontSize="30px" >{updatedUser && updatedUser !== null ? updatedUser.name : userInfo.name}</Typography>
+                <Avatar src={updatedUser && updatedUser !== null ? updatedUser.avatar : userInfo.avatar} sx={{mr: 3, width: { xs: 42, sm: 100 }, height: {xs: 42, sm: 100 }}}></Avatar>
+                <Typography fontSize={{xs: "20px", sm: "30px"}} fontWeight="bold" >{updatedUser && updatedUser !== null ? updatedUser.name : userInfo.name}</Typography>
             </Box>
           :
-          <Box sx={{display: "flex", flexDirection: "row", alignItems: "end"}} >
-            <Avatar src={userInfo.avatar} sx={{mr: 3, width: 100, height: 100}}></Avatar>
+          <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}} >
+            {/* <Avatar src={userInfo.avatar} sx={{mr: 3, width: { xs: 42, sm: 100 }, height: {xs: 42, sm: 100 }}} ></Avatar> */}
               <form onSubmit={handleSubmitName}>
                 <Box display="flex" flexDirection="row">
                   <Box bgcolor={"white"}>
@@ -44,7 +44,7 @@ export const UserProfile = ({ userInfo }) => {
                       variant="outlined"
                       color="info"
                       defaultValue={`${updatedUser && updatedUser !== null ? updatedUser.name : userInfo.name}`}
-                      sx={{width: "300px"}}
+                      sx={{width: {xs: "150px", sm: "300px"}}}
                       onChange={handleEditName}
                     >
                     </TextField>

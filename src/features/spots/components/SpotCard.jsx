@@ -13,7 +13,7 @@ export const SpotCard = ({ spots, text }) => {
       <Grid container spacing={2} style={{ width: '100%', margin: '0 auto' }} >
         {spots.length > 0 ? (
           spots.map((spot) => (
-            <Grid item xs={4} >
+            <Grid item xs={12} sm={6} md={4} >
               <Link
                 to={`/spots/${spot.id}`}
                 style={{color: "inherit", textDecoration: "none"}}

@@ -16,9 +16,17 @@ export const PrivacyPolicy = () => {
 
   return (
     <>
-      <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", px: 20, py: 2 }} >
-        <Box display="flex" justifyContent="center" sx={{pb: 5}}>
-          <Typography variant="h4" fontWeight="bold" >プライバシーポリシー</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          px: { xs: 3, sm: 10, md: 20 },
+          py: 2
+        }}
+      >
+        <Box display="flex" justifyContent="center" sx={{pb: { xs: 2, sm: 5 }}}>
+          <Typography fontSize={{xs: "20px", sm: "40px"}} fontWeight="bold" >プライバシーポリシー</Typography>
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", gap: 5}} >
           <Box>
