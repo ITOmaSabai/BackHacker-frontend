@@ -8,7 +8,6 @@ import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 import SpotModal from "../Elements/Modals/SpotModal";
 import { useLocation } from 'react-router-dom';
 import { MyMarker } from "../Elements/Markers/MyMarker";
-import { CreateComment } from "../../features/comments/components/CreateComment";
 
 export const CreateSpotLayout = () => {
   const { currentUser, loading } = useFirebaseAuth();

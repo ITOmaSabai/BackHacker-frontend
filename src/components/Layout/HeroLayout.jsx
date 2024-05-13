@@ -9,7 +9,7 @@ import { useRef } from "react";
 
 const styleForHero = {
   backgroundImage: "url('/heroImage.jpg')",
-  height: '100vh',
+  // height: '100vh',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
@@ -115,14 +115,15 @@ export const HeroLayout = () => {
       <Box
         ref={scrollToMidRef}
         sx={{
+          ...styleForHero,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
+          minHeight: "100vh"
         }}
         bgcolor={"primary.dark"}
-        style={styleForHero}
       >
         <Box
           sx={{width: {xs: "90%", sm: "80%"} }}

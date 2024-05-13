@@ -25,7 +25,14 @@ export default function SpotDetailModal({ spotId, open, setOpen }) {
         onClose={handleClose}
         open={open}
       >
-        <DialogContent sx={{height: "100vh", p: 0, m: 0}}>
+        <DialogContent
+          sx={{
+            height: "100%",
+            p: { xs: 1, sm: 0 },
+            pb: { xs: 2, sm: 3 },
+            m: 0
+          }}
+        >
           <SpotDetail spotId={spotId} selectedSpot={selectedSpot} setSelectedSpot={setSelectedSpot} handleVideoClick={handleVideoClick} handleClose={handleClose} />
         </DialogContent>
       </Dialog>

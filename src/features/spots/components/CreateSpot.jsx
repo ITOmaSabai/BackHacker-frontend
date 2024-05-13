@@ -15,11 +15,7 @@ const style = {
   width: '90%',
   textAlign: 'center',
   alignItems: "center",
-  margin: "0 auto",
-  paddingTop: {
-    xs: 2,
-    sm: 4
-  }
+  margin: "0 auto"
 }
 const searchFailureModal = {
   title: "動画が見つかりませんでした...",
