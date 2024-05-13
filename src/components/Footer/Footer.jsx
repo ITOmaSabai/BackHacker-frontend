@@ -5,10 +5,20 @@ import { Link } from 'react-router-dom';
 export const Footer = () => {
   return (
     <Box
-      sx={{bgcolor: "primary.main", height: "2.5rem", px: 15}}
+      sx={{
+        bgcolor: "primary.main",
+        height: "2.5rem",
+        px: { xs: 1, sm: 10, md: 15 },
+        py: { xs: 1, sm: 0 }
+      }}
       display="flex"
       justifyContent="space-between"
       alignItems="center"
+      flexDirection={{
+        xs: "column",
+        sm: "row",
+        md: "row"
+      }}
     >
       <Box display="flex" sx={{gap: 5}} >
         <Link
