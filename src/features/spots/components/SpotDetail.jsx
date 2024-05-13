@@ -41,7 +41,7 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
               <Box display="flex" flexDirection="row" justifyContent="space-between" >
                 <Button
                   component={Link}
-                  to={`/users/${selectedSpot.user.id}`}
+                  to={userId === selectedSpot.user.id ? "/profile" : `/users/${selectedSpot.user.id}`}
                   sx={{
                     color: "inherit",
                     textDecoration: "none",

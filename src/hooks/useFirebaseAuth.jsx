@@ -39,7 +39,6 @@ export const useFirebaseAuth = () => {
 
   // ユーザーのログイン状態を監視する関数
   const nextOrObserver = async (user) => {
-    console.log("nextOrObserverが呼ばれました。userは", user)
     if (!user) {
       clear();
       return;
@@ -59,19 +58,9 @@ export const useFirebaseAuth = () => {
     const usersData = await getUsers();
     const foundUser = await usersData.find(userData => userData.uid === user.uid);
     if (foundUser) {
-      // console.log("foundUser", foundUser);
-      // console.log("foundUser.id", foundUser.id);
       setUserId(foundUser.id);
     }
   }
-
-  useEffect(() => {
-    if(userId) {
-      console.log("setされたuserId", userId);
-    } else {
-      console.log("setされたuserIdはnullです");
-    }
-  },[userId]);
 
   return {
     currentUser,
