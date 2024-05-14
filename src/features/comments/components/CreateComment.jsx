@@ -1,5 +1,4 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
-import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from "react";
 import { createComment } from "../api/createComment";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";

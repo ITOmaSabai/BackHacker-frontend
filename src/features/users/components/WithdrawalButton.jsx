@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import {
   deleteUser as deleteUserFromFirebase,
   signInWithPopup,
@@ -10,9 +10,11 @@ import { deleteUser } from "../api/deleteUser";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import WarningIcon from '@mui/icons-material/Warning';
 import { auth } from "../../../lib/firebase";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 export const WithdrawalButton = () => {
   const { currentUser } = useFirebaseAuth();
+  const { message, setMessage, setIsSuccessMessage } = useFlashMessage();
 
   const navigate = useNavigate();
 
@@ -34,8 +36,14 @@ export const WithdrawalButton = () => {
     // Firebaseからユーザーを削除後、データベースからもユーザーを削除する
     await deleteUserFromFirebase(currentUser)
     .then(() => {
-      deleteUser(currentUser).then((message) => {
-        navigate("/", { state: { message: message } });
+      deleteUser(currentUser).then((res) => {
+        if (res.success) {
+          setMessage(res.message);
+          setIsSuccessMessage(true);
+          navigate("/", { state: { message: message } });
+        } else {
+          setMessage(res.message);
+        }
       }).catch ((error) => {
         return {
           isSuccess: false,
@@ -46,15 +54,17 @@ export const WithdrawalButton = () => {
   };
 
   return (
-    <Box
-      sx={{p: 0, m: 0}}
+    <Button
+      sx={{p: 1, m: 0}}
       display={"flex"}
       flexDirection={"row"}
       alignItems={"center"}
+      variant="outlined"
+      color="error"
       onClick={withdrawalUser}
     >
       <WarningIcon fontSize="small" color="error" sx={{mr: 1}} />
       <Typography color={"error"}>退会する</Typography>
-    </Box>
+    </Button>
   )
 }
