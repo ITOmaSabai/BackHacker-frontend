@@ -4,10 +4,12 @@ import { UserProfile } from "../../features/users/components/UserProfile"
 import { useParams } from "react-router-dom";
 import { getUsers } from "../../features/users/api/getUsers";
 import { SpotListTab } from "../../features/users/components/SpotListTab";
+import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 
 export const UserLayout = () => {
   const { loadSpots } = useSpotsContext();
-  const { userId } = useParams();
+  const { userId } = useFirebaseAuth();
+  const { id } = useParams();
   const [ userInfo, setUserInfo ] = useState();
 
   useEffect(() => {
@@ -15,17 +17,26 @@ export const UserLayout = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const users = await getUsers();
-        const selectedUser = users.find(user => parseInt(user.id) === parseInt(userId))
-        setUserInfo(selectedUser);
-      } catch (error) {
-        console.error('Failed to fetch user data', error);
+
+
+      const fetchData = async () => {
+        try {
+          const users = await getUsers();
+
+          if (id) {
+            const selectedUser = users.find(user => parseInt(user.id) === parseInt(id))
+            setUserInfo(selectedUser);
+          } else {
+            const selectedUser = users.find(user => parseInt(user.id) === parseInt(userId))
+            setUserInfo(selectedUser);
+          }
+        } catch (error) {
+          console.error('Failed to fetch user data', error);
+        }
       }
-    }
-    fetchData();
-  }, [userId])
+      fetchData();
+
+  }, [userId, userId])
 
   if (!userInfo) {
     return <div></div>;

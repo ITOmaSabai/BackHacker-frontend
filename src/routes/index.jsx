@@ -16,7 +16,8 @@ export const AppRoutes = () => {
         <Route path="/spots" element={<CreateSpotLayout />} />
         <Route path="/map" element={<IndexSpotLayout />} />
         <Route path="spots/:spotId" element={<IndexSpotLayout />} />
-        <Route path="/users/:userId" element={<UserLayout />} />
+        <Route path="/profile" element={<UserLayout />} />
+        <Route path="/users/:id" element={<UserLayout />} />
         <Route path="/users/:userId/likes" element={<IndexLikedSpotLayout />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -44,7 +44,7 @@ export default function Header() {
 
   const handleProfileOpen = () => {
     handleMenuClose();
-    navigate(`/users/${userId}`);
+    navigate("/profile");
   }
 
   const handleNavigate = () => {

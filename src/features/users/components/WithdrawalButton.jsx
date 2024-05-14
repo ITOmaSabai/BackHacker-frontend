@@ -1,69 +1,70 @@
-import { Box, Typography } from "@mui/material";
-import { signInWithPopup, getAuth, GoogleAuthProvider, reauthenticateWithCredential } from "firebase/auth";
-import { deleteUser as deleteUserFromFirebase } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore"
-import { db } from "../../../lib/firebase";
+import { Button, Typography } from "@mui/material";
+import {
+  deleteUser as deleteUserFromFirebase,
+  signInWithPopup,
+  GoogleAuthProvider,
+  reauthenticateWithCredential
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../api/deleteUser";
+import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
+import WarningIcon from '@mui/icons-material/Warning';
+import { auth } from "../../../lib/firebase";
+import { useFlashMessage } from "../../../contexts/FlashMessageContext";
 
 export const WithdrawalButton = () => {
+  const { currentUser } = useFirebaseAuth();
+  const { message, setMessage, setIsSuccessMessage } = useFlashMessage();
+
   const navigate = useNavigate();
 
-  const withdrawalUser = () => {
-    const login = () => {
+  const withdrawalUser = async () => {
+    if (!currentUser) return;
+
+    // 退会するためには最近ログインしている必要があるので、ログイン処理を実行する
+    const login = async () => {
       const provider = new GoogleAuthProvider();
-      return signInWithPopup(auth, provider);
-    };
-
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
-      login().then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        reauthenticateWithCredential(currentUser, credential)
-        .then(() => {
-          deleteUserFromFirebase(currentUser)
-          .then(() => {
-            // if (currentUser?.id) {
-              deleteDoc(doc(db, "users", currentUser.id));
-            // }
-            deleteUser(currentUser).then((message) => {
-              navigate("/", { state: { message: message } });
-            }).catch ((error) => {
-              return {
-                isSuccess: false,
-                errorMessage: "アカウントの削除に失敗しました",
-              };
-            })
-          })
-          .catch((error) => {
-            // An error ocurred
-            return {
-              isSuccess: false,
-              errorMessage: "アカウントの削除に失敗しました",
-            };
-          });
-        })
-        .catch((error) => {
-          // An error ocurred
-          return {
-            isSuccess: false,
-            errorMessage: "エラーが発生しました",
-          };
-        });
-      });
+      const result = await signInWithPopup(auth, provider);
+      return result;
     }
-  }
+
+    // ログインしたユーザーから新しい認証情報を取得し、ユーザーを再認証する
+    // see document:https://firebase.google.com/docs/auth/web/manage-users?hl=ja#re-authenticate_a_user
+    const result = await login();
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    await reauthenticateWithCredential(currentUser, credential);
+    // Firebaseからユーザーを削除後、データベースからもユーザーを削除する
+    await deleteUserFromFirebase(currentUser)
+    .then(() => {
+      deleteUser(currentUser).then((res) => {
+        if (res.success) {
+          setMessage(res.message);
+          setIsSuccessMessage(true);
+          navigate("/", { state: { message: message } });
+        } else {
+          setMessage(res.message);
+        }
+      }).catch ((error) => {
+        return {
+          isSuccess: false,
+          errorMessage: "アカウントの削除に失敗しました",
+        };
+      })
+    })
+  };
 
   return (
-    <Box
-      sx={{p: 0, m: 0}}
+    <Button
+      sx={{p: 1, m: 0}}
       display={"flex"}
       flexDirection={"row"}
+      alignItems={"center"}
+      variant="outlined"
+      color="error"
       onClick={withdrawalUser}
     >
-      <Typography color={"warning"}>退会する</Typography>
-    </Box>
+      <WarningIcon fontSize="small" color="error" sx={{mr: 1}} />
+      <Typography color={"error"}>退会する</Typography>
+    </Button>
   )
 }
