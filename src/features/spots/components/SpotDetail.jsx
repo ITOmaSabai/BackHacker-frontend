@@ -20,7 +20,6 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
     if (spots) {
       const spot = spots.find(spot => parseInt(spot.id) === parseInt(spotId));
       setSelectedSpot(spot);
-      console.log(selectedSpot)
     }
   }, [spotId, spots, currentUser]);
 

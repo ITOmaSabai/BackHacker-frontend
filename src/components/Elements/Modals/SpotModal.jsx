@@ -139,7 +139,6 @@ export default function SpotModal({open, setOpen, spot, setLatLng}) {
                 url={spot.body && spot.body.trim() !== ''
                 ? `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(spot.id)} &text=「${spot.body}」を投稿したよ！🎉 バーチャル旅行アプリ【BackHacker.】で見に行こう🌎%0a%0a`
                 : `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(spot.id)} &text=バーチャル旅行アプリ【BackHacker.】でスポットを投稿したよ🎉 さっそく見に行ってみよう🌎%0a%0a`
-            
               } />
             </Box>
 
