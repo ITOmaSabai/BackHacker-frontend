@@ -9,7 +9,7 @@ export const MainLayout = () => {
   const hideFooter = location.pathname === "/map" || location.pathname === "/spots";
 
   return (
-    <Box sx={{height: "calc(100vh - 64px)", width: "100%"}}>
+    <Box sx={{height: { xs: "calc(100vh - 56px)", sm: "calc(100vh - 64px)" }}}>
       <Header />
       <Outlet />
       <FlashMessage />

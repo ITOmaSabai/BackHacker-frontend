@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, IconButton } from '@mui/material';
+import { Box, Button, Dialog, DialogContent, IconButton, Typography } from '@mui/material';
 import { SpotDetail } from '../../../features/spots/components/SpotDetail';
 import { useNavigate } from 'react-router-dom';
 import { VideoModal } from './VideoModal';
@@ -33,10 +33,25 @@ export default function SpotDetailModal({ spotId, open, setOpen }) {
             m: 0
           }}
         >
-          <SpotDetail spotId={spotId} selectedSpot={selectedSpot} setSelectedSpot={setSelectedSpot} handleVideoClick={handleVideoClick} handleClose={handleClose} />
+          <SpotDetail
+            spotId={spotId}
+            selectedSpot={selectedSpot}
+            setSelectedSpot={setSelectedSpot}
+            handleVideoClick={handleVideoClick}
+            handleClose={handleClose}
+          />
         </DialogContent>
+          <Box display="flex" justifyContent="center" sx={{pb: 1}} >
+            <Button onClick={handleClose} >
+              <Typography color="gray" >閉じる</Typography>
+            </Button>
+          </Box>
       </Dialog>
-      <VideoModal open={videoModalOpen} setOpen={setVideoModalOpen} selectedSpot={selectedSpot} />
+      <VideoModal
+        open={videoModalOpen}
+        setOpen={setVideoModalOpen}
+        selectedSpot={selectedSpot}
+      />
     </div>
   );
 }

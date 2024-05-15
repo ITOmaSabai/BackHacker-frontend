@@ -84,13 +84,13 @@ export const SpotListTab = ({ userInfo }) => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Box width={{ xs: "90vw", sm: "70vw" }}>
+        <Box width={{ xs: "75vw", sm: "90vw" }}>
           {!spots && <Spinner />}
           <SpotCard spots={userPostedSpots()} text={"投稿"} />
         </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Box width={"70vw"}>
+        <Box width={{ xs: "75vw", sm: "90vw" }}>
           {!spots && <Spinner />}
           <SpotCard spots={userLikedSpots()} text={"いいね"} />
           <Box display={"flex"} justifyContent={"center"} sx={{mt: 2}}>
