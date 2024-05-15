@@ -79,7 +79,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
 
   return (
     latLng ?
-      <Box sx={style} >
+      <Box sx={style} pt={2} >
         <MessageModal
           open={searchFailureModalOpen}
           setOpen={setSearchFailureModalOpen}
@@ -89,7 +89,7 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
           button={"close"}
         />
         <form onSubmit={handleSpotPost} >
-          <Typography variant='h5' fontSize={{xs: "16px", sm: "24px"}}>
+          <Typography fontSize={{xs: "16px", sm: "20px", md: "24px"}}>
             <RoomTwoToneIcon />スポット新規投稿
           </Typography>
           <TextField
@@ -152,7 +152,10 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
               color='success'
               variant='contained'
               display={"flex"}
-              sx={{width: "150px"}}
+              sx={{
+                width: { xs: "100px", sm: "150px" },
+                ml: 1
+              }}
               disabled={isDisabled}
             >
               投稿する
@@ -161,8 +164,8 @@ export const CreateSpot = ({ latLng, setLatLng, setOpen, setCreatedSpot }) => {
         </form>
       </Box>
     :
-      <Box sx={style} >
-        <Typography variant='h5' fontSize={{xs: "16px", sm: "24px"}} >
+      <Box sx={style}  pt={2} >
+        <Typography fontSize={{xs: "16px", sm: "20px", md: "24px"}} >
           <RoomTwoToneIcon />スポット新規投稿
         </Typography>
         <Alert

@@ -55,10 +55,21 @@ export const HeroLayout = () => {
     <>
       <Box
         sx={{
-          height: "100%",
+          minHeight: {xs: "calc(100vh - 56px)", sm: "calc(100vh - 64px)"},
           display: "flex",
           alignItems: "center",
-          position: "relative"
+          position: "relative",
+          '@media (max-height: 440px)': {
+            position: 'relative',
+            left: 'auto',
+            transform: 'none',
+            py: 3,
+            flexDirection: "column",
+            alignItems: "left",
+            '& > *': {
+              marginLeft: '20px',
+            }
+          },
         }}
         bgcolor={"primary.dark"}
       >
@@ -104,7 +115,19 @@ export const HeroLayout = () => {
           />
         </Box>
         <Box
-          sx={{position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)'}}
+          sx={{
+            position: 'absolute',
+            bottom: {xs: 60, sm: 16},
+            left: '50%',
+            transform: 'translateX(-50%)',
+            '@media (max-height: 430px)': {
+              position: 'relative',
+              left: 'auto',
+              transform: 'none',
+              pt: 3,
+              bottom: {xs: 30, sm: 16},
+            },
+          }}
           onClick={scrollToMid}
         >
           <Typography color="white" fontSize="40px" >
@@ -126,7 +149,7 @@ export const HeroLayout = () => {
         bgcolor={"primary.dark"}
       >
         <Box
-          sx={{width: {xs: "90%", sm: "80%"} }}
+          sx={{width: {xs: "90%", md: "80%"} }}
         >
           <Typography
             fontSize={{ xs: "16px", sm: "32px", md: "38px" }}
@@ -136,7 +159,7 @@ export const HeroLayout = () => {
             CONCEPT
           </Typography>
           <Typography
-            fontSize={{ xs: "24px", sm: "50px", md: "60px" }}
+            fontSize={{ xs: "24px", sm: "38px", md: "60px" }}
             color={"black"}
             fontWeight={"bold"}
             sx={{mb: 3}}
@@ -144,18 +167,18 @@ export const HeroLayout = () => {
             ひらけPC。行くぞ海外。
           </Typography>
           <Typography
-            fontSize={{ xs: "16px", sm: "24px"}}
+            fontSize={{ xs: "16px", sm: "20px", md: "24px"}}
             color={"black"}
           >
             BackHacker.は、「自宅にいながらPC1台でバックパッカー」をコンセプトとした、バーチャル旅行好きのためのエンタメアプリです。</Typography>
           <Typography
-            fontSize={{ xs: "16px", sm: "24px"}}
+            fontSize={{ xs: "16px", sm: "20px", md: "24px"}}
             color={"black"}
           >
             地図を見ながら、世界中の国や都市の街歩き動画を楽しんで、旅行気分を味わうことができます。
           </Typography>
           <Typography
-            fontSize={{ xs: "16px", sm: "24px"}}
+            fontSize={{ xs: "16px", sm: "20px", md: "24px"}}
             color={"black"}
             sx={{mt: 3}}
           >
@@ -167,8 +190,15 @@ export const HeroLayout = () => {
         <Box
           sx={{
             position: 'absolute',
-            bottom: 16, left: '50%',
+            bottom: 16,
+            left: '50%',
             transform: 'translateX(-50%)',
+            '@media (max-height: 420px)': {
+              position: 'relative',
+              left: 'auto',
+              transform: 'none',
+              pt: 3
+            },
           }}
           onClick={scrollToBottom}
         >

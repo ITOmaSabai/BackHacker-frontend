@@ -29,26 +29,58 @@ export const CommentIndex = ({ spotId, isCommentPosted }) => {
   }, [isCommentPosted, commentDeleted])
 
   return (
-    <Box sx={{px: 2}} >
+    <Box>
       {fetchedComments ?
         fetchedComments.length > 0 ?
           <>
             {fetchedComments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((comment) => (
-              <Box key={comment.id} sx={{pb: 1, px: 1}}>
+              <Box key={comment.id} sx={{pb: 1, px: { xs: 0, sm: 1 }}}>
                 <Box display="flex" justifyContent="space-between" >
-                  <Box sx={{display: "flex", flexDirection: "row", alignItems: "flex-end", gap: 2}} >
-                    <Button component={Link} to={`/users/${comment.user.id}`} sx={{alignItems: "flex-end",  gap: 2, pb: 0}} >
-                      <Avatar src={comment.user.avatar} />
-                      <Typography fontWeight="bold" >{comment.user.name}</Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "flex-end",
+                      gap: { xs: 1, sm: 2 }
+                    }}
+                  >
+                    <Button
+                      component={Link}
+                      to={`/users/${comment.user.id}`}
+                      sx={{
+                        alignItems: "flex-end",
+                        gap: { xs: 0, sm: 2 },
+                        pb: 0
+                      }}
+                    >
+                      {/* <Avatar
+                        src={comment.user.avatar}
+                        sx={{
+                          mr: { xs: 1, sm: 3 },
+                          width: { xs: 36, sm: 42 },
+                          height: {xs: 36, sm: 42 }
+                        }}
+                      /> */}
+                      <Typography fontSize={{xs: "16px", sm: "16px"}} fontWeight="bold" >
+                        {comment.user.name}
+                      </Typography>
                     </Button>
-                    <Typography fontSize="14px" >{new Date(comment.created_at).toLocaleDateString()}</Typography>
+                    <Typography fontSize={{xs: "12px", sm: "16px"}} >
+                      {new Date(comment.created_at).toLocaleDateString()}
+                    </Typography>
                   </Box>
                   {userId && comment.user_id === userId &&
-                    <DeleteComment commentId={comment.id} currentUser={currentUser} setCommentDeleted={setCommentDeleted} />
+                    <DeleteComment
+                      commentId={comment.id}
+                      currentUser={currentUser}
+                      setCommentDeleted={setCommentDeleted}
+                    />
                   }
                 </Box>
-                <Box sx={{display: "flex", justifyContent: "left", py: 1, px: 3}} >
-                  <Typography >{comment.content}</Typography>
+                <Box sx={{display: "flex", justifyContent: "left", py: 1, px: 1}} >
+                  <Typography fontSize={{xs: "14px", sm: "16px"}}  >
+                    {comment.content}
+                  </Typography>
                 </Box>
               </Box>
             ))
@@ -56,7 +88,9 @@ export const CommentIndex = ({ spotId, isCommentPosted }) => {
           </>
         :
           <Box sx={{textAlign: "center", pt: 1}} >
-            <Typography >まだコメントはありません</Typography>
+            <Typography fontSize={{xs: "14px", sm: "16px"}} >
+              まだコメントはありません
+            </Typography>
           </Box>
       :
         <></>

@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
-import { SignInButton } from '../../../features/auth/components/SignInButton';
 import { ShareButton } from '../Buttons/ShareButton';
 import { useNavigate } from 'react-router-dom';
 
