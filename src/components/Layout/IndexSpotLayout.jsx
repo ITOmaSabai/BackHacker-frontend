@@ -61,7 +61,7 @@ export const IndexSpotLayout = () => {
             handleMarkerClick={handleMarkerClick}
             clickedMarkerId={clickedMarkerId}
           />
-          <SpotDetailModal spotId={spotId} open={open} setOpen={setOpen} />
+          <SpotDetailModal open={open} setOpen={setOpen} />
           <FloatingButton text={"スポットを投稿"} onClick={handleButtonClick} />
           <MessageModal
             open={loginModalOpen}
