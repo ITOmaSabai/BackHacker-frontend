@@ -124,7 +124,13 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
                 selectedSpot={selectedSpot}
               />
             </Box>
-            <ShareButton sx={{mx: 2}} url={`https://twitter.com/share?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)} (※PC💻環境より閲覧してください)&text=【BackHacker.】で${selectedSpot.name}を見に行かない？🌎%0a%0a`}  />
+            <ShareButton
+              sx={{mx: 2}}
+              url={selectedSpot.name && selectedSpot.name.trim() !== ''
+                ? `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)}&text=バーチャル旅行アプリ【BackHacker.】で「${selectedSpot.name}」に行ってみよう！🌎%0a%0a`
+                : `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)}&text=バーチャル旅行アプリ【BackHacker.】で旅行気分を味わってみよう！🌎%0a%0a`
+              }
+            />
           </Box>
           <Box sx={{px: 2, mt: 2}}>
             <Typography >{selectedSpot.description}</Typography>
