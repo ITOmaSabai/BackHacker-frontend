@@ -35,35 +35,51 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
             display={"flex"}
             flexDirection={"row"}
             justifyContent={"space-between"}
-            sx={{px: 2, mt: 2}}
+            sx={{px: { xs: 0, sm: 2 }, mt: 2}}
           >
-            <Box >
-              <Button
-                component={Link}
-                to={`/users/${selectedSpot.user.id}`}
-                sx={{
-                  color: "inherit",
-                  textDecoration: "none",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "left",
-                  mb: 2,
-                  width: "100%"
-                }}
+            <Box width="100%">
+              <Box display="flex" flexDirection="row" justifyContent="space-between" >
+                <Button
+                  component={Link}
+                  to={userId === selectedSpot.user.id ? "/profile" : `/users/${selectedSpot.user.id}`}
+                  sx={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "left",
+                    mb: { xs: 1, sm: 2 },
+                    width: "100%"
+                  }}
+                >
+                  <Avatar
+                    src={selectedSpot.user.avatar}
+                    sx={{
+                      mr: 2,
+                      width: { xs: 24, sm: 40 },
+                      height: { xs: 24, sm: 40 }
+                    }}
+                  >
+                  </Avatar>
+                  <Typography fontSize={{ xs: "16px", sm: "20px" }} >{selectedSpot.user.name}</Typography>
+                </Button>
+                { userId === selectedSpot.user.id &&
+                  <ConfigButton
+                    currentUser={currentUser}
+                    selectedSpot={selectedSpot}
+                    setEditing={setEditing}
+                    handleModalClose={handleClose}
+                  />
+                }
+              </Box>
+              <Typography
+                fontSize={{ xs: "16px", sm: "20px" }}
+                fontWeight="bold"
+                sx={{px: { xs: 1, sm: 0 }}}
               >
-                <Avatar src={selectedSpot.user.avatar} sx={{mr: 2}} ></Avatar>
-                <Typography fontSize="20px" >{selectedSpot.user.name}</Typography>
-              </Button>
-              <Typography fontSize="20px" fontWeight="bold" >{selectedSpot.name}</Typography>
+                {selectedSpot.name}
+              </Typography>
             </Box>
-          { userId === selectedSpot.user.id &&
-            <ConfigButton
-              currentUser={currentUser}
-              selectedSpot={selectedSpot}
-              setEditing={setEditing}
-              handleModalClose={handleClose}
-            />
-          }
           </Box>
           <Box
             sx={{
@@ -100,7 +116,7 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
             <Box sx={{display: "flex", justifyContent: "left", alignItems: "center", width: "100%"}}>
               <Tooltip title="コメント">
                 <span>
-                  <IconButton sx={{mx: 2}} onClick={() => setCommentModalOpen(true)} ><ChatBubbleOutlineIcon /></IconButton>
+                  <IconButton sx={{ml: 1, mr: 2}} onClick={() => setCommentModalOpen(true)} ><ChatBubbleOutlineIcon /></IconButton>
                 </span>
               </Tooltip>
               <LikeButton
@@ -108,7 +124,13 @@ export const SpotDetail = ({ spotId, selectedSpot, setSelectedSpot, handleVideoC
                 selectedSpot={selectedSpot}
               />
             </Box>
-            <ShareButton sx={{mx: 2}} url={`https://twitter.com/share?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)} (※PC💻環境より閲覧してください)&text=【BackHacker.】で${selectedSpot.name}を見に行かない？🌎%0a%0a`}  />
+            <ShareButton
+              sx={{mx: 2}}
+              url={selectedSpot.name && selectedSpot.name.trim() !== ''
+                ? `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)}&text=バーチャル旅行アプリ【BackHacker.】で「${selectedSpot.name}」に行ってみよう！🌎%0a%0a`
+                : `https://twitter.com/intent/tweet?url=${process.env.REACT_APP_PUBLIC_URL}spots/${parseInt(selectedSpot.id)}&text=バーチャル旅行アプリ【BackHacker.】で旅行気分を味わってみよう！🌎%0a%0a`
+              }
+            />
           </Box>
           <Box sx={{px: 2, mt: 2}}>
             <Typography >{selectedSpot.description}</Typography>

@@ -44,7 +44,7 @@ export default function Header() {
 
   const handleProfileOpen = () => {
     handleMenuClose();
-    navigate(`/users/${userId}`);
+    navigate("/profile");
   }
 
   const handleNavigate = () => {
@@ -152,7 +152,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{pl: 5}}>
+      <AppBar position="static" sx={{ pl: {xs: 0, sm: 1, md: 5} }}>
         <Toolbar>
           <Link
               to={`${currentUser ? "/map" : "/"}`}
@@ -162,7 +162,7 @@ export default function Header() {
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: 'none', sm: 'block' } }}
+              sx={{ display: { xs: 'block', sm: 'block' } }}
             >
               BackHacker.
             </Typography>

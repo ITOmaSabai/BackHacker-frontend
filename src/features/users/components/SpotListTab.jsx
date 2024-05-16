@@ -44,7 +44,7 @@ function a11yProps(index) {
 }
 
 export const SpotListTab = ({ userInfo }) => {
-  const [value, setValue] = useState(0);
+  const [ value, setValue ] = useState(0);
   const { spots } = useSpotsContext();
 
   const handleChange = (event, newValue) => {
@@ -73,24 +73,24 @@ export const SpotListTab = ({ userInfo }) => {
         sx={{
           borderBottom: "none",
           borderColor: 'devider',
-          width: '40%',
+          width: {xs: '90%', sm: '40%'},
           display: "flex",
           justifyContent: "center"
         }}
       >
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" >
-          <Tab label="投稿したスポット" {...a11yProps(0)} color='"primary.light'/>
-          <Tab label="いいねしたスポット" {...a11yProps(1)} color='"primary.light'/>
+        <Tabs value={value} onChange={handleChange} >
+          <Tab label="投稿したスポット" {...a11yProps(0)} color='"primary.light' sx={{fontSize: {xs: "12px", sm: "14px"}}}/>
+          <Tab label="いいねしたスポット" {...a11yProps(1)} color='"primary.light' sx={{fontSize: {xs: "12px", sm: "14px"}}}/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Box width={"70vw"}>
+        <Box width={{ xs: "75vw", sm: "90vw" }}>
           {!spots && <Spinner />}
           <SpotCard spots={userPostedSpots()} text={"投稿"} />
         </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Box width={"70vw"}>
+        <Box width={{ xs: "75vw", sm: "90vw" }}>
           {!spots && <Spinner />}
           <SpotCard spots={userLikedSpots()} text={"いいね"} />
           <Box display={"flex"} justifyContent={"center"} sx={{mt: 2}}>

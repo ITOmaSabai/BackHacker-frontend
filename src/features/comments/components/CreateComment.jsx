@@ -1,9 +1,9 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
-import SendIcon from '@mui/icons-material/Send';
+import { Alert, Box, Button, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import { createComment } from "../api/createComment";
 import { useFirebaseAuth } from "../../../hooks/useFirebaseAuth";
 import { useFlashMessage } from "../../../contexts/FlashMessageContext";
+import { SignInButton } from "../../auth/components/SignInButton";
 
 const style = {
   display: 'flex',
@@ -39,7 +39,6 @@ export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
       setInputComment("");
       setIsCommentPosted(true);
     } else {
-      console.log(result)
       setMessage(result.message);
     }
   }
@@ -52,6 +51,19 @@ export const CreateComment = ({ spotId, setIsCommentPosted, setOpen }) => {
   const handleCommentInput = (e) => {
     setInputComment(e.target.value);
     setIsCommentPosted(false);
+  }
+
+  if (!currentUser) {
+    return (
+      <Box style={style} >
+        <Alert severity="info">
+          <Typography sx={{pb: 1}} fontSize={{xs: "14px"}} >
+            コメントを投稿するにはログインしてください
+          </Typography>
+          <SignInButton text={"ログイン"} color={"info"} variant={"contained"} />
+        </Alert>
+      </Box>
+    );
   }
 
   return (

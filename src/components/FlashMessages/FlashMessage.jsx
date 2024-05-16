@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Fade from '@mui/material/Fade';
 import Slide from '@mui/material/Slide';
-import { useLocation } from 'react-router-dom';
 import { Alert } from '@mui/material';
 import { useFlashMessage } from '../../contexts/FlashMessageContext';
 
@@ -17,7 +16,7 @@ export default function FlashMessage() {
   });
   const { message, isSuccessMessage } = useFlashMessage();
 
-  useState(() => {
+  useEffect(() => {
     if (message) {
       setState({
         open: true,
@@ -54,7 +53,7 @@ export default function FlashMessage() {
           </Alert>
           :
           <Alert
-            severity="warning"
+            severity="error"
             variant="filled"
             sx={{ width: '100%' }}
           >
