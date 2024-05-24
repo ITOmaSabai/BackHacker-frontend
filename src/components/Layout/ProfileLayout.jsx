@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSpotsContext } from "../../contexts/SpotsContext";
 import { UserProfile } from "../../features/users/components/UserProfile"
-import { useParams } from "react-router-dom";
 import { getUsers } from "../../features/users/api/getUsers";
 import { SpotListTab } from "../../features/users/components/SpotListTab";
+import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 
-export const UserLayout = () => {
+export const ProfileLayout = () => {
   const { loadSpots } = useSpotsContext();
-  const { id } = useParams();
+  const { userId } = useFirebaseAuth();
   const [ userInfo, setUserInfo ] = useState();
 
   useEffect(() => {
@@ -19,8 +19,8 @@ export const UserLayout = () => {
       try {
         const users = await getUsers();
 
-        if (id) {
-          const selectedUser = users.find(user => parseInt(user.id) === parseInt(id))
+        if (userId) {
+          const selectedUser = users.find(user => parseInt(user.id) === parseInt(userId))
           setUserInfo(selectedUser);
         }
       } catch (error) {
@@ -28,7 +28,7 @@ export const UserLayout = () => {
       }
     }
     fetchData();
-  }, [id])
+  }, [userId])
 
   if (!userInfo) {
     return <div></div>;
